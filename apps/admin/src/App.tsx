@@ -60,7 +60,7 @@ function App() {
                     login
                     <Route index element={<Home />} />
                     <Route path="/products" element={<AllProducts />} />
-                    <Route path="/products/:id" element={<div className="w-3 h-3 bg-black">Products page</div>} />
+                    <Route path="/products/:id" element={<div>Products page</div>} />
                     <Route path="/profiles" element={<Users />} />
                     <Route path="/me" element={<Profile />} />
                   </Route>

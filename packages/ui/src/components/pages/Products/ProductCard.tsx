@@ -48,7 +48,7 @@ export const ProductCard = ({
       >
         {dayjs(product.updated_at).format("hh:mm A DD MMM YYYY")}
       </Text>
-      <Button type="primary" size="large">Edit</Button>
+      <Button type="primary" size="large" style={{display: "block", marginTop: "10px",width: "100%"}}>Edit</Button>
     </Card>
   );
 };
