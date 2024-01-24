@@ -1,0 +1,17 @@
+{
+  "name": "@repo/graphql",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "default": "./index.ts"
+    }
+  },
+  "dependencies": {
+    "graphql-config": "^5.0.3",
+    "graphql-tag": "^2.12.6"
+  },
+  "scripts": {
+    "codegen": "graphql-codegen"
+  }
+}
