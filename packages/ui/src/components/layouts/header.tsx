@@ -12,9 +12,7 @@ import {
   useActiveAuthProvider,
   useGetIdentity,
 } from "@refinedev/core";
-import {
-  useThemedLayoutContext,
-} from "@refinedev/antd";
+import { useThemedLayoutContext } from "@refinedev/antd";
 import { BarsOutlined } from "@ant-design/icons";
 
 const { useToken } = theme;
@@ -22,10 +20,12 @@ const { useToken } = theme;
 interface HeaderProps {
   isSticky?: boolean | undefined;
   sticky?: boolean | undefined;
+  appName?: string;
 }
 export const Header: React.FC<HeaderProps> = ({
   isSticky,
   sticky,
+  appName,
 }) => {
   const breakpoint = Grid.useBreakpoint();
   const { token } = useToken();
@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
   const { data: user } = useGetIdentity({
     v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
   });
-
+  const { Title } = Typography;
   const shouldRenderHeader = user && (user.name || user.avatar);
 
   if (!shouldRenderHeader) {
@@ -62,6 +62,9 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <AntdLayout.Header style={headerStyles}>
       <Space>
+        {isMobile && <Title level={3}>{appName}</Title>}
+      </Space>
+      <Space align="center">
         {isMobile && (
           <Button
             size="large"
@@ -69,14 +72,6 @@ export const Header: React.FC<HeaderProps> = ({
             icon={<BarsOutlined />}
           />
         )}
-      </Space>
-      <Space align="center">
-        {/* <Button
-          onClick={() => {
-            setTheme(theme === "light" ? "dark" : "light");
-          }}
-          icon={theme === "light" ? <IconMoonStars /> : <IconSun />}
-        /> */}
       </Space>
     </AntdLayout.Header>
   );

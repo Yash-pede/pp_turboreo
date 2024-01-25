@@ -1,11 +1,18 @@
 import { ThemedLayoutV2, ThemedTitleV2 } from "@refinedev/antd";
 import { Header } from "./header";
-import React, { useState } from "react";
+import React from "react";
 import { CustomSider } from "./Sidebar";
-export const Layout = ({ children }: React.PropsWithChildren) => {
+export const Layout = ({
+  children,
+  appName,
+}: {
+  children: React.ReactNode;
+  appName: string;
+}) => {
+  console.log(appName);
   return (
     <ThemedLayoutV2
-      Header={Header}
+      Header={() => <Header appName={appName || "PurePride"} />}
       Sider={CustomSider}
       Title={(titleProps) => <ThemedTitleV2 {...titleProps} text={"Refine"} />}
     >

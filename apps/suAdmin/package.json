@@ -1,5 +1,5 @@
 {
-  "name": "admin",
+  "name": "suadmin",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -38,7 +38,7 @@
     "vite": "^4.3.1"
   },
   "scripts": {
-    "dev": "refine dev -- --host  --port 3001",
+    "dev": "refine dev -- --host  --port 3000",
     "build": "tsc && refine build",
     "preview": "refine start",
     "refine": "refine"

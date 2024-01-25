@@ -2,7 +2,7 @@ import React from "react";
 import { Products } from "@repo/graphql";
 import { Button, Card, Typography } from "antd";
 import dayjs from "dayjs";
-import { useGo } from "@refinedev/core";
+import { useGo, useNavigation } from "@refinedev/core";
 // import "./card.scss";
 
 export const ProductCard = ({
@@ -14,12 +14,14 @@ export const ProductCard = ({
 }) => {
   const { Text, Paragraph, Title } = Typography;
   const go = useGo();
+  const { show } = useNavigation();
   return (
     <Card
+      hoverable
       title={product.name}
       loading={isLoading}
       style={{ width: 300, cursor: "pointer" }}
-      onClick={() => go({ to: `/products/${product.id}`, type: "push" })}
+      onClick={() => show("products", product.id)}
     >
       <img
         src={`https://krtkfjphiovnpjawcxwo.supabase.co/storage/v1/object/public/Products/${product.imageURL}`}
@@ -48,7 +50,13 @@ export const ProductCard = ({
       >
         {dayjs(product.updated_at).format("hh:mm A DD MMM YYYY")}
       </Text>
-      <Button type="primary" size="large" style={{display: "block", marginTop: "10px",width: "100%"}}>Edit</Button>
+      <Button
+        type="primary"
+        size="large"
+        style={{ display: "block", marginTop: "10px", width: "100%" }}
+      >
+        Edit
+      </Button>
     </Card>
   );
 };

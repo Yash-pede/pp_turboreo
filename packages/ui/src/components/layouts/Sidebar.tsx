@@ -194,34 +194,34 @@ export const CustomSider: React.FC<RefineThemedLayoutV2SiderProps> = ({
     );
   };
 
-  
-const renderMenu = () => {
-  return (
-    <Flex
-      className="custom-scrollbar"
-      style={{
-        height: "calc(100vh - 72px)",
-        position: "sticky",
-        top: "0",
-        overflowY: "auto",
-      }}
-    >
-      <Menu
-        selectedKeys={selectedKey ? [selectedKey] : []}
-        defaultOpenKeys={defaultOpenKeys}
-        mode="inline"
+  const renderMenu = () => {
+    return (
+      <Flex
+        className="custom-scrollbar"
         style={{
-          paddingTop: "7px",
-        }}
-        onClick={() => {
-          setMobileSiderOpen(false);
+          height: "calc(100vh - 72px)",
+          position: "sticky",
+          width: "100%",
+          top: "0",
+          overflowY: "auto",
         }}
       >
-        {renderSider()}
-      </Menu>
-    </Flex>
-  );
-};
+        <Menu
+          selectedKeys={selectedKey ? [selectedKey] : []}
+          defaultOpenKeys={defaultOpenKeys}
+          mode="inline"
+          style={{
+            paddingTop: "7px",
+          }}
+          onClick={() => {
+            setMobileSiderOpen(false);
+          }}
+        >
+          {renderSider()}
+        </Menu>
+      </Flex>
+    );
+  };
 
   const renderDrawerSider = () => {
     return (
@@ -229,9 +229,9 @@ const renderMenu = () => {
         <Drawer
           open={mobileSiderOpen}
           onClose={() => setMobileSiderOpen(false)}
-          placement="left"
+          placement="right"
           closable={false}
-          width={200}
+          width={250}
           maskClosable={true}
         >
           <Layout>
@@ -244,7 +244,7 @@ const renderMenu = () => {
             >
               <div
                 style={{
-                  width: "200px",
+                  width: "250px",
                   padding: "0 16px",
                   display: "flex",
                   justifyContent: "flex-start",
@@ -296,7 +296,7 @@ const renderMenu = () => {
       {fixed && (
         <div
           style={{
-            width: siderCollapsed ? "80px" : "200px",
+            width: siderCollapsed ? "80px" : "250px",
             transition: "all 0.2s",
           }}
         />
@@ -340,7 +340,7 @@ const renderMenu = () => {
       >
         <div
           style={{
-            width: siderCollapsed ? "80px" : "200px",
+            width: siderCollapsed ? "80px" : "250px",
             padding: siderCollapsed ? "0" : "0 16px",
             display: "flex",
             justifyContent: siderCollapsed ? "center" : "flex-start",

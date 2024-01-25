@@ -51,7 +51,7 @@ function App() {
                         key={"authenticated-layout"}
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                        <Layout appName="Admin">
+                        <Layout appName="Super Admin">
                           <Outlet />
                         </Layout>
                       </Authenticated>
