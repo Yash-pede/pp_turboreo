@@ -1,4 +1,3 @@
-import React from "react";
 import { PROFILES_QUERY, Profiles } from "@repo/graphql";
 import {
   DeleteButton,
