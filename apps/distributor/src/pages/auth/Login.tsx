@@ -28,11 +28,7 @@ export function Login() {
           authProvider
             .login(values)
             .then(
-              (response: {
-                error: { message: any };
-                success: any;
-                redirectTo: any;
-              }) => {
+              (response: any) => {
                 console.log(response);
                 if (response.error) {
                   openNotification({

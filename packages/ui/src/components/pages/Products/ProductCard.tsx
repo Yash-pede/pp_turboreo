@@ -1,8 +1,7 @@
-import React from "react";
 import { Products } from "@repo/graphql";
 import { Button, Card, Typography } from "antd";
 import dayjs from "dayjs";
-import { useGo, useNavigation } from "@refinedev/core";
+import { useNavigation } from "@refinedev/core";
 // import "./card.scss";
 
 export const ProductCard = ({
@@ -13,7 +12,6 @@ export const ProductCard = ({
   isLoading: boolean;
 }) => {
   const { Text, Paragraph, Title } = Typography;
-  const go = useGo();
   const { show } = useNavigation();
   return (
     <Card

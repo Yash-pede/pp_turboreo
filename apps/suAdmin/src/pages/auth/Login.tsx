@@ -1,4 +1,3 @@
-import React from "react";
 import { authProvider } from "@repo/utility";
 import { redirect } from "react-router-dom";
 import { AuthPage } from "@refinedev/antd";
@@ -6,7 +5,7 @@ import { notification } from "antd";
 import { NotificationPlacement } from "antd/lib/notification/interface";
 
 export function Login() {
-  const [api, contextHolder] = notification.useNotification();
+  const [api] = notification.useNotification();
   const openNotification = ({
     placement,
     description,
@@ -28,11 +27,7 @@ export function Login() {
           authProvider
             .login(values)
             .then(
-              (response: {
-                error: { message: any };
-                success: any;
-                redirectTo: any;
-              }) => {
+              (response: any) => {
                 console.log(response);
                 if (response.error) {
                   openNotification({

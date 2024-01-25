@@ -1,10 +1,7 @@
-import React from "react";
 import { useLocation } from "react-router-dom";
-import { useGo, useList, useNavigation } from "@refinedev/core";
+import { useGo, useList } from "@refinedev/core";
 import { ALL_PRODUCTS_QUERY } from "@repo/graphql";
 import { Button, Typography } from "antd";
-import ButtonGroup from "antd/lib/button/button-group";
-import dayjs from "dayjs";
 import { DateField, DeleteButton } from "@refinedev/antd";
 
 export const ProductPage = () => {
@@ -12,7 +9,7 @@ export const ProductPage = () => {
   const id = pathname.split("/").pop();
   const go = useGo();
   const { Title, Paragraph, Text } = Typography;
-  const { data: Product, isLoading } = useList({
+  const { data: Product } = useList({
     resource: "products",
     meta: {
       gqlQuery: ALL_PRODUCTS_QUERY,

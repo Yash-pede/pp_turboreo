@@ -1,5 +1,4 @@
 import { useGetIdentity } from "@refinedev/core";
-import React from "react";
 
 export const Profile = () => {
   const { data: user } = useGetIdentity<any>();

@@ -25,30 +25,22 @@ export function Login() {
       type="login"
       formProps={{
         onSubmitCapture(values) {
-          authProvider
-            .login(values)
-            .then(
-              (response: {
-                error: { message: any };
-                success: any;
-                redirectTo: any;
-              }) => {
-                console.log(response);
-                if (response.error) {
-                  openNotification({
-                    placement: "topRight",
-                    description: response.error.message,
-                  });
-                }
-                if (response.success) {
-                  openNotification({
-                    placement: "topRight",
-                    description: "Login Successful",
-                  });
-                  redirect(response.redirectTo || "/");
-                }
-              }
-            );
+          authProvider.login(values).then((response: any) => {
+            console.log(response);
+            if (response.error) {
+              openNotification({
+                placement: "topRight",
+                description: response.error.message,
+              });
+            }
+            if (response.success) {
+              openNotification({
+                placement: "topRight",
+                description: "Login Successful",
+              });
+              redirect(response.redirectTo || "/");
+            }
+          });
         },
       }}
     />

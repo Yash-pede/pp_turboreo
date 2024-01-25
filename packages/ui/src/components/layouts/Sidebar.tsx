@@ -4,7 +4,6 @@ import {
   DashboardOutlined,
   LogoutOutlined,
   UnorderedListOutlined,
-  BarsOutlined,
   LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
