@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  DeleteButton,
-  EditButton,
-  useTable,
-} from "@refinedev/antd";
+import { DeleteButton, EditButton, useTable } from "@refinedev/antd";
 import { ALL_ORDERS_QUERY, ALL_PRODUCTS_QUERY, Orders } from "@repo/graphql";
 import { Skeleton, Space, Table } from "antd";
 import { useList } from "@refinedev/core";
@@ -48,12 +44,10 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
             }
             return (
               <Space>
-                <pre>
-                  {
-                    products?.data.find((item) => item.id === record.productId)
-                      ?.name
-                  }
-                </pre>
+                {
+                  products?.data.find((item) => item.id === record.productId)
+                    ?.name
+                }
               </Space>
             );
           }}

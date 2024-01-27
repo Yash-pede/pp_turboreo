@@ -16,6 +16,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider, supabaseClient } from "@repo/utility";
 import {
   AllCart,
+  AllInventory,
   EditOrders,
   ForgotPassord,
   Home,
@@ -78,6 +79,7 @@ function App() {
                       <Route index element={<AllCart />} />
                       <Route path="edit/:id" element={<EditOrders />} />
                     </Route>
+                    <Route path="/inventory" element={<AllInventory />} />
                     <Route path="/profiles" element={<Users />} />
                     <Route path="/me" element={<Profile />} />
                   </Route>

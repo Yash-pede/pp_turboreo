@@ -1,119 +1,130 @@
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends " $fragmentName" | "__typename" ? T[P] : never;
+    };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  BigFloat: { input: any; output: any; }
-  BigInt: { input: any; output: any; }
-  Cursor: { input: any; output: any; }
-  Date: { input: any; output: any; }
-  Datetime: { input: any; output: any; }
-  JSON: { input: any; output: any; }
-  Opaque: { input: any; output: any; }
-  Time: { input: any; output: any; }
-  UUID: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  BigFloat: { input: any; output: any };
+  BigInt: { input: any; output: any };
+  Cursor: { input: any; output: any };
+  Date: { input: any; output: any };
+  Datetime: { input: any; output: any };
+  JSON: { input: any; output: any };
+  Opaque: { input: any; output: any };
+  Time: { input: any; output: any };
+  UUID: { input: any; output: any };
 };
 
 /** Boolean expression comparing fields on type "BigFloat" */
 export type BigFloatFilter = {
-  eq?: InputMaybe<Scalars['BigFloat']['input']>;
-  gt?: InputMaybe<Scalars['BigFloat']['input']>;
-  gte?: InputMaybe<Scalars['BigFloat']['input']>;
-  in?: InputMaybe<Array<Scalars['BigFloat']['input']>>;
+  eq?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  gt?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  gte?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  in?: InputMaybe<Array<Scalars["BigFloat"]["input"]>>;
   is?: InputMaybe<FilterIs>;
-  lt?: InputMaybe<Scalars['BigFloat']['input']>;
-  lte?: InputMaybe<Scalars['BigFloat']['input']>;
-  neq?: InputMaybe<Scalars['BigFloat']['input']>;
+  lt?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  lte?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  neq?: InputMaybe<Scalars["BigFloat"]["input"]>;
 };
 
 /** Boolean expression comparing fields on type "BigInt" */
 export type BigIntFilter = {
-  eq?: InputMaybe<Scalars['BigInt']['input']>;
-  gt?: InputMaybe<Scalars['BigInt']['input']>;
-  gte?: InputMaybe<Scalars['BigInt']['input']>;
-  in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
+  eq?: InputMaybe<Scalars["BigInt"]["input"]>;
+  gt?: InputMaybe<Scalars["BigInt"]["input"]>;
+  gte?: InputMaybe<Scalars["BigInt"]["input"]>;
+  in?: InputMaybe<Array<Scalars["BigInt"]["input"]>>;
   is?: InputMaybe<FilterIs>;
-  lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lte?: InputMaybe<Scalars['BigInt']['input']>;
-  neq?: InputMaybe<Scalars['BigInt']['input']>;
+  lt?: InputMaybe<Scalars["BigInt"]["input"]>;
+  lte?: InputMaybe<Scalars["BigInt"]["input"]>;
+  neq?: InputMaybe<Scalars["BigInt"]["input"]>;
 };
 
 /** Boolean expression comparing fields on type "Boolean" */
 export type BooleanFilter = {
-  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  eq?: InputMaybe<Scalars["Boolean"]["input"]>;
   is?: InputMaybe<FilterIs>;
 };
 
 /** Boolean expression comparing fields on type "Date" */
 export type DateFilter = {
-  eq?: InputMaybe<Scalars['Date']['input']>;
-  gt?: InputMaybe<Scalars['Date']['input']>;
-  gte?: InputMaybe<Scalars['Date']['input']>;
-  in?: InputMaybe<Array<Scalars['Date']['input']>>;
+  eq?: InputMaybe<Scalars["Date"]["input"]>;
+  gt?: InputMaybe<Scalars["Date"]["input"]>;
+  gte?: InputMaybe<Scalars["Date"]["input"]>;
+  in?: InputMaybe<Array<Scalars["Date"]["input"]>>;
   is?: InputMaybe<FilterIs>;
-  lt?: InputMaybe<Scalars['Date']['input']>;
-  lte?: InputMaybe<Scalars['Date']['input']>;
-  neq?: InputMaybe<Scalars['Date']['input']>;
+  lt?: InputMaybe<Scalars["Date"]["input"]>;
+  lte?: InputMaybe<Scalars["Date"]["input"]>;
+  neq?: InputMaybe<Scalars["Date"]["input"]>;
 };
 
 /** Boolean expression comparing fields on type "Datetime" */
 export type DatetimeFilter = {
-  eq?: InputMaybe<Scalars['Datetime']['input']>;
-  gt?: InputMaybe<Scalars['Datetime']['input']>;
-  gte?: InputMaybe<Scalars['Datetime']['input']>;
-  in?: InputMaybe<Array<Scalars['Datetime']['input']>>;
+  eq?: InputMaybe<Scalars["Datetime"]["input"]>;
+  gt?: InputMaybe<Scalars["Datetime"]["input"]>;
+  gte?: InputMaybe<Scalars["Datetime"]["input"]>;
+  in?: InputMaybe<Array<Scalars["Datetime"]["input"]>>;
   is?: InputMaybe<FilterIs>;
-  lt?: InputMaybe<Scalars['Datetime']['input']>;
-  lte?: InputMaybe<Scalars['Datetime']['input']>;
-  neq?: InputMaybe<Scalars['Datetime']['input']>;
+  lt?: InputMaybe<Scalars["Datetime"]["input"]>;
+  lte?: InputMaybe<Scalars["Datetime"]["input"]>;
+  neq?: InputMaybe<Scalars["Datetime"]["input"]>;
 };
 
-export type FilterIs =
-  | 'NOT_NULL'
-  | 'NULL';
+export type FilterIs = "NOT_NULL" | "NULL";
 
 /** Boolean expression comparing fields on type "Float" */
 export type FloatFilter = {
-  eq?: InputMaybe<Scalars['Float']['input']>;
-  gt?: InputMaybe<Scalars['Float']['input']>;
-  gte?: InputMaybe<Scalars['Float']['input']>;
-  in?: InputMaybe<Array<Scalars['Float']['input']>>;
+  eq?: InputMaybe<Scalars["Float"]["input"]>;
+  gt?: InputMaybe<Scalars["Float"]["input"]>;
+  gte?: InputMaybe<Scalars["Float"]["input"]>;
+  in?: InputMaybe<Array<Scalars["Float"]["input"]>>;
   is?: InputMaybe<FilterIs>;
-  lt?: InputMaybe<Scalars['Float']['input']>;
-  lte?: InputMaybe<Scalars['Float']['input']>;
-  neq?: InputMaybe<Scalars['Float']['input']>;
+  lt?: InputMaybe<Scalars["Float"]["input"]>;
+  lte?: InputMaybe<Scalars["Float"]["input"]>;
+  neq?: InputMaybe<Scalars["Float"]["input"]>;
 };
 
 /** Boolean expression comparing fields on type "ID" */
 export type IdFilter = {
-  eq?: InputMaybe<Scalars['ID']['input']>;
+  eq?: InputMaybe<Scalars["ID"]["input"]>;
 };
 
 /** Boolean expression comparing fields on type "Int" */
 export type IntFilter = {
-  eq?: InputMaybe<Scalars['Int']['input']>;
-  gt?: InputMaybe<Scalars['Int']['input']>;
-  gte?: InputMaybe<Scalars['Int']['input']>;
-  in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  eq?: InputMaybe<Scalars["Int"]["input"]>;
+  gt?: InputMaybe<Scalars["Int"]["input"]>;
+  gte?: InputMaybe<Scalars["Int"]["input"]>;
+  in?: InputMaybe<Array<Scalars["Int"]["input"]>>;
   is?: InputMaybe<FilterIs>;
-  lt?: InputMaybe<Scalars['Int']['input']>;
-  lte?: InputMaybe<Scalars['Int']['input']>;
-  neq?: InputMaybe<Scalars['Int']['input']>;
+  lt?: InputMaybe<Scalars["Int"]["input"]>;
+  lte?: InputMaybe<Scalars["Int"]["input"]>;
+  neq?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 /** The root type for creating and mutating data */
 export type Mutation = {
-  /** Deletes zero or more records from the `cart` collection */
-  deleteFromcartCollection: CartDeleteResponse;
+  /** Deletes zero or more records from the `inventory_distributor` collection */
+  deleteFrominventory_distributorCollection: Inventory_DistributorDeleteResponse;
   /** Deletes zero or more records from the `orders` collection */
   deleteFromordersCollection: OrdersDeleteResponse;
   /** Deletes zero or more records from the `product_batches` collection */
@@ -122,8 +133,8 @@ export type Mutation = {
   deleteFromproductsCollection: ProductsDeleteResponse;
   /** Deletes zero or more records from the `profiles` collection */
   deleteFromprofilesCollection: ProfilesDeleteResponse;
-  /** Adds one or more `cart` records to the collection */
-  insertIntocartCollection?: Maybe<CartInsertResponse>;
+  /** Adds one or more `inventory_distributor` records to the collection */
+  insertIntoinventory_distributorCollection?: Maybe<Inventory_DistributorInsertResponse>;
   /** Adds one or more `orders` records to the collection */
   insertIntoordersCollection?: Maybe<OrdersInsertResponse>;
   /** Adds one or more `product_batches` records to the collection */
@@ -132,8 +143,8 @@ export type Mutation = {
   insertIntoproductsCollection?: Maybe<ProductsInsertResponse>;
   /** Adds one or more `profiles` records to the collection */
   insertIntoprofilesCollection?: Maybe<ProfilesInsertResponse>;
-  /** Updates zero or more records in the `cart` collection */
-  updatecartCollection: CartUpdateResponse;
+  /** Updates zero or more records in the `inventory_distributor` collection */
+  updateinventory_distributorCollection: Inventory_DistributorUpdateResponse;
   /** Updates zero or more records in the `orders` collection */
   updateordersCollection: OrdersUpdateResponse;
   /** Updates zero or more records in the `product_batches` collection */
@@ -144,144 +155,129 @@ export type Mutation = {
   updateprofilesCollection: ProfilesUpdateResponse;
 };
 
-
 /** The root type for creating and mutating data */
-export type MutationDeleteFromcartCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<CartFilter>;
+export type MutationDeleteFrominventory_DistributorCollectionArgs = {
+  atMost?: Scalars["Int"]["input"];
+  filter?: InputMaybe<Inventory_DistributorFilter>;
 };
-
 
 /** The root type for creating and mutating data */
 export type MutationDeleteFromordersCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
+  atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<OrdersFilter>;
 };
 
-
 /** The root type for creating and mutating data */
 export type MutationDeleteFromproduct_BatchesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
+  atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<Product_BatchesFilter>;
 };
 
-
 /** The root type for creating and mutating data */
 export type MutationDeleteFromproductsCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
+  atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<ProductsFilter>;
 };
 
-
 /** The root type for creating and mutating data */
 export type MutationDeleteFromprofilesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
+  atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<ProfilesFilter>;
 };
 
-
 /** The root type for creating and mutating data */
-export type MutationInsertIntocartCollectionArgs = {
-  objects: Array<CartInsertInput>;
+export type MutationInsertIntoinventory_DistributorCollectionArgs = {
+  objects: Array<Inventory_DistributorInsertInput>;
 };
-
 
 /** The root type for creating and mutating data */
 export type MutationInsertIntoordersCollectionArgs = {
   objects: Array<OrdersInsertInput>;
 };
 
-
 /** The root type for creating and mutating data */
 export type MutationInsertIntoproduct_BatchesCollectionArgs = {
   objects: Array<Product_BatchesInsertInput>;
 };
-
 
 /** The root type for creating and mutating data */
 export type MutationInsertIntoproductsCollectionArgs = {
   objects: Array<ProductsInsertInput>;
 };
 
-
 /** The root type for creating and mutating data */
 export type MutationInsertIntoprofilesCollectionArgs = {
   objects: Array<ProfilesInsertInput>;
 };
 
-
 /** The root type for creating and mutating data */
-export type MutationUpdatecartCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
-  filter?: InputMaybe<CartFilter>;
-  set: CartUpdateInput;
+export type MutationUpdateinventory_DistributorCollectionArgs = {
+  atMost?: Scalars["Int"]["input"];
+  filter?: InputMaybe<Inventory_DistributorFilter>;
+  set: Inventory_DistributorUpdateInput;
 };
-
 
 /** The root type for creating and mutating data */
 export type MutationUpdateordersCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
+  atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<OrdersFilter>;
   set: OrdersUpdateInput;
 };
 
-
 /** The root type for creating and mutating data */
 export type MutationUpdateproduct_BatchesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
+  atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<Product_BatchesFilter>;
   set: Product_BatchesUpdateInput;
 };
 
-
 /** The root type for creating and mutating data */
 export type MutationUpdateproductsCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
+  atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<ProductsFilter>;
   set: ProductsUpdateInput;
 };
 
-
 /** The root type for creating and mutating data */
 export type MutationUpdateprofilesCollectionArgs = {
-  atMost?: Scalars['Int']['input'];
+  atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<ProfilesFilter>;
   set: ProfilesUpdateInput;
 };
 
 export type Node = {
   /** Retrieves a record by `ID` */
-  nodeId: Scalars['ID']['output'];
+  nodeId: Scalars["ID"]["output"];
 };
 
 /** Boolean expression comparing fields on type "Opaque" */
 export type OpaqueFilter = {
-  eq?: InputMaybe<Scalars['Opaque']['input']>;
+  eq?: InputMaybe<Scalars["Opaque"]["input"]>;
   is?: InputMaybe<FilterIs>;
 };
 
 /** Defines a per-field sorting order */
 export type OrderByDirection =
   /** Ascending order, nulls first */
-  | 'AscNullsFirst'
+  | "AscNullsFirst"
   /** Ascending order, nulls last */
-  | 'AscNullsLast'
+  | "AscNullsLast"
   /** Descending order, nulls first */
-  | 'DescNullsFirst'
+  | "DescNullsFirst"
   /** Descending order, nulls last */
-  | 'DescNullsLast';
+  | "DescNullsLast";
 
 export type PageInfo = {
-  endCursor?: Maybe<Scalars['String']['output']>;
-  hasNextPage: Scalars['Boolean']['output'];
-  hasPreviousPage: Scalars['Boolean']['output'];
-  startCursor?: Maybe<Scalars['String']['output']>;
+  endCursor?: Maybe<Scalars["String"]["output"]>;
+  hasNextPage: Scalars["Boolean"]["output"];
+  hasPreviousPage: Scalars["Boolean"]["output"];
+  startCursor?: Maybe<Scalars["String"]["output"]>;
 };
 
 /** The root type for querying data */
 export type Query = {
-  /** A pagable collection of type `cart` */
-  cartCollection?: Maybe<CartConnection>;
+  /** A pagable collection of type `inventory_distributor` */
+  inventory_distributorCollection?: Maybe<Inventory_DistributorConnection>;
   /** Retrieve a record by its `ID` */
   node?: Maybe<Node>;
   /** A pagable collection of type `orders` */
@@ -294,187 +290,190 @@ export type Query = {
   profilesCollection?: Maybe<ProfilesConnection>;
 };
 
-
 /** The root type for querying data */
-export type QueryCartCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<CartFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<CartOrderBy>>;
+export type QueryInventory_DistributorCollectionArgs = {
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
+  filter?: InputMaybe<Inventory_DistributorFilter>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  orderBy?: InputMaybe<Array<Inventory_DistributorOrderBy>>;
 };
-
 
 /** The root type for querying data */
 export type QueryNodeArgs = {
-  nodeId: Scalars['ID']['input'];
+  nodeId: Scalars["ID"]["input"];
 };
-
 
 /** The root type for querying data */
 export type QueryOrdersCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
   filter?: InputMaybe<OrdersFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
   orderBy?: InputMaybe<Array<OrdersOrderBy>>;
 };
 
-
 /** The root type for querying data */
 export type QueryProduct_BatchesCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
   filter?: InputMaybe<Product_BatchesFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
   orderBy?: InputMaybe<Array<Product_BatchesOrderBy>>;
 };
 
-
 /** The root type for querying data */
 export type QueryProductsCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
   filter?: InputMaybe<ProductsFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
   orderBy?: InputMaybe<Array<ProductsOrderBy>>;
 };
 
-
 /** The root type for querying data */
 export type QueryProfilesCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
   filter?: InputMaybe<ProfilesFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
   orderBy?: InputMaybe<Array<ProfilesOrderBy>>;
 };
 
 /** Boolean expression comparing fields on type "String" */
 export type StringFilter = {
-  eq?: InputMaybe<Scalars['String']['input']>;
-  gt?: InputMaybe<Scalars['String']['input']>;
-  gte?: InputMaybe<Scalars['String']['input']>;
-  ilike?: InputMaybe<Scalars['String']['input']>;
-  in?: InputMaybe<Array<Scalars['String']['input']>>;
-  iregex?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars["String"]["input"]>;
+  gt?: InputMaybe<Scalars["String"]["input"]>;
+  gte?: InputMaybe<Scalars["String"]["input"]>;
+  ilike?: InputMaybe<Scalars["String"]["input"]>;
+  in?: InputMaybe<Array<Scalars["String"]["input"]>>;
+  iregex?: InputMaybe<Scalars["String"]["input"]>;
   is?: InputMaybe<FilterIs>;
-  like?: InputMaybe<Scalars['String']['input']>;
-  lt?: InputMaybe<Scalars['String']['input']>;
-  lte?: InputMaybe<Scalars['String']['input']>;
-  neq?: InputMaybe<Scalars['String']['input']>;
-  regex?: InputMaybe<Scalars['String']['input']>;
-  startsWith?: InputMaybe<Scalars['String']['input']>;
+  like?: InputMaybe<Scalars["String"]["input"]>;
+  lt?: InputMaybe<Scalars["String"]["input"]>;
+  lte?: InputMaybe<Scalars["String"]["input"]>;
+  neq?: InputMaybe<Scalars["String"]["input"]>;
+  regex?: InputMaybe<Scalars["String"]["input"]>;
+  startsWith?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 /** Boolean expression comparing fields on type "Time" */
 export type TimeFilter = {
-  eq?: InputMaybe<Scalars['Time']['input']>;
-  gt?: InputMaybe<Scalars['Time']['input']>;
-  gte?: InputMaybe<Scalars['Time']['input']>;
-  in?: InputMaybe<Array<Scalars['Time']['input']>>;
+  eq?: InputMaybe<Scalars["Time"]["input"]>;
+  gt?: InputMaybe<Scalars["Time"]["input"]>;
+  gte?: InputMaybe<Scalars["Time"]["input"]>;
+  in?: InputMaybe<Array<Scalars["Time"]["input"]>>;
   is?: InputMaybe<FilterIs>;
-  lt?: InputMaybe<Scalars['Time']['input']>;
-  lte?: InputMaybe<Scalars['Time']['input']>;
-  neq?: InputMaybe<Scalars['Time']['input']>;
+  lt?: InputMaybe<Scalars["Time"]["input"]>;
+  lte?: InputMaybe<Scalars["Time"]["input"]>;
+  neq?: InputMaybe<Scalars["Time"]["input"]>;
 };
 
 /** Boolean expression comparing fields on type "UUID" */
 export type UuidFilter = {
-  eq?: InputMaybe<Scalars['UUID']['input']>;
-  in?: InputMaybe<Array<Scalars['UUID']['input']>>;
+  eq?: InputMaybe<Scalars["UUID"]["input"]>;
+  in?: InputMaybe<Array<Scalars["UUID"]["input"]>>;
   is?: InputMaybe<FilterIs>;
-  neq?: InputMaybe<Scalars['UUID']['input']>;
+  neq?: InputMaybe<Scalars["UUID"]["input"]>;
 };
 
-export type Cart = Node & {
+export type Inventory_Distributor = Node & {
+  created_at: Scalars["Datetime"]["output"];
+  id: Scalars["UUID"]["output"];
   /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
-  product?: Maybe<Products>;
-  productId?: Maybe<Scalars['UUID']['output']>;
-  quantity: Scalars['BigInt']['output'];
-  user: Profiles;
-  userId: Scalars['UUID']['output'];
+  nodeId: Scalars["ID"]["output"];
+  product: Products;
+  productId: Scalars["UUID"]["output"];
+  quantity: Scalars["BigFloat"]["output"];
+  userId: Scalars["UUID"]["output"];
 };
 
-export type CartConnection = {
-  edges: Array<CartEdge>;
+export type Inventory_DistributorConnection = {
+  edges: Array<Inventory_DistributorEdge>;
   pageInfo: PageInfo;
 };
 
-export type CartDeleteResponse = {
+export type Inventory_DistributorDeleteResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
-  records: Array<Cart>;
+  records: Array<Inventory_Distributor>;
 };
 
-export type CartEdge = {
-  cursor: Scalars['String']['output'];
-  node: Cart;
+export type Inventory_DistributorEdge = {
+  cursor: Scalars["String"]["output"];
+  node: Inventory_Distributor;
 };
 
-export type CartFilter = {
+export type Inventory_DistributorFilter = {
   /** Returns true only if all its inner filters are true, otherwise returns false */
-  and?: InputMaybe<Array<CartFilter>>;
+  and?: InputMaybe<Array<Inventory_DistributorFilter>>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
   nodeId?: InputMaybe<IdFilter>;
   /** Negates a filter */
-  not?: InputMaybe<CartFilter>;
+  not?: InputMaybe<Inventory_DistributorFilter>;
   /** Returns true if at least one of its inner filters is true, otherwise returns false */
-  or?: InputMaybe<Array<CartFilter>>;
+  or?: InputMaybe<Array<Inventory_DistributorFilter>>;
   productId?: InputMaybe<UuidFilter>;
-  quantity?: InputMaybe<BigIntFilter>;
+  quantity?: InputMaybe<BigFloatFilter>;
   userId?: InputMaybe<UuidFilter>;
 };
 
-export type CartInsertInput = {
-  productId?: InputMaybe<Scalars['UUID']['input']>;
-  quantity?: InputMaybe<Scalars['BigInt']['input']>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
+export type Inventory_DistributorInsertInput = {
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  productId?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  userId?: InputMaybe<Scalars["UUID"]["input"]>;
 };
 
-export type CartInsertResponse = {
+export type Inventory_DistributorInsertResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
-  records: Array<Cart>;
+  records: Array<Inventory_Distributor>;
 };
 
-export type CartOrderBy = {
+export type Inventory_DistributorOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
   productId?: InputMaybe<OrderByDirection>;
   quantity?: InputMaybe<OrderByDirection>;
   userId?: InputMaybe<OrderByDirection>;
 };
 
-export type CartUpdateInput = {
-  productId?: InputMaybe<Scalars['UUID']['input']>;
-  quantity?: InputMaybe<Scalars['BigInt']['input']>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
+export type Inventory_DistributorUpdateInput = {
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  productId?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  userId?: InputMaybe<Scalars["UUID"]["input"]>;
 };
 
-export type CartUpdateResponse = {
+export type Inventory_DistributorUpdateResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
-  records: Array<Cart>;
+  records: Array<Inventory_Distributor>;
 };
 
 export type Orders = Node & {
-  created_at: Scalars['Datetime']['output'];
-  id: Scalars['UUID']['output'];
+  created_at: Scalars["Datetime"]["output"];
+  id: Scalars["UUID"]["output"];
   /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
+  nodeId: Scalars["ID"]["output"];
   product?: Maybe<Products>;
-  productId?: Maybe<Scalars['UUID']['output']>;
-  quantity: Scalars['BigInt']['output'];
-  status?: Maybe<Orders_Status>;
+  productId?: Maybe<Scalars["UUID"]["output"]>;
+  quantity: Scalars["BigInt"]["output"];
+  status: Orders_Status;
   user?: Maybe<Profiles>;
-  userId?: Maybe<Scalars['UUID']['output']>;
+  userId?: Maybe<Scalars["UUID"]["output"]>;
 };
 
 export type OrdersConnection = {
@@ -484,13 +483,13 @@ export type OrdersConnection = {
 
 export type OrdersDeleteResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Orders>;
 };
 
 export type OrdersEdge = {
-  cursor: Scalars['String']['output'];
+  cursor: Scalars["String"]["output"];
   node: Orders;
 };
 
@@ -511,17 +510,17 @@ export type OrdersFilter = {
 };
 
 export type OrdersInsertInput = {
-  created_at?: InputMaybe<Scalars['Datetime']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  productId?: InputMaybe<Scalars['UUID']['input']>;
-  quantity?: InputMaybe<Scalars['BigInt']['input']>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  productId?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
   status?: InputMaybe<Orders_Status>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
+  userId?: InputMaybe<Scalars["UUID"]["input"]>;
 };
 
 export type OrdersInsertResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Orders>;
 };
@@ -536,25 +535,27 @@ export type OrdersOrderBy = {
 };
 
 export type OrdersUpdateInput = {
-  created_at?: InputMaybe<Scalars['Datetime']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  productId?: InputMaybe<Scalars['UUID']['input']>;
-  quantity?: InputMaybe<Scalars['BigInt']['input']>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  productId?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
   status?: InputMaybe<Orders_Status>;
-  userId?: InputMaybe<Scalars['UUID']['input']>;
+  userId?: InputMaybe<Scalars["UUID"]["input"]>;
 };
 
 export type OrdersUpdateResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Orders>;
 };
 
 export type Orders_Status =
-  | 'cancelled'
-  | 'fulfilled'
-  | 'pending';
+  | "Cancelled"
+  | "Defected"
+  | "Fulfilled"
+  | "InProcess"
+  | "Pending";
 
 /** Boolean expression comparing fields on type "orders_status" */
 export type Orders_StatusFilter = {
@@ -565,14 +566,14 @@ export type Orders_StatusFilter = {
 };
 
 export type Product_Batches = Node & {
-  batchNo: Scalars['String']['output'];
-  created_at: Scalars['Datetime']['output'];
-  expiryDate?: Maybe<Scalars['Date']['output']>;
+  batchNo: Scalars["String"]["output"];
+  created_at: Scalars["Datetime"]["output"];
+  expiryDate?: Maybe<Scalars["Date"]["output"]>;
   /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
-  product_id?: Maybe<Scalars['UUID']['output']>;
-  products?: Maybe<Products>;
-  quantity?: Maybe<Scalars['BigInt']['output']>;
+  nodeId: Scalars["ID"]["output"];
+  product: Products;
+  productId: Scalars["UUID"]["output"];
+  quantity?: Maybe<Scalars["BigInt"]["output"]>;
 };
 
 export type Product_BatchesConnection = {
@@ -582,13 +583,13 @@ export type Product_BatchesConnection = {
 
 export type Product_BatchesDeleteResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Product_Batches>;
 };
 
 export type Product_BatchesEdge = {
-  cursor: Scalars['String']['output'];
+  cursor: Scalars["String"]["output"];
   node: Product_Batches;
 };
 
@@ -603,21 +604,21 @@ export type Product_BatchesFilter = {
   not?: InputMaybe<Product_BatchesFilter>;
   /** Returns true if at least one of its inner filters is true, otherwise returns false */
   or?: InputMaybe<Array<Product_BatchesFilter>>;
-  product_id?: InputMaybe<UuidFilter>;
+  productId?: InputMaybe<UuidFilter>;
   quantity?: InputMaybe<BigIntFilter>;
 };
 
 export type Product_BatchesInsertInput = {
-  batchNo?: InputMaybe<Scalars['String']['input']>;
-  created_at?: InputMaybe<Scalars['Datetime']['input']>;
-  expiryDate?: InputMaybe<Scalars['Date']['input']>;
-  product_id?: InputMaybe<Scalars['UUID']['input']>;
-  quantity?: InputMaybe<Scalars['BigInt']['input']>;
+  batchNo?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  expiryDate?: InputMaybe<Scalars["Date"]["input"]>;
+  productId?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
 };
 
 export type Product_BatchesInsertResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Product_Batches>;
 };
@@ -626,66 +627,63 @@ export type Product_BatchesOrderBy = {
   batchNo?: InputMaybe<OrderByDirection>;
   created_at?: InputMaybe<OrderByDirection>;
   expiryDate?: InputMaybe<OrderByDirection>;
-  product_id?: InputMaybe<OrderByDirection>;
+  productId?: InputMaybe<OrderByDirection>;
   quantity?: InputMaybe<OrderByDirection>;
 };
 
 export type Product_BatchesUpdateInput = {
-  batchNo?: InputMaybe<Scalars['String']['input']>;
-  created_at?: InputMaybe<Scalars['Datetime']['input']>;
-  expiryDate?: InputMaybe<Scalars['Date']['input']>;
-  product_id?: InputMaybe<Scalars['UUID']['input']>;
-  quantity?: InputMaybe<Scalars['BigInt']['input']>;
+  batchNo?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  expiryDate?: InputMaybe<Scalars["Date"]["input"]>;
+  productId?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
 };
 
 export type Product_BatchesUpdateResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Product_Batches>;
 };
 
 export type Products = Node & {
-  cartCollection?: Maybe<CartConnection>;
-  description?: Maybe<Scalars['String']['output']>;
-  id: Scalars['UUID']['output'];
-  imageURL?: Maybe<Scalars['String']['output']>;
-  name: Scalars['String']['output'];
+  description?: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["UUID"]["output"];
+  imageURL?: Maybe<Scalars["String"]["output"]>;
+  inventory_distributorCollection?: Maybe<Inventory_DistributorConnection>;
+  name: Scalars["String"]["output"];
   /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
+  nodeId: Scalars["ID"]["output"];
   ordersCollection?: Maybe<OrdersConnection>;
-  price: Scalars['String']['output'];
+  price: Scalars["String"]["output"];
   product_batchesCollection?: Maybe<Product_BatchesConnection>;
-  updated_at?: Maybe<Scalars['Datetime']['output']>;
+  updated_at?: Maybe<Scalars["Datetime"]["output"]>;
 };
 
-
-export type ProductsCartCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<CartFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<CartOrderBy>>;
+export type ProductsInventory_DistributorCollectionArgs = {
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
+  filter?: InputMaybe<Inventory_DistributorFilter>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  orderBy?: InputMaybe<Array<Inventory_DistributorOrderBy>>;
 };
-
 
 export type ProductsOrdersCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
   filter?: InputMaybe<OrdersFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
   orderBy?: InputMaybe<Array<OrdersOrderBy>>;
 };
 
-
 export type ProductsProduct_BatchesCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
   filter?: InputMaybe<Product_BatchesFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
   orderBy?: InputMaybe<Array<Product_BatchesOrderBy>>;
 };
 
@@ -696,13 +694,13 @@ export type ProductsConnection = {
 
 export type ProductsDeleteResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Products>;
 };
 
 export type ProductsEdge = {
-  cursor: Scalars['String']['output'];
+  cursor: Scalars["String"]["output"];
   node: Products;
 };
 
@@ -723,17 +721,17 @@ export type ProductsFilter = {
 };
 
 export type ProductsInsertInput = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  imageURL?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  price?: InputMaybe<Scalars['String']['input']>;
-  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  imageURL?: InputMaybe<Scalars["String"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  price?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
 };
 
 export type ProductsInsertResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Products>;
 };
@@ -748,42 +746,40 @@ export type ProductsOrderBy = {
 };
 
 export type ProductsUpdateInput = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  imageURL?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  price?: InputMaybe<Scalars['String']['input']>;
-  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  imageURL?: InputMaybe<Scalars["String"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+  price?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
 };
 
 export type ProductsUpdateResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Products>;
 };
 
 export type Profiles = Node & {
-  cart?: Maybe<Cart>;
-  email?: Maybe<Scalars['String']['output']>;
-  full_name?: Maybe<Scalars['String']['output']>;
-  id: Scalars['UUID']['output'];
+  email?: Maybe<Scalars["String"]["output"]>;
+  full_name?: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["UUID"]["output"];
   /** Globally Unique Record Identifier */
-  nodeId: Scalars['ID']['output'];
+  nodeId: Scalars["ID"]["output"];
   ordersCollection?: Maybe<OrdersConnection>;
-  role?: Maybe<Scalars['String']['output']>;
-  updated_at?: Maybe<Scalars['Datetime']['output']>;
-  username?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<Scalars["String"]["output"]>;
+  updated_at?: Maybe<Scalars["Datetime"]["output"]>;
+  username?: Maybe<Scalars["String"]["output"]>;
   userrole?: Maybe<User_Roles>;
 };
 
-
 export type ProfilesOrdersCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
   filter?: InputMaybe<OrdersFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
   orderBy?: InputMaybe<Array<OrdersOrderBy>>;
 };
 
@@ -794,13 +790,13 @@ export type ProfilesConnection = {
 
 export type ProfilesDeleteResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Profiles>;
 };
 
 export type ProfilesEdge = {
-  cursor: Scalars['String']['output'];
+  cursor: Scalars["String"]["output"];
   node: Profiles;
 };
 
@@ -822,18 +818,18 @@ export type ProfilesFilter = {
 };
 
 export type ProfilesInsertInput = {
-  email?: InputMaybe<Scalars['String']['input']>;
-  full_name?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  role?: InputMaybe<Scalars['String']['input']>;
-  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
-  username?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars["String"]["input"]>;
+  full_name?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  role?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  username?: InputMaybe<Scalars["String"]["input"]>;
   userrole?: InputMaybe<User_Roles>;
 };
 
 export type ProfilesInsertResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Profiles>;
 };
@@ -849,27 +845,23 @@ export type ProfilesOrderBy = {
 };
 
 export type ProfilesUpdateInput = {
-  email?: InputMaybe<Scalars['String']['input']>;
-  full_name?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['UUID']['input']>;
-  role?: InputMaybe<Scalars['String']['input']>;
-  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
-  username?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars["String"]["input"]>;
+  full_name?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  role?: InputMaybe<Scalars["String"]["input"]>;
+  updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  username?: InputMaybe<Scalars["String"]["input"]>;
   userrole?: InputMaybe<User_Roles>;
 };
 
 export type ProfilesUpdateResponse = {
   /** Count of the records impacted by the mutation */
-  affectedCount: Scalars['Int']['output'];
+  affectedCount: Scalars["Int"]["output"];
   /** Array of records impacted by the mutation */
   records: Array<Profiles>;
 };
 
-export type User_Roles =
-  | 'ADMIN'
-  | 'DISTRIBUTORS'
-  | 'SUPERADMIN'
-  | 'UNDEFINED';
+export type User_Roles = "ADMIN" | "DISTRIBUTORS" | "SUPERADMIN" | "UNDEFINED";
 
 /** Boolean expression comparing fields on type "user_roles" */
 export type User_RolesFilter = {

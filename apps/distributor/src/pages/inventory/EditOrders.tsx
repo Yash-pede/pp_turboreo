@@ -43,7 +43,7 @@ export const EditOrders = () => {
       <Modal {...modalProps} mask={true} onCancel={goToList} title="Edit Order">
         <Form {...formProps} layout="vertical">
           <Form.Item name="id" label="OrderID">
-            <Input />
+            <Input disabled />
           </Form.Item>
           <Form.Item name="productName" label="productName">
             {isLoadingProducts ? (
@@ -53,7 +53,7 @@ export const EditOrders = () => {
             )}
           </Form.Item>
           <Form.Item name="quantity" label="quantity">
-            <Input />
+            <Input disabled />
           </Form.Item>
           <Form.Item name="status" label="status  ">
             <Select

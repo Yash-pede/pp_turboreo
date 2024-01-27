@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const INSERT_PRODUCT_BATCHES_MUTATION = gql`
+export const INSERT_PRODUCT_BATCHES_MUTATION: any = gql`
   mutation insertIntoproduct_batchesCollection(
     $objects: [product_batchesInsertInput!]!
   ) {
@@ -15,9 +15,9 @@ export const INSERT_PRODUCT_BATCHES_MUTATION = gql`
   }
 `;
 
-export const INSERT_ORDER_MUTATION = gql`
+export const INSERT_ORDER_MUTATION: any = gql`
   mutation insertIntoordersCollection(
-    $objects: [insertIntoordersCollection!]!
+    $objects: [ordersInsertInput!]!
   ) {
     insertIntoordersCollection(objects: $objects) {
       records {

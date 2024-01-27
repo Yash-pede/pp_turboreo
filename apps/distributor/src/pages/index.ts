@@ -5,3 +5,4 @@ export * from "./Home/Home";
 export * from "./Users";
 export * from "./inventory/AllCart";
 export * from "./inventory/EditOrders";
+export * from "./inventory/AllInventory";

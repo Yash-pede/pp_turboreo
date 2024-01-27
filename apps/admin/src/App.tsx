@@ -15,6 +15,7 @@ import { App as AntdApp, ConfigProvider } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider, supabaseClient } from "@repo/utility";
 import {
+  AllInventory,
   AllOrders,
   EditOrders,
   ForgotPassord,
@@ -77,6 +78,9 @@ function App() {
                     <Route path="/orders">
                       <Route index element={<AllOrders />} />
                       <Route path="edit/:id" element={<EditOrders />} />
+                    </Route>
+                    <Route path="/inventory">
+                      <Route index element={<AllInventory />} />
                     </Route>
                     <Route path="/profiles" element={<Users />} />
                     <Route path="/me" element={<Profile />} />

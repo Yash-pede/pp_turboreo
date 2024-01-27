@@ -1,5 +1,43 @@
 import type * as Types from "./schema.types";
 
+export type InsertIntoproduct_BatchesCollectionMutationVariables = Types.Exact<{
+  objects:
+    | Array<Types.Product_BatchesInsertInput>
+    | Types.Product_BatchesInsertInput;
+}>;
+
+export type InsertIntoproduct_BatchesCollectionMutation = {
+  insertIntoproduct_batchesCollection?: Types.Maybe<{
+    records: Array<
+      Pick<
+        Types.Product_Batches,
+        "productId" | "expiryDate" | "quantity" | "batchNo"
+      >
+    >;
+  }>;
+};
+
+export type InsertIntoordersCollectionMutationVariables = Types.Exact<{
+  objects: Array<Types.OrdersInsertInput> | Types.OrdersInsertInput;
+}>;
+
+export type InsertIntoordersCollectionMutation = {
+  insertIntoordersCollection?: Types.Maybe<{
+    records: Array<Pick<Types.Orders, "userId" | "productId" | "quantity">>;
+  }>;
+};
+
+export type UpdateOrdersCollectionMutationVariables = Types.Exact<{
+  set: Types.OrdersUpdateInput;
+  filter?: Types.InputMaybe<Types.OrdersFilter>;
+}>;
+
+export type UpdateOrdersCollectionMutation = {
+  updateordersCollection: {
+    records: Array<Pick<Types.Orders, "productId" | "quantity" | "status">>;
+  };
+};
+
 export type TestQueryQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type TestQueryQuery = { __typename: "Query" };
@@ -31,6 +69,49 @@ export type AllproductsQuery = {
       node: Pick<
         Types.Products,
         "id" | "name" | "price" | "description" | "imageURL"
+      >;
+    }>;
+  }>;
+};
+
+export type AllOrdersQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type AllOrdersQuery = {
+  ordersCollection?: Types.Maybe<{
+    edges: Array<{
+      node: Pick<
+        Types.Orders,
+        "id" | "productId" | "quantity" | "status" | "created_at"
+      >;
+    }>;
+  }>;
+};
+
+export type Inventory_DistributorConnectionQueryVariables = Types.Exact<{
+  [key: string]: never;
+}>;
+
+export type Inventory_DistributorConnectionQuery = {
+  inventory_distributorCollection?: Types.Maybe<{
+    edges: Array<{
+      node: Pick<
+        Types.Inventory_Distributor,
+        "id" | "quantity" | "created_at" | "productId"
+      >;
+    }>;
+  }>;
+};
+
+export type Product_BatchesCollectionQueryVariables = Types.Exact<{
+  [key: string]: never;
+}>;
+
+export type Product_BatchesCollectionQuery = {
+  product_batchesCollection?: Types.Maybe<{
+    edges: Array<{
+      node: Pick<
+        Types.Product_Batches,
+        "productId" | "quantity" | "created_at" | "batchNo"
       >;
     }>;
   }>;

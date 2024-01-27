@@ -54,7 +54,36 @@ export const AllProducts = ({ whereToAdd }: { whereToAdd?: string }) => {
   }
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ gap: "15px", width: "100%" }}>
+      <div style={{
+        display: "flex",
+        justifyContent: "end",
+        alignItems: "center",
+      }}>
+        <Button
+          type="primary"
+          size="large"
+          style={{
+            gap: "15px",
+            marginTop: "15px",
+            marginBottom: "15px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={() =>
+            go({
+              to: { resource: "orders", action: "list" },
+              type: "push",
+              options: {
+                keepQuery: true,
+              },
+            })
+          }
+        >
+          <IconShoppingCart /> {whereToAdd}
+        </Button>
+      </div>
       <Flex
         wrap="wrap"
         gap="small"
@@ -72,31 +101,6 @@ export const AllProducts = ({ whereToAdd }: { whereToAdd?: string }) => {
           />
         ))}
       </Flex>
-
-      <Button
-        type="primary"
-        size="large"
-        style={{
-          position: "absolute",
-          top: 10,
-          right: 10,
-          gap: "15px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        onClick={() =>
-          go({
-            to: { resource: "orders", action: "list" },
-            type: "push",
-            options: {
-              keepQuery: true,
-            },
-          })
-        }
-      >
-        <IconShoppingCart /> {whereToAdd}
-      </Button>
     </div>
   );
 };

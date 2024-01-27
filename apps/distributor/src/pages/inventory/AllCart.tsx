@@ -1,15 +1,11 @@
 import React from "react";
-import {
-  EditButton,
-  FilterDropdown,
-  useTable,
-} from "@refinedev/antd";
+import { EditButton, FilterDropdown, useTable } from "@refinedev/antd";
 import { ALL_ORDERS_QUERY, ALL_PRODUCTS_QUERY, Orders } from "@repo/graphql";
 import { Input, Skeleton, Space, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useList } from "@refinedev/core";
 
-export const AllCart = ({children}: {children?: React.ReactNode}) => {
+export const AllCart = ({ children }: { children?: React.ReactNode }) => {
   const { tableProps, tableQueryResult } = useTable({
     resource: "orders",
     pagination: {
@@ -49,9 +45,12 @@ export const AllCart = ({children}: {children?: React.ReactNode}) => {
             }
             return (
               <Space>
-                <pre>{products?.data.find((item) => item.id === record.productId)?.name}</pre>
+                {
+                  products?.data.find((item) => item.id === record.productId)
+                    ?.name
+                }
               </Space>
-            )
+            );
           }}
         />
         <Table.Column<Orders>

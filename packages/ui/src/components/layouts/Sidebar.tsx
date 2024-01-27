@@ -198,7 +198,7 @@ export const CustomSider: React.FC<RefineThemedLayoutV2SiderProps> = ({
       <Flex
         className="custom-scrollbar"
         style={{
-          height: "calc(100vh - 72px)",
+          height: "100%",
           position: "sticky",
           width: "100%",
           top: "0",
@@ -236,9 +236,8 @@ export const CustomSider: React.FC<RefineThemedLayoutV2SiderProps> = ({
           <Layout>
             <Layout.Sider
               style={{
-                height: "100vh",
+                height: "100%",
                 backgroundColor: token.colorBgContainer,
-                borderRight: `1px solid ${token.colorBgElevated}`,
               }}
             >
               <div

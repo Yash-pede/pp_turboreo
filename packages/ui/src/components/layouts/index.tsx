@@ -14,7 +14,7 @@ export const Layout = ({
     <ThemedLayoutV2
       Header={() => <Header appName={appName || "PurePride"} />}
       Sider={CustomSider}
-      Title={(titleProps) => <ThemedTitleV2 {...titleProps} text={"Refine"} />}
+      Title={(titleProps) => <ThemedTitleV2 {...titleProps} text={"PurePride"} />}
     >
       {children}
     </ThemedLayoutV2>

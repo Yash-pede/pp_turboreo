@@ -66,3 +66,33 @@ export const ALL_ORDERS_QUERY = gql`
     }
   }
 `;
+
+export const ALL_INVENTORY_DISTRIBUTOR_QUERY = gql`
+  query inventory_distributorConnection {
+    inventory_distributorCollection {
+      edges {
+        node {
+          id
+          quantity
+          created_at
+          productId
+        }
+      }
+    }
+  }
+`;
+
+export const ALL_PRODUCT_BATCHES_QUERY = gql`
+  query product_batchesCollection {
+    product_batchesCollection {
+      edges {
+        node {
+          productId
+          quantity
+          created_at
+          batchNo
+        }
+      }
+    }
+  }
+`;
