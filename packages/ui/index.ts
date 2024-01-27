@@ -4,3 +4,6 @@ export * from "./src/components/pages/Profile";
 export * from "./src/components/pages/Products/AllProducts"
 export * from "./src/components/pages/Products/ProductCard"
 export * from "./src/components/pages/Products/productPage"
+export * from "./src/components/pages/admin/inventory/AllInventory"
+export * from "./src/components/pages/admin/inventory/AllOrders"
+export * from "./src/components/pages/admin/inventory/EditOrders"

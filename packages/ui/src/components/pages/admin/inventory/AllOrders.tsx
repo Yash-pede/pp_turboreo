@@ -71,8 +71,8 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
           fixed="right"
           render={(value) => (
             <Space>
-              <EditButton size="small" hideText recordItemId={value} />
-              <DeleteButton size="small" hideText recordItemId={value} />
+              <EditButton size="small"  recordItemId={value} />
+              <DeleteButton size="small"  recordItemId={value} />
             </Space>
           )}
         />

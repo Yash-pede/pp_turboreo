@@ -14,7 +14,7 @@ import {
   Typography,
 } from "antd";
 import dayjs from "dayjs";
-import { useNavigation } from "@refinedev/core";
+import { useGo } from "@refinedev/core";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useModalForm } from "@refinedev/antd";
@@ -31,7 +31,7 @@ export const ProductCard = ({
   WhereToAdd?: string;
 }) => {
   const { Text, Paragraph, Title } = Typography;
-  const { show } = useNavigation();
+  const go = useGo();
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState(null);
   const { formProps, modalProps } = useModalForm({
@@ -65,7 +65,6 @@ export const ProductCard = ({
       fetchUserId();
     }
   };
-
   return (
     <>
       <Card
@@ -73,7 +72,13 @@ export const ProductCard = ({
         title={product.name}
         loading={isLoading}
         style={{ width: 300, cursor: "pointer" }}
-        onClick={() => show("products", product.id)}
+        onClick={() =>
+          go({
+            to: { resource: "products", id: product.id, action: "show" },
+            type: "push",
+            options: { keepQuery: true },
+          })
+        }
       >
         <img
           src={`https://krtkfjphiovnpjawcxwo.supabase.co/storage/v1/object/public/Products/${product.imageURL}`}
@@ -124,13 +129,15 @@ export const ProductCard = ({
           <Form.Item label={"productId"} name={"productId"} style={{}}>
             <Input defaultValue={product.id} defaultChecked={product.id} />
           </Form.Item>
-          <Form.Item label={"userId"} name={"userId"} style={{}}>
-            {userId ? (
-              <Input defaultValue={userId} />
-            ) : (
-              <Skeleton.Input active />
-            )}
-          </Form.Item>
+          {WhereToAdd === "orders" && (
+            <Form.Item label={"userId"} name={"userId"} style={{}}>
+              {userId ? (
+                <Input defaultValue={userId} />
+              ) : (
+                <Skeleton.Input active />
+              )}
+            </Form.Item>
+          )}
           <Form.Item label={"name"} name={"name"}>
             <Input
               placeholder="Enter name"

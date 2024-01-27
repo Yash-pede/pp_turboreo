@@ -14,17 +14,16 @@ import { dataProvider, liveProvider } from "@refinedev/supabase";
 import { App as AntdApp, ConfigProvider } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider, supabaseClient } from "@repo/utility";
+import { ForgotPassord, Home, Login, Register, Users } from "./pages";
 import {
-  AllInventory,
+  AllProducts,
+  Layout,
+  Profile,
+  ProductPage,
   AllOrders,
   EditOrders,
-  ForgotPassord,
-  Home,
-  Login,
-  Register,
-  Users,
-} from "./pages";
-import { AllProducts, Layout, Profile, ProductPage } from "@repo/ui";
+  AllInventory,
+} from "@repo/ui";
 import { resources } from "./config/resources";
 
 function App() {
@@ -74,6 +73,7 @@ function App() {
                         element={<AllProducts whereToAdd="stock" />}
                       />
                       <Route path=":id" element={<ProductPage />} />
+                      <Route path="create" element={<>U r not su admin</>} />
                     </Route>
                     <Route path="/orders">
                       <Route index element={<AllOrders />} />

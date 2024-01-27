@@ -16,6 +16,7 @@ export const resources: IResourceItem[] = [
       label: "Products",
     },
     show: "/products/:id",
+    create:"/products/create",
   },
   {
     name: "orders",
@@ -26,6 +27,14 @@ export const resources: IResourceItem[] = [
     show: "/orders/:id",
     edit: "/orders/edit/:id",
     create: "/orders/create",
+  },
+  {
+    name: "inventory",
+    list: "/inventory",
+    meta: {
+      label: "Inventory",
+    },
+    show: "/inventory/:id",
   },
   {
     name: "reports",

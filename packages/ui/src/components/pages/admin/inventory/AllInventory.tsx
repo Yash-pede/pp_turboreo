@@ -1,4 +1,4 @@
-import { useTable } from "@refinedev/antd";
+import { DeleteButton, EditButton, useTable } from "@refinedev/antd";
 import { useList } from "@refinedev/core";
 import { ALL_PRODUCTS_QUERY, ALL_PRODUCT_BATCHES_QUERY } from "@repo/graphql";
 import { DatePicker, Skeleton, Space, Table } from "antd";
@@ -76,6 +76,17 @@ export const AllInventory = () => {
           );
         }}
       />
+        <Table.Column
+          dataIndex={"id"}
+          title="Action"
+          fixed="right"
+          render={(value) => (
+            <Space>
+              <EditButton size="small"  recordItemId={value} />
+              <DeleteButton size="small"  recordItemId={value} />
+            </Space>
+          )}
+        />
     </Table>
   );
 };

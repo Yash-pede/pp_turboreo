@@ -1,6 +1,5 @@
 import { IResourceItem } from "@refinedev/core";
 
-
 export const resources: IResourceItem[] = [
   {
     name: "dashboard",
@@ -16,6 +15,7 @@ export const resources: IResourceItem[] = [
       label: "Products",
     },
     show: "/products/:id",
+    create: "/products/create",
   },
   {
     name: "orders",

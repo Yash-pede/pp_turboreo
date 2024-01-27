@@ -16,9 +16,7 @@ export const INSERT_PRODUCT_BATCHES_MUTATION: any = gql`
 `;
 
 export const INSERT_ORDER_MUTATION: any = gql`
-  mutation insertIntoordersCollection(
-    $objects: [ordersInsertInput!]!
-  ) {
+  mutation insertIntoordersCollection($objects: [ordersInsertInput!]!) {
     insertIntoordersCollection(objects: $objects) {
       records {
         userId
@@ -39,6 +37,20 @@ export const UPDATE_ORDER_MUTATION = gql`
         productId
         quantity
         status
+      }
+    }
+  }
+`;
+
+export const INSERT_PRODUCT_MUTATION = gql`
+  mutation insertIntoproductsCollection($objects: [productsInsertInput!]!) {
+    insertIntoproductsCollection(objects: $objects) {
+      records {
+        name
+        price
+        description
+        imageURL
+        updated_at
       }
     }
   }
