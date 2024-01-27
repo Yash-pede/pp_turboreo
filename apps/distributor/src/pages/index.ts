@@ -3,3 +3,5 @@ export * from "./auth/Register";
 export * from "./auth/ForgotPassord";
 export * from "./Home/Home";
 export * from "./Users";
+export * from "./inventory/AllCart";
+export * from "./inventory/EditOrders";

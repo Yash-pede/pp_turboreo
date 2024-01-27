@@ -17,13 +17,7 @@ export const Home = () => {
     meta: {
       gqlQuery: PROFILES_QUERY,
     },
-    filters: [
-      {
-        field: "username",
-        operator: "eq",
-        value: "yashpede",
-      },
-    ],
+  
   });
   return (
     <div>

@@ -38,6 +38,14 @@ export const resources: IResourceItem[] = [
     create: "/reports/create",
   },
   {
+    name: "inventory",
+    list: "/inventory",
+    meta: {
+      label: "Inventory",
+    },
+    show: "/inventory/:id",
+  },
+  {
     name: "profiles",
     list: "/profiles",
     meta: {

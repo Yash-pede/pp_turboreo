@@ -6,3 +6,10 @@ export interface ProductType {
   description: string;
   imageURL: string;
 }
+export enum OrderStatus {
+  PENDING = "Pending",
+  FULFILLED = "Fulfilled",
+  CANCELLED = "Cancelled",
+  INPROCESS = "InProcess",
+  DEFECTED = "Defected",
+}

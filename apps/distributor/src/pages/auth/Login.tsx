@@ -1,4 +1,4 @@
-import { authProvider } from "@repo/utility";
+import { authProvider } from "./authProvider";
 import { redirect } from "react-router-dom";
 import { AuthPage } from "@refinedev/antd";
 import { notification } from "antd";

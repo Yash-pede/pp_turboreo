@@ -50,3 +50,19 @@ export const ALL_PRODUCTS_QUERY = gql`
     }
   }
 `;
+
+export const ALL_ORDERS_QUERY = gql`
+  query allOrders {
+    ordersCollection {
+      edges {
+        node {
+          id
+          productId
+          quantity
+          status
+          created_at
+        }
+      }
+    }
+  }
+`;

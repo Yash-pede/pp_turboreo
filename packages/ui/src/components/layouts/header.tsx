@@ -29,6 +29,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const breakpoint = Grid.useBreakpoint();
   const { token } = useToken();
+  const { setMobileSiderOpen } = useThemedLayoutContext();
 
   const authProvider = useActiveAuthProvider();
   const { data: user } = useGetIdentity({
@@ -58,7 +59,6 @@ export const Header: React.FC<HeaderProps> = ({
   const isMobile =
     typeof breakpoint.lg === "undefined" ? false : !breakpoint.lg;
 
-  const { setMobileSiderOpen } = useThemedLayoutContext();
   return (
     <AntdLayout.Header style={headerStyles}>
       <Space>
