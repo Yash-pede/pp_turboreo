@@ -13,12 +13,11 @@ import routerBindings, {
 import { dataProvider, liveProvider } from "@refinedev/supabase";
 import { App as AntdApp, ConfigProvider } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import { authProvider, supabaseClient } from "@repo/utility";
+import { UserRoleTypes, authProvider, supabaseClient } from "@repo/utility";
 import {
   CreateProduct,
   ForgotPassord,
   Home,
-  Login,
   Register,
   Users,
 } from "./pages";
@@ -30,6 +29,7 @@ import {
   AllOrders,
   EditOrders,
   AllInventory,
+  LoginNew,
 } from "@repo/ui";
 import { resources } from "./config/resources";
 
@@ -57,7 +57,10 @@ function App() {
               >
                 <Routes>
                   <Route path="/register" element={<Register />} />
-                  <Route path="/login" element={<Login />} />
+                  <Route
+                    path="/login"
+                    element={<LoginNew userType={UserRoleTypes.SUPERADMIN} />}
+                  />
                   <Route path="/forgot-password" element={<ForgotPassord />} />
 
                   <Route
@@ -75,10 +78,7 @@ function App() {
                     login
                     <Route index element={<Home />} />
                     <Route path="/products">
-                      <Route
-                        index
-                        element={<AllProducts/>}
-                      />
+                      <Route index element={<AllProducts />} />
                       <Route path=":id" element={<ProductPage />} />
                       <Route path="create" element={<CreateProduct />} />
                     </Route>

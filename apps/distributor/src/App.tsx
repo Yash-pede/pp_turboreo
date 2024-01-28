@@ -13,7 +13,7 @@ import routerBindings, {
 import { dataProvider, liveProvider } from "@refinedev/supabase";
 import { App as AntdApp, ConfigProvider } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import { authProvider, supabaseClient } from "@repo/utility";
+import { UserRoleTypes, authProvider, supabaseClient } from "@repo/utility";
 import {
   AllAvalableProducts,
   AllCart,
@@ -21,11 +21,10 @@ import {
   EditOrders,
   ForgotPassord,
   Home,
-  Login,
   Register,
   Users,
 } from "./pages";
-import { Layout, Profile, ProductPage } from "@repo/ui";
+import { Layout, Profile, ProductPage, LoginNew } from "@repo/ui";
 import { resources } from "./config/resources";
 
 function App() {
@@ -52,7 +51,7 @@ function App() {
               >
                 <Routes>
                   <Route path="/register" element={<Register />} />
-                  <Route path="/login" element={<Login />} />
+                  <Route path="/login" element={<LoginNew userType={UserRoleTypes.DISTRIBUTORS} />} />
                   <Route path="/forgot-password" element={<ForgotPassord />} />
 
                   <Route

@@ -44,6 +44,9 @@ importers:
       antd:
         specifier: ^5.0.5
         version: 5.13.2(react-dom@18.2.0)(react@18.2.0)
+      axios:
+        specifier: ^1.6.7
+        version: 1.6.7
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
@@ -293,6 +296,9 @@ importers:
       '@repo/graphql':
         specifier: workspace:*
         version: link:../../packages/graphql
+      '@repo/shared':
+        specifier: workspace:*
+        version: link:../../packages/Shared
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -355,6 +361,8 @@ importers:
         specifier: ^4.3.1
         version: 4.5.2(@types/node@18.19.8)(sass@1.70.0)
 
+  packages/Shared: {}
+
   packages/config-eslint:
     dependencies:
       '@typescript-eslint/eslint-plugin':
@@ -402,6 +410,9 @@ importers:
       '@repo/graphql':
         specifier: workspace:*
         version: link:../graphql
+      '@repo/shared':
+        specifier: workspace:*
+        version: link:../Shared
       '@repo/utility':
         specifier: workspace:*
         version: link:../utility
@@ -4464,6 +4475,16 @@ packages:
       - debug
     dev: false
 
+  /axios@1.6.7:
+    resolution: {integrity: sha512-/hDJGff6/c7u0hDkvkGxR/oy6CbCs8ziCsC7SqmhjfozqiJGc8Z11wrv9z9lYfY4K8l+H9TpjcMDX0xOZmx+RA==}
+    dependencies:
+      follow-redirects: 1.15.5
+      form-data: 4.0.0
+      proxy-from-env: 1.1.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /babel-core@7.0.0-bridge.0(@babel/core@7.23.7):
     resolution: {integrity: sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==}
     peerDependencies:
@@ -7736,6 +7757,10 @@ packages:
     dependencies:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
+    dev: false
+
+  /proxy-from-env@1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: false
 
   /punycode@1.4.1:

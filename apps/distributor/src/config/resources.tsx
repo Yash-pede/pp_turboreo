@@ -28,14 +28,14 @@ export const resources: IResourceItem[] = [
     create: "/orders/create",
   },
   {
-    name: "reports",
-    list: "/reports",
+    name: "customer",
+    list: "/customer",
     meta: {
-      label: "Reports",
+      label: "customer",
     },
-    show: "/reports/:id",
-    edit: "/reports/edit/:id",
-    create: "/reports/create",
+    show: "/customer/:id",
+    edit: "/customer/edit/:id",
+    create: "/customer/create",
   },
   {
     name: "inventory",

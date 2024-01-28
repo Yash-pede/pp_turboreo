@@ -2,10 +2,13 @@ import { Form, Input, Modal, Select, Skeleton } from "antd";
 import { useModalForm } from "@refinedev/antd";
 import { useGo, useList } from "@refinedev/core";
 import { ALL_PRODUCTS_QUERY, UPDATE_ORDER_MUTATION } from "@repo/graphql";
-import { OrderStatus } from "@repo/utility";
+import { OrderStatus, authProvider } from "@repo/utility";
 import { AllCart } from "./AllCart";
+import React, { useEffect } from "react";
 
 export const EditOrders = () => {
+  const [userId, setUserId] = React.useState<string>();
+
   const go = useGo();
   const goToList = () => {
     go({
@@ -38,6 +41,15 @@ export const EditOrders = () => {
       },
     ],
   });
+  useEffect(() => {
+    const fetchingUser = async () => {
+      if (authProvider.getIdentity) {
+        const user: any = await authProvider.getIdentity();
+        setUserId(user.id);
+      }
+    };
+    fetchingUser();
+  });
   return (
     <AllCart>
       <Modal {...modalProps} mask={true} onCancel={goToList} title="Edit Order">
@@ -50,6 +62,13 @@ export const EditOrders = () => {
               <Skeleton.Input />
             ) : (
               <Input disabled defaultValue={products?.data[0]?.name} />
+            )}
+          </Form.Item>
+          <Form.Item label={"userId"} name={"userId"}>
+            {userId ? (
+              <Input defaultValue={userId} value={userId} />
+            ) : (
+              <Skeleton.Input active />
             )}
           </Form.Item>
           <Form.Item name="quantity" label="quantity">

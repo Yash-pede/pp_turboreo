@@ -53,6 +53,11 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
           }}
         />
         <Table.Column<Orders>
+          dataIndex={"userId"}
+          title="userId"
+          render={(_value, record) => <Space>{record.userId}</Space>}
+        />
+        <Table.Column<Orders>
           dataIndex={"quantity"}
           title="quantity"
           render={(_value, record) => <Space>{record.quantity || "-"}</Space>}
@@ -71,8 +76,8 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
           fixed="right"
           render={(value) => (
             <Space>
-              <EditButton size="small"  recordItemId={value} />
-              <DeleteButton size="small"  recordItemId={value} />
+              <EditButton size="small" recordItemId={value} />
+              <DeleteButton size="small" recordItemId={value} />
             </Space>
           )}
         />

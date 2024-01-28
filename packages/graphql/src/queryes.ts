@@ -96,3 +96,16 @@ export const ALL_PRODUCT_BATCHES_QUERY = gql`
     }
   }
 `;
+
+export const GET_USER_ROLE_QUERY = gql`
+  query GetProfileByIdAndUserRole($filter: profilesFilter) {
+    profilesCollection(filter: $filter) {
+      edges {
+        node {
+          id
+          userrole
+        }
+      }
+    }
+  }
+`;

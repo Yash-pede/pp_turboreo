@@ -13,3 +13,10 @@ export enum OrderStatus {
   INPROCESS = "InProcess",
   DEFECTED = "Defected",
 }
+export enum UserRoleTypes {
+  SUPERADMIN = "SUPERADMIN",
+  ADMIN = "ADMIN",
+  DISTRIBUTORS = "DISTRIBUTORS",
+  CUSTOMER = "CUSTOMER",
+  UNDEFINED = "UNDEFINED",
+}

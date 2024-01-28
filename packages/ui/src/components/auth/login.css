@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  height: 100dvh;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+
+.login-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 50%;
+}
+.right-image-container {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 50%;
+}
+.right-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 768px) {
+  .login-form {
+    width: 100%;
+  }
+  .right-image-container {
+    display: none;
+  }
+}

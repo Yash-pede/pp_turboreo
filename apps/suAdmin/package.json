@@ -15,6 +15,7 @@
     "@refinedev/supabase": "^5.7.4",
     "@repo/graphql": "workspace:*",
     "@repo/ui": "workspace:*",
+    "@repo/shared": "workspace:*",
     "@repo/utility": "workspace:*",
     "@tabler/icons": "^2.46.0",
     "antd": "^5.0.5",
