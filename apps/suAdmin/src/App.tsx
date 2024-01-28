@@ -77,7 +77,7 @@ function App() {
                     <Route path="/products">
                       <Route
                         index
-                        element={<AllProducts whereToAdd="stock" />}
+                        element={<AllProducts/>}
                       />
                       <Route path=":id" element={<ProductPage />} />
                       <Route path="create" element={<CreateProduct />} />
