@@ -1,8 +1,7 @@
-import { DeleteButton, EditButton, useTable } from "@refinedev/antd";
+import { DateField, DeleteButton, EditButton, useTable } from "@refinedev/antd";
 import { useList } from "@refinedev/core";
 import { ALL_PRODUCTS_QUERY, ALL_PRODUCT_BATCHES_QUERY } from "@repo/graphql";
-import { DatePicker, Skeleton, Space, Table } from "antd";
-import dayjs from "dayjs";
+import { Skeleton, Space, Table } from "antd";
 
 export const AllInventory = () => {
   const { tableProps, tableQueryResult } = useTable({
@@ -71,7 +70,8 @@ export const AllInventory = () => {
         render={(value) => {
           return (
             <Space>
-              <DatePicker defaultValue={dayjs(value)} />
+              {/* <DatePicker defaultValue={dayjs(value)} /> */}
+              <DateField value={value} />
             </Space>
           );
         }}

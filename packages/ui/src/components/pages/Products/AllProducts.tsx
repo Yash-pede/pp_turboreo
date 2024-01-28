@@ -19,7 +19,7 @@ import { InboxOutlined, PlusCircleTwoTone } from "@ant-design/icons";
 import { Create, useDrawerForm } from "@refinedev/antd";
 import { supabaseClient } from "@repo/utility";
 
-export const AllProducts = ({ whereToAdd }: { whereToAdd?: string }) => {
+export const AllProducts = () => {
   const { data, isLoading } = useList({
     resource: "products",
     meta: {
@@ -142,7 +142,6 @@ export const AllProducts = ({ whereToAdd }: { whereToAdd?: string }) => {
           gap: "0.7rem",
         }}
       >
-        {whereToAdd === "stock" && (
           <Button
             type="primary"
             size="large"
@@ -158,7 +157,6 @@ export const AllProducts = ({ whereToAdd }: { whereToAdd?: string }) => {
           >
             <PlusCircleTwoTone /> Add Products
           </Button>
-        )}
         <Button
           type="primary"
           size="large"
@@ -180,7 +178,7 @@ export const AllProducts = ({ whereToAdd }: { whereToAdd?: string }) => {
             })
           }
         >
-          <IconShoppingCart /> {whereToAdd}
+          <IconShoppingCart /> Stock
         </Button>
       </div>
       <Flex
@@ -196,7 +194,7 @@ export const AllProducts = ({ whereToAdd }: { whereToAdd?: string }) => {
             product={product}
             isLoading={isLoading}
             key={product.id}
-            WhereToAdd={whereToAdd || "orders"}
+            WhereToAdd={"stock"}
           />
         ))}
       </Flex>

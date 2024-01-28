@@ -15,6 +15,7 @@ import { App as AntdApp, ConfigProvider } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider, supabaseClient } from "@repo/utility";
 import {
+  AllAvalableProducts,
   AllCart,
   AllInventory,
   EditOrders,
@@ -24,7 +25,7 @@ import {
   Register,
   Users,
 } from "./pages";
-import { AllProducts, Layout, Profile, ProductPage } from "@repo/ui";
+import { Layout, Profile, ProductPage } from "@repo/ui";
 import { resources } from "./config/resources";
 
 function App() {
@@ -71,7 +72,7 @@ function App() {
                     <Route path="/products">
                       <Route
                         index
-                        element={<AllProducts whereToAdd="orders" />}
+                        element={<AllAvalableProducts />}
                       />
                       <Route path=":id" element={<ProductPage />} />
                     </Route>

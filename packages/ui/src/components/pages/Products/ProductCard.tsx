@@ -6,6 +6,7 @@ import {
 import {
   Button,
   Card,
+  DatePicker,
   Form,
   Input,
   InputNumber,
@@ -126,9 +127,19 @@ export const ProductCard = ({
         width={512}
       >
         <Form {...formProps} layout="vertical">
+          
           <Form.Item label={"productId"} name={"productId"} style={{}}>
             <Input defaultValue={product.id} defaultChecked={product.id} />
           </Form.Item>
+          
+          <Form.Item label={"name"} name={"name"}>
+            <Input
+              placeholder="Enter name"
+              disabled
+              defaultValue={product.name}
+            />
+          </Form.Item>
+
           {WhereToAdd === "orders" && (
             <Form.Item label={"userId"} name={"userId"} style={{}}>
               {userId ? (
@@ -138,13 +149,16 @@ export const ProductCard = ({
               )}
             </Form.Item>
           )}
-          <Form.Item label={"name"} name={"name"}>
-            <Input
-              placeholder="Enter name"
-              disabled
-              defaultValue={product.name}
-            />
-          </Form.Item>
+          {WhereToAdd === "stock" && (
+            <>
+              <Form.Item label={"Batch No"} name={"batchNo"} style={{}}>
+                <Input placeholder="Enter Batch No" />
+              </Form.Item>
+              <Form.Item label={"expiryDate"} name={"expiryDate"} style={{}}>
+                <DatePicker style={{ width: "100%" }} />
+              </Form.Item>
+            </>
+          )}
 
           <Form.Item
             label={"quantity"}
