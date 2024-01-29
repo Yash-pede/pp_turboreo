@@ -28,7 +28,7 @@ export const Home = () => {
   return (
     <div>
       <div>Products page</div>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       <Flex>
         <Skeleton />
         <Skeleton />
