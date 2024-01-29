@@ -11,7 +11,7 @@ export type InsertIntoproduct_BatchesCollectionMutation = {
     records: Array<
       Pick<
         Types.Product_Batches,
-        "productId" | "expiryDate" | "quantity" | "batchNo"
+        "productId" | "expiryDate" | "price" | "quantity" | "batchNo"
       >
     >;
   }>;
@@ -36,6 +36,18 @@ export type UpdateOrdersCollectionMutation = {
   updateordersCollection: {
     records: Array<Pick<Types.Orders, "productId" | "quantity" | "status">>;
   };
+};
+
+export type InsertIntoproductsCollectionMutationVariables = Types.Exact<{
+  objects: Array<Types.ProductsInsertInput> | Types.ProductsInsertInput;
+}>;
+
+export type InsertIntoproductsCollectionMutation = {
+  insertIntoproductsCollection?: Types.Maybe<{
+    records: Array<
+      Pick<Types.Products, "name" | "description" | "imageURL" | "updated_at">
+    >;
+  }>;
 };
 
 export type TestQueryQueryVariables = Types.Exact<{ [key: string]: never }>;
@@ -66,10 +78,7 @@ export type AllproductsQueryVariables = Types.Exact<{ [key: string]: never }>;
 export type AllproductsQuery = {
   productsCollection?: Types.Maybe<{
     edges: Array<{
-      node: Pick<
-        Types.Products,
-        "id" | "name" | "price" | "description" | "imageURL"
-      >;
+      node: Pick<Types.Products, "id" | "name" | "description" | "imageURL">;
     }>;
   }>;
 };
@@ -111,8 +120,18 @@ export type Product_BatchesCollectionQuery = {
     edges: Array<{
       node: Pick<
         Types.Product_Batches,
-        "productId" | "quantity" | "created_at" | "batchNo"
+        "productId" | "price" | "quantity" | "created_at" | "batchNo"
       >;
     }>;
+  }>;
+};
+
+export type GetProfileByIdAndUserRoleQueryVariables = Types.Exact<{
+  filter?: Types.InputMaybe<Types.ProfilesFilter>;
+}>;
+
+export type GetProfileByIdAndUserRoleQuery = {
+  profilesCollection?: Types.Maybe<{
+    edges: Array<{ node: Pick<Types.Profiles, "id" | "userrole"> }>;
   }>;
 };

@@ -1,32 +1,28 @@
 import { useGo, useList } from "@refinedev/core";
 import { ALL_PRODUCTS_QUERY, ALL_PRODUCT_BATCHES_QUERY } from "@repo/graphql";
 import { ProductCard } from "@repo/ui";
-import {
-  Button,
-  Card,
-  Flex,
-} from "antd";
+import { Button, Card, Flex } from "antd";
 import { IconShoppingCart } from "@tabler/icons-react";
 export const AllAvalableProducts = () => {
-  const { data:StockInventory, isLoading } = useList({
+  const { data: StockInventory, isLoading } = useList({
     resource: "product_batches",
     meta: {
       gqlQuery: ALL_PRODUCT_BATCHES_QUERY,
     },
   });
- const {data} = useList({
-   resource: "products",
-   meta: {
-     gqlQuery: ALL_PRODUCTS_QUERY,
-   },
-   filters: [
-     {
-       field: "id",
-       operator: "in",
-       value: StockInventory?.data?.map((item) => item.productId),
-     }
-   ]
- })
+  const { data } = useList({
+    resource: "products",
+    meta: {
+      gqlQuery: ALL_PRODUCTS_QUERY,
+    },
+    filters: [
+      {
+        field: "id",
+        operator: "in",
+        value: StockInventory?.data?.map((item) => item.productId),
+      },
+    ],
+  });
   const go = useGo();
   if (isLoading) {
     return (
@@ -114,6 +110,9 @@ export const AllAvalableProducts = () => {
         {data?.data.map((product: any) => (
           <ProductCard
             product={product}
+            stockProduct={StockInventory?.data.find(
+              (item) => item.productId === product.id
+            )}
             isLoading={isLoading}
             key={product.id}
             WhereToAdd={"orders"}

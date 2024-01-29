@@ -42,7 +42,6 @@ export const ALL_PRODUCTS_QUERY = gql`
         node {
           id
           name
-          price
           description
           imageURL
         }
@@ -88,6 +87,7 @@ export const ALL_PRODUCT_BATCHES_QUERY = gql`
       edges {
         node {
           productId
+          price
           quantity
           created_at
           batchNo

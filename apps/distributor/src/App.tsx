@@ -18,11 +18,13 @@ import {
   AllAvalableProducts,
   AllCart,
   AllInventory,
+  CustomerEdit,
+  CustomerHome,
+  CustomerShow,
   EditOrders,
   ForgotPassord,
   Home,
   Register,
-  Users,
 } from "./pages";
 import { Layout, Profile, ProductPage, LoginNew } from "@repo/ui";
 import { resources } from "./config/resources";
@@ -51,7 +53,10 @@ function App() {
               >
                 <Routes>
                   <Route path="/register" element={<Register />} />
-                  <Route path="/login" element={<LoginNew userType={UserRoleTypes.DISTRIBUTORS} />} />
+                  <Route
+                    path="/login"
+                    element={<LoginNew userType={UserRoleTypes.DISTRIBUTORS} />}
+                  />
                   <Route path="/forgot-password" element={<ForgotPassord />} />
 
                   <Route
@@ -69,18 +74,20 @@ function App() {
                     login
                     <Route index element={<Home />} />
                     <Route path="/products">
-                      <Route
-                        index
-                        element={<AllAvalableProducts />}
-                      />
+                      <Route index element={<AllAvalableProducts />} />
                       <Route path=":id" element={<ProductPage />} />
                     </Route>
                     <Route path="/orders">
                       <Route index element={<AllCart />} />
                       <Route path="edit/:id" element={<EditOrders />} />
                     </Route>
+                    <Route path="/customer">
+                      <Route index element={<CustomerHome />} />
+                      <Route path="edit/:id" element={<CustomerEdit />} />
+                      <Route path="create" element={<CustomerEdit />} />
+                      <Route path=":id" element={<CustomerShow />} />
+                    </Route>
                     <Route path="/inventory" element={<AllInventory />} />
-                    <Route path="/profiles" element={<Users />} />
                     <Route path="/me" element={<Profile />} />
                   </Route>
                 </Routes>

@@ -1,4 +1,5 @@
 import { IResourceItem } from "@refinedev/core";
+import { IconDashboard, IconPackage, IconPackageExport, IconPackageImport, IconUser } from "@tabler/icons-react";
 
 
 export const resources: IResourceItem[] = [
@@ -7,6 +8,7 @@ export const resources: IResourceItem[] = [
     list: "/",
     meta: {
       label: "Dashboard",
+      icon: <IconDashboard />,
     },
   },
   {
@@ -14,6 +16,7 @@ export const resources: IResourceItem[] = [
     list: "/products",
     meta: {
       label: "Products",
+      icon: <IconPackage />,
     },
     show: "/products/:id",
     create:"/products/create",
@@ -23,6 +26,7 @@ export const resources: IResourceItem[] = [
     list: "/orders",
     meta: {
       label: "Orders",
+      icon: <IconPackageExport />,
     },
     show: "/orders/:id",
     edit: "/orders/edit/:id",
@@ -33,24 +37,16 @@ export const resources: IResourceItem[] = [
     list: "/inventory",
     meta: {
       label: "Inventory",
+      icon: <IconPackageImport />,
     },
     show: "/inventory/:id",
-  },
-  {
-    name: "reports",
-    list: "/reports",
-    meta: {
-      label: "Reports",
-    },
-    show: "/reports/:id",
-    edit: "/reports/edit/:id",
-    create: "/reports/create",
   },
   {
     name: "profiles",
     list: "/profiles",
     meta: {
       label: "profiles",
+      icon: <IconUser />,
     },
     show: "/profiles/:id",
     edit: "/profiles/edit/:id",

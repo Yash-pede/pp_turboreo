@@ -8,6 +8,7 @@ export const INSERT_PRODUCT_BATCHES_MUTATION: any = gql`
       records {
         productId
         expiryDate
+        price
         quantity
         batchNo
       }
@@ -47,7 +48,6 @@ export const INSERT_PRODUCT_MUTATION = gql`
     insertIntoproductsCollection(objects: $objects) {
       records {
         name
-        price
         description
         imageURL
         updated_at

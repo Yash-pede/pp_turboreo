@@ -9,7 +9,6 @@ import {
   Form,
   GetProp,
   Input,
-  InputNumber,
   Upload,
   UploadProps,
   message,
@@ -211,17 +210,6 @@ export const AllProducts = () => {
               ]}
             >
               <Input />
-            </Form.Item>
-            <Form.Item
-              label="Price"
-              name="price"
-              rules={[
-                {
-                  required: true,
-                },
-              ]}
-            >
-              <InputNumber />
             </Form.Item>
             <Form.Item
               label="Description"

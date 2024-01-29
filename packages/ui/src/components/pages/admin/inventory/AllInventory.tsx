@@ -58,6 +58,13 @@ export const AllInventory = () => {
         }}
       />
       <Table.Column
+        dataIndex={"price"}
+        title="Price"
+        render={(value) => {
+          return <Space>{value}</Space>;
+        }}
+      />
+      <Table.Column
         dataIndex={"quantity"}
         title="Quantity"
         render={(value) => {

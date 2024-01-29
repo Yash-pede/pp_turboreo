@@ -568,12 +568,13 @@ export type Orders_StatusFilter = {
 export type Product_Batches = Node & {
   batchNo: Scalars["String"]["output"];
   created_at: Scalars["Datetime"]["output"];
-  expiryDate?: Maybe<Scalars["Date"]["output"]>;
+  expiryDate: Scalars["Date"]["output"];
   /** Globally Unique Record Identifier */
   nodeId: Scalars["ID"]["output"];
+  price: Scalars["BigInt"]["output"];
   product: Products;
   productId: Scalars["UUID"]["output"];
-  quantity?: Maybe<Scalars["BigInt"]["output"]>;
+  quantity: Scalars["BigInt"]["output"];
 };
 
 export type Product_BatchesConnection = {
@@ -604,6 +605,7 @@ export type Product_BatchesFilter = {
   not?: InputMaybe<Product_BatchesFilter>;
   /** Returns true if at least one of its inner filters is true, otherwise returns false */
   or?: InputMaybe<Array<Product_BatchesFilter>>;
+  price?: InputMaybe<BigIntFilter>;
   productId?: InputMaybe<UuidFilter>;
   quantity?: InputMaybe<BigIntFilter>;
 };
@@ -612,6 +614,7 @@ export type Product_BatchesInsertInput = {
   batchNo?: InputMaybe<Scalars["String"]["input"]>;
   created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
   expiryDate?: InputMaybe<Scalars["Date"]["input"]>;
+  price?: InputMaybe<Scalars["BigInt"]["input"]>;
   productId?: InputMaybe<Scalars["UUID"]["input"]>;
   quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
 };
@@ -627,6 +630,7 @@ export type Product_BatchesOrderBy = {
   batchNo?: InputMaybe<OrderByDirection>;
   created_at?: InputMaybe<OrderByDirection>;
   expiryDate?: InputMaybe<OrderByDirection>;
+  price?: InputMaybe<OrderByDirection>;
   productId?: InputMaybe<OrderByDirection>;
   quantity?: InputMaybe<OrderByDirection>;
 };
@@ -635,6 +639,7 @@ export type Product_BatchesUpdateInput = {
   batchNo?: InputMaybe<Scalars["String"]["input"]>;
   created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
   expiryDate?: InputMaybe<Scalars["Date"]["input"]>;
+  price?: InputMaybe<Scalars["BigInt"]["input"]>;
   productId?: InputMaybe<Scalars["UUID"]["input"]>;
   quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
 };
@@ -655,7 +660,6 @@ export type Products = Node & {
   /** Globally Unique Record Identifier */
   nodeId: Scalars["ID"]["output"];
   ordersCollection?: Maybe<OrdersConnection>;
-  price: Scalars["String"]["output"];
   product_batchesCollection?: Maybe<Product_BatchesConnection>;
   updated_at?: Maybe<Scalars["Datetime"]["output"]>;
 };
@@ -716,7 +720,6 @@ export type ProductsFilter = {
   not?: InputMaybe<ProductsFilter>;
   /** Returns true if at least one of its inner filters is true, otherwise returns false */
   or?: InputMaybe<Array<ProductsFilter>>;
-  price?: InputMaybe<StringFilter>;
   updated_at?: InputMaybe<DatetimeFilter>;
 };
 
@@ -725,7 +728,6 @@ export type ProductsInsertInput = {
   id?: InputMaybe<Scalars["UUID"]["input"]>;
   imageURL?: InputMaybe<Scalars["String"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
-  price?: InputMaybe<Scalars["String"]["input"]>;
   updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
 };
 
@@ -741,7 +743,6 @@ export type ProductsOrderBy = {
   id?: InputMaybe<OrderByDirection>;
   imageURL?: InputMaybe<OrderByDirection>;
   name?: InputMaybe<OrderByDirection>;
-  price?: InputMaybe<OrderByDirection>;
   updated_at?: InputMaybe<OrderByDirection>;
 };
 
@@ -750,7 +751,6 @@ export type ProductsUpdateInput = {
   id?: InputMaybe<Scalars["UUID"]["input"]>;
   imageURL?: InputMaybe<Scalars["String"]["input"]>;
   name?: InputMaybe<Scalars["String"]["input"]>;
-  price?: InputMaybe<Scalars["String"]["input"]>;
   updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
 };
 
@@ -861,7 +861,12 @@ export type ProfilesUpdateResponse = {
   records: Array<Profiles>;
 };
 
-export type User_Roles = "ADMIN" | "DISTRIBUTORS" | "SUPERADMIN" | "UNDEFINED";
+export type User_Roles =
+  | "ADMIN"
+  | "CUSTOMER"
+  | "DISTRIBUTORS"
+  | "SUPERADMIN"
+  | "UNDEFINED";
 
 /** Boolean expression comparing fields on type "user_roles" */
 export type User_RolesFilter = {

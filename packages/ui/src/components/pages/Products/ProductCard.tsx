@@ -1,6 +1,7 @@
 import {
   INSERT_ORDER_MUTATION,
   INSERT_PRODUCT_BATCHES_MUTATION,
+  Product_Batches,
   Products,
 } from "@repo/graphql";
 import {
@@ -15,7 +16,7 @@ import {
   Typography,
 } from "antd";
 import dayjs from "dayjs";
-import { useGo } from "@refinedev/core";
+import { BaseRecord, useGo } from "@refinedev/core";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useModalForm } from "@refinedev/antd";
@@ -26,8 +27,10 @@ export const ProductCard = ({
   product,
   isLoading,
   WhereToAdd,
+  stockProduct,
 }: {
   product: Products;
+  stockProduct?: BaseRecord | Product_Batches;
   isLoading: boolean;
   WhereToAdd?: string;
 }) => {
@@ -66,8 +69,26 @@ export const ProductCard = ({
       fetchUserId();
     }
   };
+
+  const [quantity, setQuantity] = useState(0);
+
+  const handleQuantityChange = (value: number | null) => {
+    if (typeof value === "number") {
+      setQuantity(value);
+    }
+  };
+
+  const handleIncrement = () => {
+    setQuantity((prevQuantity) => prevQuantity + 5);
+  };
+
+  const handleDecrement = () => {
+    setQuantity((prevQuantity) => Math.max(0, prevQuantity - 5));
+  };
+
   return (
     <>
+      {JSON.stringify(stockProduct, null, 2)}
       <Card
         hoverable
         title={product.name}
@@ -101,12 +122,14 @@ export const ProductCard = ({
         >
           {product.description}
         </Paragraph>
-        <Title level={5}> &#x20b9; {product.price}</Title>
+        <Title level={5}>{stockProduct?.price}</Title>
         <Text
           type="secondary"
           style={{ marginTop: "10px", textAlign: "right", width: "100%" }}
         >
-          {dayjs(product.updated_at).format("hh:mm A DD MMM YYYY")}
+          {dayjs(stockProduct?.expiryDate || product.updated_at).format(
+            "hh:mm A DD MMM YYYY"
+          )}
         </Text>
         <Button
           type="primary"
@@ -127,11 +150,10 @@ export const ProductCard = ({
         width={512}
       >
         <Form {...formProps} layout="vertical">
-          
           <Form.Item label={"productId"} name={"productId"} style={{}}>
             <Input defaultValue={product.id} defaultChecked={product.id} />
           </Form.Item>
-          
+
           <Form.Item label={"name"} name={"name"}>
             <Input
               placeholder="Enter name"
@@ -141,13 +163,31 @@ export const ProductCard = ({
           </Form.Item>
 
           {WhereToAdd === "orders" && (
-            <Form.Item label={"userId"} name={"userId"} style={{}}>
-              {userId ? (
-                <Input defaultValue={userId} />
-              ) : (
-                <Skeleton.Input active />
-              )}
-            </Form.Item>
+            <>
+              <Form.Item label={"userId"} name={"userId"} style={{}}>
+                {userId ? (
+                  <Input defaultValue={userId} />
+                ) : (
+                  <Skeleton.Input active />
+                )}
+              </Form.Item>
+              <Form.Item
+                label={"quantity"}
+                name={"quantity"}
+                rules={[{ required: true, message: "Enter quantity" }]}
+              >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Button onClick={handleDecrement}>-</Button>
+                  <InputNumber
+                    placeholder="Enter quantity"
+                    style={{ width: "100%" }}
+                    value={quantity}
+                    onChange={handleQuantityChange}
+                  />
+                  <Button onClick={handleIncrement}>+</Button>
+                </div>
+              </Form.Item>
+            </>
           )}
           {WhereToAdd === "stock" && (
             <>
@@ -157,19 +197,25 @@ export const ProductCard = ({
               <Form.Item label={"expiryDate"} name={"expiryDate"} style={{}}>
                 <DatePicker style={{ width: "100%" }} />
               </Form.Item>
+              <Form.Item label={"price"} name={"price"}>
+                <InputNumber
+                  min={1}
+                  placeholder="Enter price"
+                  style={{ width: "100%" }}
+                />
+              </Form.Item>
+              <Form.Item
+                label={"quantity"}
+                name={"quantity"}
+                rules={[{ required: true, message: "Enter quantity" }]}
+              >
+                <InputNumber
+                  placeholder="Enter quantity"
+                  style={{ width: "100%" }}
+                />
+              </Form.Item>
             </>
           )}
-
-          <Form.Item
-            label={"quantity"}
-            name={"quantity"}
-            rules={[{ required: true, message: "Enter quantity" }]}
-          >
-            <InputNumber
-              placeholder="Enter quantity"
-              style={{ width: "100%" }}
-            />
-          </Form.Item>
         </Form>
       </Modal>
     </>
