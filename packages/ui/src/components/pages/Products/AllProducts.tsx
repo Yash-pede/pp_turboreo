@@ -44,34 +44,13 @@ export const AllProducts = () => {
           gap: "16px",
         }}
       >
-        <Card
-          loading
-          style={{ flexBasis: "calc(25% - 16px)", marginBottom: "16px" }}
-        />
-        <Card
-          loading
-          style={{ flexBasis: "calc(25% - 16px)", marginBottom: "16px" }}
-        />
-        <Card
-          loading
-          style={{ flexBasis: "calc(25% - 16px)", marginBottom: "16px" }}
-        />
-        <Card
-          loading
-          style={{ flexBasis: "calc(25% - 16px)", marginBottom: "16px" }}
-        />
-        <Card
-          loading
-          style={{ flexBasis: "calc(25% - 16px)", marginBottom: "16px" }}
-        />
-        <Card
-          loading
-          style={{ flexBasis: "calc(25% - 16px)", marginBottom: "16px" }}
-        />
-        <Card
-          loading
-          style={{ flexBasis: "calc(25% - 16px)", marginBottom: "16px" }}
-        />
+        {Array(7).map((_, index) => (
+          <Card
+            key={index}
+            loading
+            style={{ flexBasis: "calc(25% - 16px)", marginBottom: "16px" }}
+          />
+        ))}
       </div>
     );
   }
@@ -81,11 +60,11 @@ export const AllProducts = () => {
     if (!isJpgOrPng) {
       message.error("You can only upload JPG/PNG file!");
     }
-    const isLt5M = file.size / 1024 / 1024 < 4;
-    if (!isLt5M) {
-      message.error("Image must smaller than 4MB!");
+    const isLt3M = file.size / 1024 / 1024 < 3;
+    if (!isLt3M) {
+      message.error("Image must smaller than 3MB!");
     }
-    return isJpgOrPng && isLt5M;
+    return isJpgOrPng && isLt3M;
   };
   const props: UploadProps = {
     name: "file",
@@ -141,21 +120,21 @@ export const AllProducts = () => {
           gap: "0.7rem",
         }}
       >
-          <Button
-            type="primary"
-            size="large"
-            style={{
-              gap: "15px",
-              marginTop: "15px",
-              marginBottom: "15px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            onClick={() => show()}
-          >
-            <PlusCircleTwoTone /> Add Products
-          </Button>
+        <Button
+          type="primary"
+          size="large"
+          style={{
+            gap: "15px",
+            marginTop: "15px",
+            marginBottom: "15px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onClick={() => show()}
+        >
+          <PlusCircleTwoTone /> Add Products
+        </Button>
         <Button
           type="primary"
           size="large"
@@ -169,7 +148,7 @@ export const AllProducts = () => {
           }}
           onClick={() =>
             go({
-              to: { resource: "orders", action: "list" },
+              to: { resource: "inventory", action: "list" },
               type: "push",
               options: {
                 keepQuery: true,

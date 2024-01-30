@@ -36,9 +36,10 @@ export const ProductCard = ({
 }) => {
   const { Text, Paragraph, Title } = Typography;
   const go = useGo();
+  const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState(null);
-  const { formProps, modalProps } = useModalForm({
+  const { formProps, modalProps, formLoading } = useModalForm({
     action: "create",
     defaultVisible: false,
     resource: WhereToAdd === "stock" ? "product_batches" : "orders",
@@ -60,35 +61,44 @@ export const ProductCard = ({
       authProvider.getIdentity && (await authProvider.getIdentity());
     console.log("user", user.id);
     setUserId(user.id);
+    form.setFieldsValue({
+      userId: user.id,
+    });
   };
   const HandleProductAdding = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     console.log("adding " + WhereToAdd);
     setOpen(true);
+
     if (WhereToAdd === "orders") {
       fetchUserId();
     }
+    // form.submit();
   };
 
   const [quantity, setQuantity] = useState(0);
 
-  const handleQuantityChange = (value: number | null) => {
-    if (typeof value === "number") {
-      setQuantity(value);
-    }
-  };
-
   const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 5);
+    const newQuantity = quantity + 5;
+    setQuantity(newQuantity);
+    form.setFieldsValue({
+      quantity: newQuantity,
+    });
   };
 
   const handleDecrement = () => {
-    setQuantity((prevQuantity) => Math.max(0, prevQuantity - 5));
+    const newQuantity = Math.max(0, quantity - 5);
+    setQuantity(newQuantity);
+    form.setFieldsValue({
+      quantity: newQuantity,
+    });
   };
-
+  form.setFieldsValue({
+    productId: product.id,
+  });
   return (
     <>
-      {JSON.stringify(stockProduct, null, 2)}
+      {/* {JSON.stringify(stockProduct, null, 2)} */}
       <Card
         hoverable
         title={product.name}
@@ -147,29 +157,34 @@ export const ProductCard = ({
         mask={true}
         onCancel={() => setOpen(false)}
         open={open}
+        okButtonProps={{
+          style: { display: "ruby" },
+          onClick: () => form.submit(),
+        }}
+        confirmLoading={formLoading}
         width={512}
       >
-        <Form {...formProps} layout="vertical">
-          <Form.Item label={"productId"} name={"productId"} style={{}}>
-            <Input defaultValue={product.id} defaultChecked={product.id} />
+        <Title level={4} style={{ textAlign: "center", marginBottom: "10px" }}>
+          {product.name}
+        </Title>
+        <Form {...formProps} layout="vertical" form={form}>
+          <Form.Item
+            label={"productId"}
+            name={"productId"}
+            style={{ display: "none" }}
+            rules={[{ required: true, message: "Please input ProductId!" }]}
+          >
+            <Input readOnly />
           </Form.Item>
-
-          <Form.Item label={"name"} name={"name"}>
-            <Input
-              placeholder="Enter name"
-              disabled
-              defaultValue={product.name}
-            />
-          </Form.Item>
-
           {WhereToAdd === "orders" && (
             <>
-              <Form.Item label={"userId"} name={"userId"} style={{}}>
-                {userId ? (
-                  <Input defaultValue={userId} />
-                ) : (
-                  <Skeleton.Input active />
-                )}
+              <Form.Item
+                label={"userId"}
+                name={"userId"}
+                style={{ display: "none" }}
+                rules={[{ required: true, message: "Please input UserId" }]}
+              >
+                {userId ? <Input readOnly /> : <Skeleton.Input active />}
               </Form.Item>
               <Form.Item
                 label={"quantity"}
@@ -179,10 +194,11 @@ export const ProductCard = ({
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Button onClick={handleDecrement}>-</Button>
                   <InputNumber
+                    readOnly
                     placeholder="Enter quantity"
-                    style={{ width: "100%" }}
                     value={quantity}
-                    onChange={handleQuantityChange}
+                    style={{ width: "100%" }}
+                    onChange={(value) => setQuantity(value as number)}
                   />
                   <Button onClick={handleIncrement}>+</Button>
                 </div>
@@ -191,10 +207,22 @@ export const ProductCard = ({
           )}
           {WhereToAdd === "stock" && (
             <>
-              <Form.Item label={"Batch No"} name={"batchNo"} style={{}}>
+              <Form.Item
+                label={"Batch No"}
+                name={"batchNo"}
+                style={{}}
+                rules={[{ required: true, message: "Please input Batch No!" }]}
+              >
                 <Input placeholder="Enter Batch No" />
               </Form.Item>
-              <Form.Item label={"expiryDate"} name={"expiryDate"} style={{}}>
+              <Form.Item
+                label={"expiryDate"}
+                name={"expiryDate"}
+                style={{}}
+                rules={[
+                  { required: true, message: "Please input Expiry Date!" },
+                ]}
+              >
                 <DatePicker style={{ width: "100%" }} />
               </Form.Item>
               <Form.Item label={"price"} name={"price"}>

@@ -8,7 +8,7 @@ import React, { useEffect } from "react";
 
 export const EditOrders = () => {
   const [userId, setUserId] = React.useState<string>();
-
+  const [form] = Form.useForm();
   const go = useGo();
   const goToList = () => {
     go({
@@ -17,7 +17,7 @@ export const EditOrders = () => {
       type: "replace",
     });
   };
-  const { modalProps, formProps, queryResult } = useModalForm({
+  const { modalProps, formProps, queryResult, formLoading } = useModalForm({
     action: "edit",
     defaultVisible: true,
     resource: "orders",
@@ -42,6 +42,10 @@ export const EditOrders = () => {
     ],
   });
   useEffect(() => {
+    form.setFieldsValue({
+      quantity: queryResult?.data?.data.quantity,
+      id: queryResult?.data?.data.id,
+    });
     const fetchingUser = async () => {
       if (authProvider.getIdentity) {
         const user: any = await authProvider.getIdentity();
@@ -49,22 +53,42 @@ export const EditOrders = () => {
       }
     };
     fetchingUser();
+    form.setFieldsValue({
+      userId: userId,
+    });
   });
   return (
     <AllCart>
-      <Modal {...modalProps} mask={true} onCancel={goToList} title="Edit Order">
-        <Form {...formProps} layout="vertical">
+      <Modal
+        confirmLoading={formLoading || queryResult?.isLoading}
+        {...modalProps}
+        mask={true}
+        maskClosable
+        okButtonProps={{ htmlType: "submit", onClick: () => form.submit() }}
+        onCancel={goToList}
+        title="Edit Order"
+      >
+        <Form {...formProps} layout="vertical" form={form}>
           <Form.Item name="id" label="OrderID">
-            <Input disabled />
+            <Input readOnly />
           </Form.Item>
-          <Form.Item name="productName" label="productName">
+          <div style={{ width: "100%", gap: "10px", margin: "20px 0" }}>
+            <p>Product Name</p>
             {isLoadingProducts ? (
-              <Skeleton.Input />
+              <Skeleton.Input style={{ width: "100%" }} />
             ) : (
-              <Input disabled defaultValue={products?.data[0]?.name} />
+              <Input
+                readOnly
+                value={products?.data[0]?.name}
+                style={{ width: "100%" }}
+              />
             )}
-          </Form.Item>
-          <Form.Item label={"userId"} name={"userId"}>
+          </div>
+          <Form.Item
+            label={"userId"}
+            name={"userId"}
+            style={{ display: "none" }}
+          >
             {userId ? (
               <Input defaultValue={userId} value={userId} />
             ) : (
@@ -72,7 +96,7 @@ export const EditOrders = () => {
             )}
           </Form.Item>
           <Form.Item name="quantity" label="quantity">
-            <Input disabled />
+            <Input readOnly />
           </Form.Item>
           <Form.Item name="status" label="status  ">
             <Select

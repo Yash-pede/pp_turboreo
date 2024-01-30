@@ -9,7 +9,7 @@ export const AllCart = ({ children }: { children?: React.ReactNode }) => {
   const { tableProps, tableQueryResult } = useTable({
     resource: "orders",
     pagination: {
-      pageSize: 4,
+      pageSize: 12,
     },
     meta: {
       gqlQuery: ALL_ORDERS_QUERY,

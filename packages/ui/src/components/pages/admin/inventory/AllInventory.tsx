@@ -9,12 +9,16 @@ export const AllInventory = () => {
     meta: {
       gqlQuery: ALL_PRODUCT_BATCHES_QUERY,
     },
+    pagination: {
+      pageSize: 12,
+    },
     sorters: {
       initial: [
         {
           field: "created_at",
           order: "asc",
         },
+        
       ],
     },
   });
@@ -89,8 +93,8 @@ export const AllInventory = () => {
           fixed="right"
           render={(value) => (
             <Space>
-              <EditButton size="small"  recordItemId={value} />
-              <DeleteButton size="small"  recordItemId={value} />
+              <EditButton size="small" recordItemId={value} />
+              <DeleteButton size="small" recordItemId={value} />
             </Space>
           )}
         />

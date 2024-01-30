@@ -22,7 +22,7 @@ export const Users = () => {
       ];
     },
     pagination: {
-      pageSize: 4,
+      pageSize: 12,
     },
     meta: {
       gqlQuery: PROFILES_QUERY,
