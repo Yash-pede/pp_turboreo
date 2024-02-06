@@ -198,6 +198,9 @@ export const LoginNew = ({ userType }: { userType: UserRoleTypes }) => {
                 Login
               </Button>
             </Form.Item>
+            <Form.Item>
+              <center><h4>Don't have an account?<a href="http://192.168.117.178:3000/register"> Register</a></h4></center>
+            </Form.Item>
           </Form>
         </div>
         <div className="right-image-container">
