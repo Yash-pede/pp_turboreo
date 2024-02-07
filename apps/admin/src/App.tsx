@@ -24,6 +24,7 @@ import {
   EditOrders,
   AllInventory,
   LoginNew,
+  CreateStock,
 } from "@repo/ui";
 import { resources } from "./config/resources";
 
@@ -82,6 +83,7 @@ function App() {
                     </Route>
                     <Route path="/inventory">
                       <Route index element={<AllInventory />} />
+                      <Route path="create" element={<CreateStock />} />
                     </Route>
                     <Route path="/profiles" element={<Users />} />
                     <Route path="/me" element={<Profile />} />

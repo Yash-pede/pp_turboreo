@@ -1,12 +1,12 @@
-import { useTable } from "@refinedev/antd";
-import { GET_ALL_INVENTORY_DISTRIBUTOR_QUERY, GET_ALL_pRODUCTS_QUERY } from "@repo/graphql";
+import { EditButton, useTable } from "@refinedev/antd";
+import { GET_ALL_ORDERS_QUERY, GET_ALL_pRODUCTS_QUERY } from "@repo/graphql";
 import { Skeleton, Space, Table } from "antd";
 import { authProvider } from "../auth/authProvider";
 import React, { useEffect } from "react";
 import dayjs from "dayjs";
 import { useList } from "@refinedev/core";
 
-export const AllInventory = () => {
+export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
   const [userId, setUser] = React.useState<any>();
 
   useEffect(() => {
@@ -22,9 +22,9 @@ export const AllInventory = () => {
     }
   }, [userId]);
   const { tableProps, tableQueryResult } = useTable({
-    resource: "D_INVENTORY",
+    resource: "ORDERS",
     meta: {
-      gqlQuery: GET_ALL_INVENTORY_DISTRIBUTOR_QUERY,
+      gqlQuery: GET_ALL_ORDERS_QUERY,
     },
     sorters: {
       initial: [
@@ -37,7 +37,7 @@ export const AllInventory = () => {
     filters: {
       permanent: [
         {
-          field: "distributor_id",
+          field: "user_id",
           operator: "eq",
           value: userId || "",
         },
@@ -65,7 +65,7 @@ export const AllInventory = () => {
           title="ID"
           render={(value) => <strong>{value}</strong>}
         />
-       <Table.Column
+        <Table.Column
           dataIndex={"product_id"}
           title="product"
           render={(_value, record: any) => {
@@ -83,8 +83,26 @@ export const AllInventory = () => {
             );
           }}
         />
-        <Table.Column dataIndex="batch_no" title="Batch No" />
+        <Table.Column
+          dataIndex="batch_no"
+          title="Batch No"
+          render={(value: Array<any>) => (
+            <div
+              style={{
+                display: "flex",
+                gap: "10px",
+                flexWrap: "wrap",
+                alignItems: "center",
+              }}
+            >
+              {value.map((item) => (
+                <p>{item}</p>
+              ))}
+            </div>
+          )}
+        />
         <Table.Column dataIndex="quantity" title="Quantity" />
+        <Table.Column dataIndex="status" title="Status" />
         <Table.Column
           dataIndex="salesperson_id"
           title="Sales Person"
@@ -97,7 +115,19 @@ export const AllInventory = () => {
             <strong>{dayjs(value).format("DD/MM/YYYY")}</strong>
           )}
         />
+        <Table.Column
+          dataIndex={"id"}
+          title="Action"
+          fixed="right"
+          render={(value) => (
+            <Space>
+              <EditButton size="small"  recordItemId={value} />
+              {/* <DeleteButton size="small"  recordItemId={value} /> */}
+            </Space>
+          )}
+        />
       </Table>
+      {children}
     </>
   );
 };

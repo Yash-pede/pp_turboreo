@@ -16,8 +16,9 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { UserRoleTypes, authProvider, supabaseClient } from "@repo/utility";
 import {
   AllAvalableProducts,
-  AllCart,
   AllInventory,
+  AllOrders,
+  CreateOrders,
   CustomerEdit,
   CustomerHome,
   CustomerShow,
@@ -78,7 +79,8 @@ function App() {
                       <Route path=":id" element={<ProductPage />} />
                     </Route>
                     <Route path="/orders">
-                      <Route index element={<AllCart />} />
+                      <Route index element={<AllOrders />} />
+                      <Route path="create" element={<CreateOrders />} />
                       <Route path="edit/:id" element={<EditOrders />} />
                     </Route>
                     <Route path="/customer">

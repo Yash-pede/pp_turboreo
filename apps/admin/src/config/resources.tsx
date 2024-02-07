@@ -39,6 +39,7 @@ export const resources: IResourceItem[] = [
       icon: <IconPackageImport />,
     },
     show: "/inventory/:id",
+    create: "/inventory/create",
   },
   {
     name: "profiles",

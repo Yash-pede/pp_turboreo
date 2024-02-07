@@ -1,13 +1,13 @@
 import { DateField, DeleteButton, EditButton, useTable } from "@refinedev/antd";
 import { useList } from "@refinedev/core";
-import { ALL_PRODUCTS_QUERY, ALL_PRODUCT_BATCHES_QUERY } from "@repo/graphql";
+import { GET_ALL_STOCKS_QUERY, GET_ALL_pRODUCTS_QUERY } from "@repo/graphql";
 import { Skeleton, Space, Table } from "antd";
 
 export const AllInventory = () => {
   const { tableProps, tableQueryResult } = useTable({
-    resource: "product_batches",
+    resource: "STOCKS",
     meta: {
-      gqlQuery: ALL_PRODUCT_BATCHES_QUERY,
+      gqlQuery: GET_ALL_STOCKS_QUERY,
     },
     pagination: {
       pageSize: 12,
@@ -23,22 +23,22 @@ export const AllInventory = () => {
     },
   });
   const { data: products, isLoading: isLoadingProducts } = useList({
-    resource: "products",
+    resource: "PRODUCTS",
     meta: {
-      gqlQuery: ALL_PRODUCTS_QUERY,
+      gqlQuery: GET_ALL_pRODUCTS_QUERY,
     },
     filters: [
       {
         field: "id",
         operator: "in",
-        value: tableQueryResult?.data?.data?.map((item) => item.productId),
+        value: tableQueryResult?.data?.data?.map((item) => item.product_id),
       },
     ],
   });
   return (
     <Table {...tableProps} loading={tableQueryResult.isLoading}>
       <Table.Column
-        dataIndex={"productId"}
+        dataIndex={"product_id"}
         title="product"
         render={(_value, record: any) => {
           if (isLoadingProducts) {
@@ -47,7 +47,7 @@ export const AllInventory = () => {
           return (
             <Space>
               {
-                products?.data.find((item: any) => item.id === record.productId)
+                products?.data.find((item: any) => item.id === record.product_id)
                   ?.name
               }
             </Space>
@@ -55,22 +55,29 @@ export const AllInventory = () => {
         }}
       />
       <Table.Column
-        dataIndex={"batchNo"}
+        dataIndex={"batch_no"}
         title="batchNo"
         render={(value) => {
           return <Space>{value}</Space>;
         }}
       />
       <Table.Column
-        dataIndex={"price"}
-        title="Price"
+        dataIndex={"selling_price"}
+        title="selling_price"
         render={(value) => {
           return <Space>{value}</Space>;
         }}
       />
       <Table.Column
-        dataIndex={"quantity"}
-        title="Quantity"
+        dataIndex={"avalable_quantity"}
+        title="avalable_quantity"
+        render={(value) => {
+          return <Space>{value}</Space>;
+        }}
+      />
+      <Table.Column
+        dataIndex={"orderd_quantity"}
+        title="orderd_quantity"
         render={(value) => {
           return <Space>{value}</Space>;
         }}
@@ -78,6 +85,18 @@ export const AllInventory = () => {
       <Table.Column
         dataIndex={"created_at"}
         title="Created At"
+        render={(value) => {
+          return (
+            <Space>
+              {/* <DatePicker defaultValue={dayjs(value)} /> */}
+              <DateField value={value} />
+            </Space>
+          );
+        }}
+      />
+      <Table.Column
+        dataIndex={"expiry_date"}
+        title="Expiry At"
         render={(value) => {
           return (
             <Space>

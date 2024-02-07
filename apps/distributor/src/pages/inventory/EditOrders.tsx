@@ -1,114 +1,110 @@
-import { Form, Input, Modal, Select, Skeleton } from "antd";
-import { useModalForm } from "@refinedev/antd";
+import { DateField, useModalForm } from "@refinedev/antd";
+import { AllOrders } from "./AllOrders";
+import {
+  GET_ALL_ORDERS_QUERY,
+  UPDATE_ORDERS_MUTATION_DISTRIBUTOR,
+} from "@repo/graphql";
+import { Form, Input, InputNumber, Modal, Select } from "antd";
 import { useGo, useList } from "@refinedev/core";
-import { ALL_PRODUCTS_QUERY, UPDATE_ORDER_MUTATION } from "@repo/graphql";
-import { OrderStatus, authProvider } from "@repo/utility";
-import { AllCart } from "./AllCart";
-import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { OrderStatus } from "@repo/utility";
+import { useEffect } from "react";
 
 export const EditOrders = () => {
-  const [userId, setUserId] = React.useState<string>();
-  const [form] = Form.useForm();
+  const orderId = useLocation().pathname.split("/").pop();
   const go = useGo();
-  const goToList = () => {
+  const RouteToOrders = () => {
     go({
       to: { resource: "orders", action: "list" },
+      type: "push",
       options: { keepQuery: true },
-      type: "replace",
     });
   };
-  const { modalProps, formProps, queryResult, formLoading } = useModalForm({
+  const { modalProps, formProps, formLoading } = useModalForm({
     action: "edit",
+    resource: "ORDERS",
+    redirect: "show",
+    id: orderId,
     defaultVisible: true,
-    resource: "orders",
-    redirect: false,
-    mutationMode: "pessimistic",
-    onMutationSuccess: goToList,
     meta: {
-      gqlMutation: UPDATE_ORDER_MUTATION,
+      gqlMutation: UPDATE_ORDERS_MUTATION_DISTRIBUTOR,
+    },
+    onMutationSuccess() {
+      RouteToOrders();
     },
   });
-  const { data: products, isLoading: isLoadingProducts } = useList({
-    resource: "products",
-    meta: {
-      gqlQuery: ALL_PRODUCTS_QUERY,
+
+  const { data, isLoading } = useList({
+    resource: "ORDERS",
+    queryOptions: {
+      meta: {
+        gqlQuery: GET_ALL_ORDERS_QUERY,
+      },
     },
     filters: [
       {
         field: "id",
         operator: "eq",
-        value: queryResult?.data?.data.productId,
+        value: orderId,
       },
     ],
   });
   useEffect(() => {
-    form.setFieldsValue({
-      quantity: queryResult?.data?.data.quantity,
-      id: queryResult?.data?.data.id,
-    });
-    const fetchingUser = async () => {
-      if (authProvider.getIdentity) {
-        const user: any = await authProvider.getIdentity();
-        setUserId(user.id);
-      }
-    };
-    fetchingUser();
-    form.setFieldsValue({
-      userId: userId,
-    });
-  });
+    if (!isLoading && formProps?.form) {
+      formProps.form.setFieldsValue({ ...data?.data[0] });
+    }
+  }, [isLoading, formProps?.form, data?.data]);
   return (
-    <AllCart>
+    <AllOrders>
       <Modal
-        confirmLoading={formLoading || queryResult?.isLoading}
         {...modalProps}
-        mask={true}
-        maskClosable
-        okButtonProps={{ htmlType: "submit", onClick: () => form.submit() }}
-        onCancel={goToList}
-        title="Edit Order"
+        afterClose={RouteToOrders}
+        confirmLoading={isLoading || formLoading}
       >
-        <Form {...formProps} layout="vertical" form={form}>
-          <Form.Item name="id" label="OrderID">
-            <Input readOnly />
+        <Form
+          {...formProps}
+          layout="vertical"
+          style={{ width: "100%", gap: "10px" }}
+        >
+          <Form.Item style={{ width: "100%" }} name="id" label="Order Id">
+            <Input min={1} style={{ width: "100%" }} readOnly />
           </Form.Item>
-          <div style={{ width: "100%", gap: "10px", margin: "20px 0" }}>
-            <p>Product Name</p>
-            {isLoadingProducts ? (
-              <Skeleton.Input style={{ width: "100%" }} />
-            ) : (
-              <Input
-                readOnly
-                value={products?.data[0]?.name}
-                style={{ width: "100%" }}
-              />
-            )}
-          </div>
+
           <Form.Item
-            label={"userId"}
-            name={"userId"}
-            style={{ display: "none" }}
+            style={{ width: "100%" }}
+            name="product_id"
+            label="Product"
           >
-            {userId ? (
-              <Input defaultValue={userId} value={userId} />
-            ) : (
-              <Skeleton.Input active />
-            )}
+            <Input min={1} style={{ width: "100%" }} readOnly />
           </Form.Item>
-          <Form.Item name="quantity" label="quantity">
-            <Input readOnly />
+
+          <Form.Item style={{ width: "100%" }} name="quantity" label="Quantity">
+            <InputNumber min={1} style={{ width: "100%" }} readOnly />
           </Form.Item>
-          <Form.Item name="status" label="status  ">
+
+          <Form.Item style={{ width: "100%" }} name="status" label="Status">
             <Select
               placeholder="Select a status"
               options={[
-                { label: "Fulfilled", value: OrderStatus.FULFILLED },
                 { label: "Defected", value: OrderStatus.DEFECTED },
+                { label: "Fulfilled", value: OrderStatus.FULFILLED },
               ]}
+            />
+          </Form.Item>
+
+          <Form.Item
+            style={{ width: "100%" }}
+            name="created_at"
+            label="Created at"
+          >
+            <DateField
+              value={data?.data[0].created_at}
+              format="LLL"
+              style={{ width: "100%" }}
             />
           </Form.Item>
         </Form>
       </Modal>
-    </AllCart>
+    </AllOrders>
   );
 };

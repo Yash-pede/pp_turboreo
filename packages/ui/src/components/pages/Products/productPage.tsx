@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useGo, useList } from "@refinedev/core";
-import { ALL_PRODUCTS_QUERY } from "@repo/graphql";
+import { GET_ALL_pRODUCTS_QUERY } from "@repo/graphql";
 import { Button, Typography } from "antd";
 import { DateField, DeleteButton } from "@refinedev/antd";
 
@@ -12,7 +12,7 @@ export const ProductPage = () => {
   const { data: Product } = useList({
     resource: "products",
     meta: {
-      gqlQuery: ALL_PRODUCTS_QUERY,
+      gqlQuery: GET_ALL_pRODUCTS_QUERY,
     },
     filters: [
       {

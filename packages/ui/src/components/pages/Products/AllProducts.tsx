@@ -1,6 +1,8 @@
 import { useGo, useList } from "@refinedev/core";
-import { ALL_PRODUCTS_QUERY, INSERT_PRODUCT_MUTATION } from "@repo/graphql";
-import { ProductCard } from "./ProductCard";
+import {
+  GET_ALL_pRODUCTS_QUERY,
+  INSERT_INTO_PRODUCTS_MUTATION,
+} from "@repo/graphql";
 import {
   Button,
   Card,
@@ -9,6 +11,7 @@ import {
   Form,
   GetProp,
   Input,
+  InputNumber,
   Upload,
   UploadProps,
   message,
@@ -17,20 +20,21 @@ import { IconShoppingCart } from "@tabler/icons-react";
 import { InboxOutlined, PlusCircleTwoTone } from "@ant-design/icons";
 import { Create, useDrawerForm } from "@refinedev/antd";
 import { supabaseClient } from "@repo/utility";
+import { ProductCardPublic } from "../../Public/ProductCard";
 
 export const AllProducts = () => {
   const { data, isLoading } = useList({
-    resource: "products",
+    resource: "PRODUCTS",
     meta: {
-      gqlQuery: ALL_PRODUCTS_QUERY,
+      gqlQuery: GET_ALL_pRODUCTS_QUERY,
     },
   });
   type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
   const { formProps, drawerProps, show, saveButtonProps } = useDrawerForm({
     action: "create",
-    resource: "products",
+    resource: "PRODUCTS",
     meta: {
-      gqlMutation: INSERT_PRODUCT_MUTATION,
+      gqlMutation: INSERT_INTO_PRODUCTS_MUTATION,
     },
   });
   const { Dragger } = Upload;
@@ -168,11 +172,27 @@ export const AllProducts = () => {
         }}
       >
         {data?.data.map((product: any) => (
-          <ProductCard
+          <ProductCardPublic
             product={product}
             isLoading={isLoading}
             key={product.id}
-            WhereToAdd={"stock"}
+            RenderButton={() => (
+              <Button
+                style={{ width: "100%" }}
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.stopPropagation();
+                  go({
+                    to: { resource: "inventory", action: "create" },
+                    type: "push",
+                    options: { keepQuery: true },
+                    query: { product: product.id },
+                  });
+                }}
+                type="primary"
+              >
+                Add to Stock
+              </Button>
+            )}
           />
         ))}
       </Flex>
@@ -189,6 +209,17 @@ export const AllProducts = () => {
               ]}
             >
               <Input />
+            </Form.Item>
+            <Form.Item
+              label="mrp"
+              name="mrp"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <InputNumber />
             </Form.Item>
             <Form.Item
               label="Description"

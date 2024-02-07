@@ -1,25 +1,28 @@
 import { useGo, useList } from "@refinedev/core";
-import { ALL_PRODUCTS_QUERY, ALL_PRODUCT_BATCHES_QUERY } from "@repo/graphql";
-import { ProductCard } from "@repo/ui";
+import {
+  GET_ALL_STOCKS_QUERY,
+  GET_ALL_pRODUCTS_QUERY,
+} from "@repo/graphql";
 import { Button, Card, Flex } from "antd";
 import { IconShoppingCart } from "@tabler/icons-react";
+import { ProductCardPublic } from "@repo/ui";
 export const AllAvalableProducts = () => {
   const { data: StockInventory, isLoading } = useList({
-    resource: "product_batches",
+    resource: "STOCKS",
     meta: {
-      gqlQuery: ALL_PRODUCT_BATCHES_QUERY,
+      gqlQuery: GET_ALL_STOCKS_QUERY,
     },
   });
   const { data } = useList({
-    resource: "products",
+    resource: "PRODUCTS",
     meta: {
-      gqlQuery: ALL_PRODUCTS_QUERY,
+      gqlQuery: GET_ALL_pRODUCTS_QUERY,
     },
     filters: [
       {
         field: "id",
         operator: "in",
-        value: StockInventory?.data?.map((item) => item.productId),
+        value: StockInventory?.data?.map((stock: any) => stock.product_id),
       },
     ],
   });
@@ -108,14 +111,42 @@ export const AllAvalableProducts = () => {
         }}
       >
         {data?.data.map((product: any) => (
-          <ProductCard
+          <ProductCardPublic
             product={product}
-            stockProduct={StockInventory?.data.find(
-              (item) => item.productId === product.id
-            )}
             isLoading={isLoading}
             key={product.id}
-            WhereToAdd={"orders"}
+            RenderButton={() => (
+              <Button
+                type="primary"
+                size="large"
+                style={{
+                  gap: "15px",
+                  marginTop: "15px",
+                  marginBottom: "15px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  e.stopPropagation();
+                  go({
+                    to: {
+                      resource: "orders",
+                      action: "create",
+                    },
+                    query: {
+                      product_id: product.id,
+                    },
+                    type: "push",
+                    options: {
+                      keepQuery: true,
+                    },
+                  });
+                }}
+              >
+                <IconShoppingCart /> Add to Orders
+              </Button>
+            )}
           />
         ))}
       </Flex>

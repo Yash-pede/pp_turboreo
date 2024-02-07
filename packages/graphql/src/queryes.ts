@@ -1,10 +1,5 @@
 import gql from "graphql-tag";
 
-export const TEST_QUERY = gql`
-  query TestQuery {
-    __typename
-  }
-`;
 
 export const PROFILES_QUERY = gql`
   query Profiles(
@@ -35,75 +30,63 @@ export const PROFILES_QUERY = gql`
   }
 `;
 
-export const ALL_PRODUCTS_QUERY = gql`
-  query allproducts {
-    productsCollection {
+export const GET_ALL_pRODUCTS_QUERY = gql`
+  query pRODUCTSCollection {
+    pRODUCTSCollection {
       edges {
         node {
           id
-          name
-          description
+          mrp
           imageURL
+          created_at
+        }
+      }
+    }
+  }
+`;
+export const GET_ALL_STOCKS_QUERY = gql`
+  query sTOCKSCollection {
+    sTOCKSCollection {
+      edges {
+        node {
+          batch_no
+          product_id
+          avalable_quantity
+          orderd_quantity
+          selling_price
+          expiry_date
         }
       }
     }
   }
 `;
 
-export const ALL_ORDERS_QUERY = gql`
-  query allOrders {
-    ordersCollection {
+export const GET_ALL_ORDERS_QUERY = gql`
+  query oRDERSCollection {
+    oRDERSCollection {
       edges {
         node {
-          id
-          productId
           quantity
           status
-          created_at
+          batch_no
+          user_id
         }
       }
     }
   }
 `;
 
-export const ALL_INVENTORY_DISTRIBUTOR_QUERY = gql`
-  query inventory_distributorConnection {
-    inventory_distributorCollection {
+export const GET_ALL_INVENTORY_DISTRIBUTOR_QUERY = gql`
+  query d_INVENTORYCollection {
+    d_INVENTORYCollection {
       edges {
         node {
           id
+          distributor_id
+          product_id
           quantity
-          created_at
-          productId
-        }
-      }
-    }
-  }
-`;
-
-export const ALL_PRODUCT_BATCHES_QUERY = gql`
-  query product_batchesCollection {
-    product_batchesCollection {
-      edges {
-        node {
-          productId
-          price
-          quantity
-          created_at
-          batchNo
-        }
-      }
-    }
-  }
-`;
-
-export const GET_USER_ROLE_QUERY = gql`
-  query GetProfileByIdAndUserRole($filter: profilesFilter) {
-    profilesCollection(filter: $filter) {
-      edges {
-        node {
-          id
-          userrole
+          salesperson_id
+          batch_no
         }
       }
     }

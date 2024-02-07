@@ -1,29 +1,30 @@
 import React from "react";
 import { DeleteButton, EditButton, useTable } from "@refinedev/antd";
-import { ALL_ORDERS_QUERY, ALL_PRODUCTS_QUERY, Orders } from "@repo/graphql";
+import { GET_ALL_ORDERS_QUERY, GET_ALL_pRODUCTS_QUERY, Orders } from "@repo/graphql";
 import { Skeleton, Space, Table } from "antd";
-import { useList } from "@refinedev/core";
+import { useGo, useList } from "@refinedev/core";
 
 export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
+  const go = useGo();
   const { tableProps, tableQueryResult } = useTable({
-    resource: "orders",
+    resource: "ORDERS",
     pagination: {
       pageSize: 12,
     },
     meta: {
-      gqlQuery: ALL_ORDERS_QUERY,
+      gqlQuery: GET_ALL_ORDERS_QUERY,
     },
   });
   const { data: products, isLoading: isLoadingProducts } = useList({
-    resource: "products",
+    resource: "PRODUCTS",
     meta: {
-      gqlQuery: ALL_PRODUCTS_QUERY,
+      gqlQuery: GET_ALL_pRODUCTS_QUERY,
     },
     filters: [
       {
         field: "id",
         operator: "in",
-        value: tableQueryResult?.data?.data?.map((item) => item.productId),
+        value: tableQueryResult?.data?.data?.map((item) => item.product_id),
       },
     ],
   });
@@ -35,27 +36,27 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
         loading={tableQueryResult.isLoading}
         pagination={{ ...tableProps.pagination }}
       >
-        <Table.Column<Orders>
-          dataIndex={"productId"}
-          title="product"
-          render={(_value, record) => {
-            if (isLoadingProducts) {
-              return <Skeleton.Input />;
-            }
-            return (
-              <Space>
-                {
-                  products?.data.find((item) => item.id === record.productId)
-                    ?.name
-                }
-              </Space>
-            );
-          }}
-        />
+        <Table.Column
+        dataIndex={"product_id"}
+        title="product"
+        render={(_value, record: any) => {
+          if (isLoadingProducts) {
+            return <Skeleton.Input />;
+          }
+          return (
+            <Space>
+              {
+                products?.data.find((item: any) => item.id === record.product_id)
+                  ?.name
+              }
+            </Space>
+          );
+        }}
+      />
         <Table.Column<Orders>
           dataIndex={"userId"}
           title="userId"
-          render={(_value, record) => <Space>{record.userId}</Space>}
+          render={(_value, record) => <Space>{record.user_id}</Space>}
         />
         <Table.Column<Orders>
           dataIndex={"quantity"}
@@ -76,7 +77,24 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
           fixed="right"
           render={(value) => (
             <Space>
-              <EditButton size="small" recordItemId={value} />
+              <EditButton
+                size="small"
+                recordItemId={value}
+                onClick={() =>
+                  go({
+                    to: {
+                      resource: "orders",
+                      action: "edit",
+                      id: value,
+                    },
+                    options: { keepQuery: true },
+                    type: "replace",
+                    query: {
+                      productId: tableQueryResult?.data?.data?.[0]?.productId,
+                    },
+                  })
+                }
+              />
               <DeleteButton size="small" recordItemId={value} />
             </Space>
           )}

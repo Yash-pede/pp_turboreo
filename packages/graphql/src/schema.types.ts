@@ -66,6 +66,96 @@ export type BooleanFilter = {
   is?: InputMaybe<FilterIs>;
 };
 
+export type D_Inventory = Node & {
+  batch_no: Scalars["String"]["output"];
+  created_at: Scalars["Datetime"]["output"];
+  distributor_id: Scalars["UUID"]["output"];
+  id: Scalars["BigInt"]["output"];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars["ID"]["output"];
+  pRODUCTS: Products;
+  product_id: Scalars["UUID"]["output"];
+  quantity: Scalars["BigFloat"]["output"];
+  sTOCKS: Stocks;
+  salesperson_id?: Maybe<Scalars["UUID"]["output"]>;
+};
+
+export type D_InventoryConnection = {
+  edges: Array<D_InventoryEdge>;
+  pageInfo: PageInfo;
+};
+
+export type D_InventoryDeleteResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<D_Inventory>;
+};
+
+export type D_InventoryEdge = {
+  cursor: Scalars["String"]["output"];
+  node: D_Inventory;
+};
+
+export type D_InventoryFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<D_InventoryFilter>>;
+  batch_no?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  distributor_id?: InputMaybe<UuidFilter>;
+  id?: InputMaybe<BigIntFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<D_InventoryFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<D_InventoryFilter>>;
+  product_id?: InputMaybe<UuidFilter>;
+  quantity?: InputMaybe<BigFloatFilter>;
+  salesperson_id?: InputMaybe<UuidFilter>;
+};
+
+export type D_InventoryInsertInput = {
+  batch_no?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  distributor_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  product_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  salesperson_id?: InputMaybe<Scalars["UUID"]["input"]>;
+};
+
+export type D_InventoryInsertResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<D_Inventory>;
+};
+
+export type D_InventoryOrderBy = {
+  batch_no?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  distributor_id?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  product_id?: InputMaybe<OrderByDirection>;
+  quantity?: InputMaybe<OrderByDirection>;
+  salesperson_id?: InputMaybe<OrderByDirection>;
+};
+
+export type D_InventoryUpdateInput = {
+  batch_no?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  distributor_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  product_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  salesperson_id?: InputMaybe<Scalars["UUID"]["input"]>;
+};
+
+export type D_InventoryUpdateResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<D_Inventory>;
+};
+
 /** Boolean expression comparing fields on type "Date" */
 export type DateFilter = {
   eq?: InputMaybe<Scalars["Date"]["input"]>;
@@ -123,60 +213,60 @@ export type IntFilter = {
 
 /** The root type for creating and mutating data */
 export type Mutation = {
-  /** Deletes zero or more records from the `inventory_distributor` collection */
-  deleteFrominventory_distributorCollection: Inventory_DistributorDeleteResponse;
-  /** Deletes zero or more records from the `orders` collection */
-  deleteFromordersCollection: OrdersDeleteResponse;
-  /** Deletes zero or more records from the `product_batches` collection */
-  deleteFromproduct_batchesCollection: Product_BatchesDeleteResponse;
-  /** Deletes zero or more records from the `products` collection */
-  deleteFromproductsCollection: ProductsDeleteResponse;
+  /** Deletes zero or more records from the `D_INVENTORY` collection */
+  deleteFromD_INVENTORYCollection: D_InventoryDeleteResponse;
+  /** Deletes zero or more records from the `ORDERS` collection */
+  deleteFromORDERSCollection: OrdersDeleteResponse;
+  /** Deletes zero or more records from the `PRODUCTS` collection */
+  deleteFromPRODUCTSCollection: ProductsDeleteResponse;
+  /** Deletes zero or more records from the `STOCKS` collection */
+  deleteFromSTOCKSCollection: StocksDeleteResponse;
   /** Deletes zero or more records from the `profiles` collection */
   deleteFromprofilesCollection: ProfilesDeleteResponse;
-  /** Adds one or more `inventory_distributor` records to the collection */
-  insertIntoinventory_distributorCollection?: Maybe<Inventory_DistributorInsertResponse>;
-  /** Adds one or more `orders` records to the collection */
-  insertIntoordersCollection?: Maybe<OrdersInsertResponse>;
-  /** Adds one or more `product_batches` records to the collection */
-  insertIntoproduct_batchesCollection?: Maybe<Product_BatchesInsertResponse>;
-  /** Adds one or more `products` records to the collection */
-  insertIntoproductsCollection?: Maybe<ProductsInsertResponse>;
+  /** Adds one or more `D_INVENTORY` records to the collection */
+  insertIntoD_INVENTORYCollection?: Maybe<D_InventoryInsertResponse>;
+  /** Adds one or more `ORDERS` records to the collection */
+  insertIntoORDERSCollection?: Maybe<OrdersInsertResponse>;
+  /** Adds one or more `PRODUCTS` records to the collection */
+  insertIntoPRODUCTSCollection?: Maybe<ProductsInsertResponse>;
+  /** Adds one or more `STOCKS` records to the collection */
+  insertIntoSTOCKSCollection?: Maybe<StocksInsertResponse>;
   /** Adds one or more `profiles` records to the collection */
   insertIntoprofilesCollection?: Maybe<ProfilesInsertResponse>;
-  /** Updates zero or more records in the `inventory_distributor` collection */
-  updateinventory_distributorCollection: Inventory_DistributorUpdateResponse;
-  /** Updates zero or more records in the `orders` collection */
-  updateordersCollection: OrdersUpdateResponse;
-  /** Updates zero or more records in the `product_batches` collection */
-  updateproduct_batchesCollection: Product_BatchesUpdateResponse;
-  /** Updates zero or more records in the `products` collection */
-  updateproductsCollection: ProductsUpdateResponse;
+  /** Updates zero or more records in the `D_INVENTORY` collection */
+  updateD_INVENTORYCollection: D_InventoryUpdateResponse;
+  /** Updates zero or more records in the `ORDERS` collection */
+  updateORDERSCollection: OrdersUpdateResponse;
+  /** Updates zero or more records in the `PRODUCTS` collection */
+  updatePRODUCTSCollection: ProductsUpdateResponse;
+  /** Updates zero or more records in the `STOCKS` collection */
+  updateSTOCKSCollection: StocksUpdateResponse;
   /** Updates zero or more records in the `profiles` collection */
   updateprofilesCollection: ProfilesUpdateResponse;
 };
 
 /** The root type for creating and mutating data */
-export type MutationDeleteFrominventory_DistributorCollectionArgs = {
+export type MutationDeleteFromD_InventoryCollectionArgs = {
   atMost?: Scalars["Int"]["input"];
-  filter?: InputMaybe<Inventory_DistributorFilter>;
+  filter?: InputMaybe<D_InventoryFilter>;
 };
 
 /** The root type for creating and mutating data */
-export type MutationDeleteFromordersCollectionArgs = {
+export type MutationDeleteFromOrdersCollectionArgs = {
   atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<OrdersFilter>;
 };
 
 /** The root type for creating and mutating data */
-export type MutationDeleteFromproduct_BatchesCollectionArgs = {
+export type MutationDeleteFromProductsCollectionArgs = {
   atMost?: Scalars["Int"]["input"];
-  filter?: InputMaybe<Product_BatchesFilter>;
+  filter?: InputMaybe<ProductsFilter>;
 };
 
 /** The root type for creating and mutating data */
-export type MutationDeleteFromproductsCollectionArgs = {
+export type MutationDeleteFromStocksCollectionArgs = {
   atMost?: Scalars["Int"]["input"];
-  filter?: InputMaybe<ProductsFilter>;
+  filter?: InputMaybe<StocksFilter>;
 };
 
 /** The root type for creating and mutating data */
@@ -186,23 +276,23 @@ export type MutationDeleteFromprofilesCollectionArgs = {
 };
 
 /** The root type for creating and mutating data */
-export type MutationInsertIntoinventory_DistributorCollectionArgs = {
-  objects: Array<Inventory_DistributorInsertInput>;
+export type MutationInsertIntoD_InventoryCollectionArgs = {
+  objects: Array<D_InventoryInsertInput>;
 };
 
 /** The root type for creating and mutating data */
-export type MutationInsertIntoordersCollectionArgs = {
+export type MutationInsertIntoOrdersCollectionArgs = {
   objects: Array<OrdersInsertInput>;
 };
 
 /** The root type for creating and mutating data */
-export type MutationInsertIntoproduct_BatchesCollectionArgs = {
-  objects: Array<Product_BatchesInsertInput>;
+export type MutationInsertIntoProductsCollectionArgs = {
+  objects: Array<ProductsInsertInput>;
 };
 
 /** The root type for creating and mutating data */
-export type MutationInsertIntoproductsCollectionArgs = {
-  objects: Array<ProductsInsertInput>;
+export type MutationInsertIntoStocksCollectionArgs = {
+  objects: Array<StocksInsertInput>;
 };
 
 /** The root type for creating and mutating data */
@@ -211,31 +301,31 @@ export type MutationInsertIntoprofilesCollectionArgs = {
 };
 
 /** The root type for creating and mutating data */
-export type MutationUpdateinventory_DistributorCollectionArgs = {
+export type MutationUpdateD_InventoryCollectionArgs = {
   atMost?: Scalars["Int"]["input"];
-  filter?: InputMaybe<Inventory_DistributorFilter>;
-  set: Inventory_DistributorUpdateInput;
+  filter?: InputMaybe<D_InventoryFilter>;
+  set: D_InventoryUpdateInput;
 };
 
 /** The root type for creating and mutating data */
-export type MutationUpdateordersCollectionArgs = {
+export type MutationUpdateOrdersCollectionArgs = {
   atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<OrdersFilter>;
   set: OrdersUpdateInput;
 };
 
 /** The root type for creating and mutating data */
-export type MutationUpdateproduct_BatchesCollectionArgs = {
-  atMost?: Scalars["Int"]["input"];
-  filter?: InputMaybe<Product_BatchesFilter>;
-  set: Product_BatchesUpdateInput;
-};
-
-/** The root type for creating and mutating data */
-export type MutationUpdateproductsCollectionArgs = {
+export type MutationUpdateProductsCollectionArgs = {
   atMost?: Scalars["Int"]["input"];
   filter?: InputMaybe<ProductsFilter>;
   set: ProductsUpdateInput;
+};
+
+/** The root type for creating and mutating data */
+export type MutationUpdateStocksCollectionArgs = {
+  atMost?: Scalars["Int"]["input"];
+  filter?: InputMaybe<StocksFilter>;
+  set: StocksUpdateInput;
 };
 
 /** The root type for creating and mutating data */
@@ -248,6 +338,95 @@ export type MutationUpdateprofilesCollectionArgs = {
 export type Node = {
   /** Retrieves a record by `ID` */
   nodeId: Scalars["ID"]["output"];
+};
+
+export type Orders = Node & {
+  batch_no?: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+  created_at: Scalars["Datetime"]["output"];
+  id: Scalars["UUID"]["output"];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars["ID"]["output"];
+  pRODUCTS: Products;
+  product_id: Scalars["UUID"]["output"];
+  quantity: Scalars["BigInt"]["output"];
+  status?: Maybe<Scalars["String"]["output"]>;
+  user_id: Scalars["UUID"]["output"];
+};
+
+export type OrdersConnection = {
+  edges: Array<OrdersEdge>;
+  pageInfo: PageInfo;
+};
+
+export type OrdersDeleteResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Orders>;
+};
+
+export type OrdersEdge = {
+  cursor: Scalars["String"]["output"];
+  node: Orders;
+};
+
+export type OrdersFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<OrdersFilter>>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<OrdersFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<OrdersFilter>>;
+  product_id?: InputMaybe<UuidFilter>;
+  quantity?: InputMaybe<BigIntFilter>;
+  status?: InputMaybe<StringFilter>;
+  user_id?: InputMaybe<UuidFilter>;
+};
+
+export type OrdersInsertInput = {
+  batch_no?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  product_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
+  user_id?: InputMaybe<Scalars["UUID"]["input"]>;
+};
+
+export type OrdersInsertResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Orders>;
+};
+
+export type OrdersOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  product_id?: InputMaybe<OrderByDirection>;
+  quantity?: InputMaybe<OrderByDirection>;
+  status?: InputMaybe<OrderByDirection>;
+  user_id?: InputMaybe<OrderByDirection>;
+};
+
+export type OrdersUpdateInput = {
+  batch_no?: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  product_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
+  status?: InputMaybe<Scalars["String"]["input"]>;
+  user_id?: InputMaybe<Scalars["UUID"]["input"]>;
+};
+
+export type OrdersUpdateResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Orders>;
 };
 
 /** Boolean expression comparing fields on type "Opaque" */
@@ -267,6 +446,121 @@ export type OrderByDirection =
   /** Descending order, nulls last */
   | "DescNullsLast";
 
+export type Products = Node & {
+  created_at: Scalars["Datetime"]["output"];
+  d_INVENTORYCollection?: Maybe<D_InventoryConnection>;
+  description?: Maybe<Scalars["String"]["output"]>;
+  id: Scalars["UUID"]["output"];
+  imageURL: Scalars["String"]["output"];
+  mrp: Scalars["BigFloat"]["output"];
+  name: Scalars["String"]["output"];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars["ID"]["output"];
+  oRDERSCollection?: Maybe<OrdersConnection>;
+  sTOCKSCollection?: Maybe<StocksConnection>;
+};
+
+export type Productsd_InventoryCollectionArgs = {
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
+  filter?: InputMaybe<D_InventoryFilter>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  orderBy?: InputMaybe<Array<D_InventoryOrderBy>>;
+};
+
+export type ProductsoRdersCollectionArgs = {
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
+  filter?: InputMaybe<OrdersFilter>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  orderBy?: InputMaybe<Array<OrdersOrderBy>>;
+};
+
+export type ProductssTocksCollectionArgs = {
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
+  filter?: InputMaybe<StocksFilter>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  orderBy?: InputMaybe<Array<StocksOrderBy>>;
+};
+
+export type ProductsConnection = {
+  edges: Array<ProductsEdge>;
+  pageInfo: PageInfo;
+};
+
+export type ProductsDeleteResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Products>;
+};
+
+export type ProductsEdge = {
+  cursor: Scalars["String"]["output"];
+  node: Products;
+};
+
+export type ProductsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<ProductsFilter>>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<UuidFilter>;
+  imageURL?: InputMaybe<StringFilter>;
+  mrp?: InputMaybe<BigFloatFilter>;
+  name?: InputMaybe<StringFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<ProductsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<ProductsFilter>>;
+};
+
+export type ProductsInsertInput = {
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  imageURL?: InputMaybe<Scalars["String"]["input"]>;
+  mrp?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type ProductsInsertResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Products>;
+};
+
+export type ProductsOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  description?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  imageURL?: InputMaybe<OrderByDirection>;
+  mrp?: InputMaybe<OrderByDirection>;
+  name?: InputMaybe<OrderByDirection>;
+};
+
+export type ProductsUpdateInput = {
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  description?: InputMaybe<Scalars["String"]["input"]>;
+  id?: InputMaybe<Scalars["UUID"]["input"]>;
+  imageURL?: InputMaybe<Scalars["String"]["input"]>;
+  mrp?: InputMaybe<Scalars["BigFloat"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type ProductsUpdateResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Products>;
+};
+
 export type PageInfo = {
   endCursor?: Maybe<Scalars["String"]["output"]>;
   hasNextPage: Scalars["Boolean"]["output"];
@@ -276,28 +570,28 @@ export type PageInfo = {
 
 /** The root type for querying data */
 export type Query = {
-  /** A pagable collection of type `inventory_distributor` */
-  inventory_distributorCollection?: Maybe<Inventory_DistributorConnection>;
+  /** A pagable collection of type `D_INVENTORY` */
+  d_INVENTORYCollection?: Maybe<D_InventoryConnection>;
   /** Retrieve a record by its `ID` */
   node?: Maybe<Node>;
-  /** A pagable collection of type `orders` */
-  ordersCollection?: Maybe<OrdersConnection>;
-  /** A pagable collection of type `product_batches` */
-  product_batchesCollection?: Maybe<Product_BatchesConnection>;
-  /** A pagable collection of type `products` */
-  productsCollection?: Maybe<ProductsConnection>;
+  /** A pagable collection of type `ORDERS` */
+  oRDERSCollection?: Maybe<OrdersConnection>;
+  /** A pagable collection of type `PRODUCTS` */
+  pRODUCTSCollection?: Maybe<ProductsConnection>;
   /** A pagable collection of type `profiles` */
   profilesCollection?: Maybe<ProfilesConnection>;
+  /** A pagable collection of type `STOCKS` */
+  sTOCKSCollection?: Maybe<StocksConnection>;
 };
 
 /** The root type for querying data */
-export type QueryInventory_DistributorCollectionArgs = {
+export type QueryD_InventoryCollectionArgs = {
   after?: InputMaybe<Scalars["Cursor"]["input"]>;
   before?: InputMaybe<Scalars["Cursor"]["input"]>;
-  filter?: InputMaybe<Inventory_DistributorFilter>;
+  filter?: InputMaybe<D_InventoryFilter>;
   first?: InputMaybe<Scalars["Int"]["input"]>;
   last?: InputMaybe<Scalars["Int"]["input"]>;
-  orderBy?: InputMaybe<Array<Inventory_DistributorOrderBy>>;
+  orderBy?: InputMaybe<Array<D_InventoryOrderBy>>;
 };
 
 /** The root type for querying data */
@@ -306,7 +600,7 @@ export type QueryNodeArgs = {
 };
 
 /** The root type for querying data */
-export type QueryOrdersCollectionArgs = {
+export type QueryORdersCollectionArgs = {
   after?: InputMaybe<Scalars["Cursor"]["input"]>;
   before?: InputMaybe<Scalars["Cursor"]["input"]>;
   filter?: InputMaybe<OrdersFilter>;
@@ -316,17 +610,7 @@ export type QueryOrdersCollectionArgs = {
 };
 
 /** The root type for querying data */
-export type QueryProduct_BatchesCollectionArgs = {
-  after?: InputMaybe<Scalars["Cursor"]["input"]>;
-  before?: InputMaybe<Scalars["Cursor"]["input"]>;
-  filter?: InputMaybe<Product_BatchesFilter>;
-  first?: InputMaybe<Scalars["Int"]["input"]>;
-  last?: InputMaybe<Scalars["Int"]["input"]>;
-  orderBy?: InputMaybe<Array<Product_BatchesOrderBy>>;
-};
-
-/** The root type for querying data */
-export type QueryProductsCollectionArgs = {
+export type QueryPRoductsCollectionArgs = {
   after?: InputMaybe<Scalars["Cursor"]["input"]>;
   before?: InputMaybe<Scalars["Cursor"]["input"]>;
   filter?: InputMaybe<ProductsFilter>;
@@ -343,6 +627,117 @@ export type QueryProfilesCollectionArgs = {
   first?: InputMaybe<Scalars["Int"]["input"]>;
   last?: InputMaybe<Scalars["Int"]["input"]>;
   orderBy?: InputMaybe<Array<ProfilesOrderBy>>;
+};
+
+/** The root type for querying data */
+export type QuerySTocksCollectionArgs = {
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
+  filter?: InputMaybe<StocksFilter>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  orderBy?: InputMaybe<Array<StocksOrderBy>>;
+};
+
+export type Stocks = Node & {
+  avalable_quantity: Scalars["BigInt"]["output"];
+  batch_no: Scalars["String"]["output"];
+  created_at: Scalars["Datetime"]["output"];
+  d_INVENTORYCollection: D_InventoryConnection;
+  expiry_date?: Maybe<Scalars["Date"]["output"]>;
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars["ID"]["output"];
+  orderd_quantity: Scalars["BigInt"]["output"];
+  pRODUCTS?: Maybe<Products>;
+  product_id?: Maybe<Scalars["UUID"]["output"]>;
+  selling_price?: Maybe<Scalars["BigInt"]["output"]>;
+};
+
+export type Stocksd_InventoryCollectionArgs = {
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
+  filter?: InputMaybe<D_InventoryFilter>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  orderBy?: InputMaybe<Array<D_InventoryOrderBy>>;
+};
+
+export type StocksConnection = {
+  edges: Array<StocksEdge>;
+  pageInfo: PageInfo;
+};
+
+export type StocksDeleteResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Stocks>;
+};
+
+export type StocksEdge = {
+  cursor: Scalars["String"]["output"];
+  node: Stocks;
+};
+
+export type StocksFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<StocksFilter>>;
+  avalable_quantity?: InputMaybe<BigIntFilter>;
+  batch_no?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  expiry_date?: InputMaybe<DateFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<StocksFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<StocksFilter>>;
+  orderd_quantity?: InputMaybe<BigIntFilter>;
+  product_id?: InputMaybe<UuidFilter>;
+  selling_price?: InputMaybe<BigIntFilter>;
+};
+
+export type StocksInsertInput = {
+  avalable_quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
+  batch_no?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  expiry_date?: InputMaybe<Scalars["Date"]["input"]>;
+  orderd_quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
+  product_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  selling_price?: InputMaybe<Scalars["BigInt"]["input"]>;
+};
+
+export type StocksInsertResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Stocks>;
+};
+
+export type StocksOrderBy = {
+  avalable_quantity?: InputMaybe<OrderByDirection>;
+  batch_no?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  expiry_date?: InputMaybe<OrderByDirection>;
+  orderd_quantity?: InputMaybe<OrderByDirection>;
+  product_id?: InputMaybe<OrderByDirection>;
+  selling_price?: InputMaybe<OrderByDirection>;
+};
+
+export type StocksUpdateInput = {
+  avalable_quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
+  batch_no?: InputMaybe<Scalars["String"]["input"]>;
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  expiry_date?: InputMaybe<Scalars["Date"]["input"]>;
+  orderd_quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
+  product_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  selling_price?: InputMaybe<Scalars["BigInt"]["input"]>;
+};
+
+export type StocksUpdateResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Stocks>;
 };
 
 /** Boolean expression comparing fields on type "String" */
@@ -382,174 +777,6 @@ export type UuidFilter = {
   neq?: InputMaybe<Scalars["UUID"]["input"]>;
 };
 
-export type Inventory_Distributor = Node & {
-  created_at: Scalars["Datetime"]["output"];
-  id: Scalars["UUID"]["output"];
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars["ID"]["output"];
-  product: Products;
-  productId: Scalars["UUID"]["output"];
-  quantity: Scalars["BigFloat"]["output"];
-  userId: Scalars["UUID"]["output"];
-};
-
-export type Inventory_DistributorConnection = {
-  edges: Array<Inventory_DistributorEdge>;
-  pageInfo: PageInfo;
-};
-
-export type Inventory_DistributorDeleteResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Inventory_Distributor>;
-};
-
-export type Inventory_DistributorEdge = {
-  cursor: Scalars["String"]["output"];
-  node: Inventory_Distributor;
-};
-
-export type Inventory_DistributorFilter = {
-  /** Returns true only if all its inner filters are true, otherwise returns false */
-  and?: InputMaybe<Array<Inventory_DistributorFilter>>;
-  created_at?: InputMaybe<DatetimeFilter>;
-  id?: InputMaybe<UuidFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-  /** Negates a filter */
-  not?: InputMaybe<Inventory_DistributorFilter>;
-  /** Returns true if at least one of its inner filters is true, otherwise returns false */
-  or?: InputMaybe<Array<Inventory_DistributorFilter>>;
-  productId?: InputMaybe<UuidFilter>;
-  quantity?: InputMaybe<BigFloatFilter>;
-  userId?: InputMaybe<UuidFilter>;
-};
-
-export type Inventory_DistributorInsertInput = {
-  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
-  id?: InputMaybe<Scalars["UUID"]["input"]>;
-  productId?: InputMaybe<Scalars["UUID"]["input"]>;
-  quantity?: InputMaybe<Scalars["BigFloat"]["input"]>;
-  userId?: InputMaybe<Scalars["UUID"]["input"]>;
-};
-
-export type Inventory_DistributorInsertResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Inventory_Distributor>;
-};
-
-export type Inventory_DistributorOrderBy = {
-  created_at?: InputMaybe<OrderByDirection>;
-  id?: InputMaybe<OrderByDirection>;
-  productId?: InputMaybe<OrderByDirection>;
-  quantity?: InputMaybe<OrderByDirection>;
-  userId?: InputMaybe<OrderByDirection>;
-};
-
-export type Inventory_DistributorUpdateInput = {
-  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
-  id?: InputMaybe<Scalars["UUID"]["input"]>;
-  productId?: InputMaybe<Scalars["UUID"]["input"]>;
-  quantity?: InputMaybe<Scalars["BigFloat"]["input"]>;
-  userId?: InputMaybe<Scalars["UUID"]["input"]>;
-};
-
-export type Inventory_DistributorUpdateResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Inventory_Distributor>;
-};
-
-export type Orders = Node & {
-  created_at: Scalars["Datetime"]["output"];
-  id: Scalars["UUID"]["output"];
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars["ID"]["output"];
-  product?: Maybe<Products>;
-  productId?: Maybe<Scalars["UUID"]["output"]>;
-  quantity: Scalars["BigInt"]["output"];
-  status: Orders_Status;
-  user?: Maybe<Profiles>;
-  userId?: Maybe<Scalars["UUID"]["output"]>;
-};
-
-export type OrdersConnection = {
-  edges: Array<OrdersEdge>;
-  pageInfo: PageInfo;
-};
-
-export type OrdersDeleteResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Orders>;
-};
-
-export type OrdersEdge = {
-  cursor: Scalars["String"]["output"];
-  node: Orders;
-};
-
-export type OrdersFilter = {
-  /** Returns true only if all its inner filters are true, otherwise returns false */
-  and?: InputMaybe<Array<OrdersFilter>>;
-  created_at?: InputMaybe<DatetimeFilter>;
-  id?: InputMaybe<UuidFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-  /** Negates a filter */
-  not?: InputMaybe<OrdersFilter>;
-  /** Returns true if at least one of its inner filters is true, otherwise returns false */
-  or?: InputMaybe<Array<OrdersFilter>>;
-  productId?: InputMaybe<UuidFilter>;
-  quantity?: InputMaybe<BigIntFilter>;
-  status?: InputMaybe<Orders_StatusFilter>;
-  userId?: InputMaybe<UuidFilter>;
-};
-
-export type OrdersInsertInput = {
-  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
-  id?: InputMaybe<Scalars["UUID"]["input"]>;
-  productId?: InputMaybe<Scalars["UUID"]["input"]>;
-  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
-  status?: InputMaybe<Orders_Status>;
-  userId?: InputMaybe<Scalars["UUID"]["input"]>;
-};
-
-export type OrdersInsertResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Orders>;
-};
-
-export type OrdersOrderBy = {
-  created_at?: InputMaybe<OrderByDirection>;
-  id?: InputMaybe<OrderByDirection>;
-  productId?: InputMaybe<OrderByDirection>;
-  quantity?: InputMaybe<OrderByDirection>;
-  status?: InputMaybe<OrderByDirection>;
-  userId?: InputMaybe<OrderByDirection>;
-};
-
-export type OrdersUpdateInput = {
-  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
-  id?: InputMaybe<Scalars["UUID"]["input"]>;
-  productId?: InputMaybe<Scalars["UUID"]["input"]>;
-  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
-  status?: InputMaybe<Orders_Status>;
-  userId?: InputMaybe<Scalars["UUID"]["input"]>;
-};
-
-export type OrdersUpdateResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Orders>;
-};
-
 export type Orders_Status =
   | "Cancelled"
   | "Defected"
@@ -565,222 +792,16 @@ export type Orders_StatusFilter = {
   neq?: InputMaybe<Orders_Status>;
 };
 
-export type Product_Batches = Node & {
-  batchNo: Scalars["String"]["output"];
-  created_at: Scalars["Datetime"]["output"];
-  expiryDate: Scalars["Date"]["output"];
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars["ID"]["output"];
-  price: Scalars["BigInt"]["output"];
-  product: Products;
-  productId: Scalars["UUID"]["output"];
-  quantity: Scalars["BigInt"]["output"];
-};
-
-export type Product_BatchesConnection = {
-  edges: Array<Product_BatchesEdge>;
-  pageInfo: PageInfo;
-};
-
-export type Product_BatchesDeleteResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Product_Batches>;
-};
-
-export type Product_BatchesEdge = {
-  cursor: Scalars["String"]["output"];
-  node: Product_Batches;
-};
-
-export type Product_BatchesFilter = {
-  /** Returns true only if all its inner filters are true, otherwise returns false */
-  and?: InputMaybe<Array<Product_BatchesFilter>>;
-  batchNo?: InputMaybe<StringFilter>;
-  created_at?: InputMaybe<DatetimeFilter>;
-  expiryDate?: InputMaybe<DateFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-  /** Negates a filter */
-  not?: InputMaybe<Product_BatchesFilter>;
-  /** Returns true if at least one of its inner filters is true, otherwise returns false */
-  or?: InputMaybe<Array<Product_BatchesFilter>>;
-  price?: InputMaybe<BigIntFilter>;
-  productId?: InputMaybe<UuidFilter>;
-  quantity?: InputMaybe<BigIntFilter>;
-};
-
-export type Product_BatchesInsertInput = {
-  batchNo?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
-  expiryDate?: InputMaybe<Scalars["Date"]["input"]>;
-  price?: InputMaybe<Scalars["BigInt"]["input"]>;
-  productId?: InputMaybe<Scalars["UUID"]["input"]>;
-  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
-};
-
-export type Product_BatchesInsertResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Product_Batches>;
-};
-
-export type Product_BatchesOrderBy = {
-  batchNo?: InputMaybe<OrderByDirection>;
-  created_at?: InputMaybe<OrderByDirection>;
-  expiryDate?: InputMaybe<OrderByDirection>;
-  price?: InputMaybe<OrderByDirection>;
-  productId?: InputMaybe<OrderByDirection>;
-  quantity?: InputMaybe<OrderByDirection>;
-};
-
-export type Product_BatchesUpdateInput = {
-  batchNo?: InputMaybe<Scalars["String"]["input"]>;
-  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
-  expiryDate?: InputMaybe<Scalars["Date"]["input"]>;
-  price?: InputMaybe<Scalars["BigInt"]["input"]>;
-  productId?: InputMaybe<Scalars["UUID"]["input"]>;
-  quantity?: InputMaybe<Scalars["BigInt"]["input"]>;
-};
-
-export type Product_BatchesUpdateResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Product_Batches>;
-};
-
-export type Products = Node & {
-  description?: Maybe<Scalars["String"]["output"]>;
-  id: Scalars["UUID"]["output"];
-  imageURL?: Maybe<Scalars["String"]["output"]>;
-  inventory_distributorCollection?: Maybe<Inventory_DistributorConnection>;
-  name: Scalars["String"]["output"];
-  /** Globally Unique Record Identifier */
-  nodeId: Scalars["ID"]["output"];
-  ordersCollection?: Maybe<OrdersConnection>;
-  product_batchesCollection?: Maybe<Product_BatchesConnection>;
-  updated_at?: Maybe<Scalars["Datetime"]["output"]>;
-};
-
-export type ProductsInventory_DistributorCollectionArgs = {
-  after?: InputMaybe<Scalars["Cursor"]["input"]>;
-  before?: InputMaybe<Scalars["Cursor"]["input"]>;
-  filter?: InputMaybe<Inventory_DistributorFilter>;
-  first?: InputMaybe<Scalars["Int"]["input"]>;
-  last?: InputMaybe<Scalars["Int"]["input"]>;
-  orderBy?: InputMaybe<Array<Inventory_DistributorOrderBy>>;
-};
-
-export type ProductsOrdersCollectionArgs = {
-  after?: InputMaybe<Scalars["Cursor"]["input"]>;
-  before?: InputMaybe<Scalars["Cursor"]["input"]>;
-  filter?: InputMaybe<OrdersFilter>;
-  first?: InputMaybe<Scalars["Int"]["input"]>;
-  last?: InputMaybe<Scalars["Int"]["input"]>;
-  orderBy?: InputMaybe<Array<OrdersOrderBy>>;
-};
-
-export type ProductsProduct_BatchesCollectionArgs = {
-  after?: InputMaybe<Scalars["Cursor"]["input"]>;
-  before?: InputMaybe<Scalars["Cursor"]["input"]>;
-  filter?: InputMaybe<Product_BatchesFilter>;
-  first?: InputMaybe<Scalars["Int"]["input"]>;
-  last?: InputMaybe<Scalars["Int"]["input"]>;
-  orderBy?: InputMaybe<Array<Product_BatchesOrderBy>>;
-};
-
-export type ProductsConnection = {
-  edges: Array<ProductsEdge>;
-  pageInfo: PageInfo;
-};
-
-export type ProductsDeleteResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Products>;
-};
-
-export type ProductsEdge = {
-  cursor: Scalars["String"]["output"];
-  node: Products;
-};
-
-export type ProductsFilter = {
-  /** Returns true only if all its inner filters are true, otherwise returns false */
-  and?: InputMaybe<Array<ProductsFilter>>;
-  description?: InputMaybe<StringFilter>;
-  id?: InputMaybe<UuidFilter>;
-  imageURL?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-  nodeId?: InputMaybe<IdFilter>;
-  /** Negates a filter */
-  not?: InputMaybe<ProductsFilter>;
-  /** Returns true if at least one of its inner filters is true, otherwise returns false */
-  or?: InputMaybe<Array<ProductsFilter>>;
-  updated_at?: InputMaybe<DatetimeFilter>;
-};
-
-export type ProductsInsertInput = {
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["UUID"]["input"]>;
-  imageURL?: InputMaybe<Scalars["String"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
-};
-
-export type ProductsInsertResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Products>;
-};
-
-export type ProductsOrderBy = {
-  description?: InputMaybe<OrderByDirection>;
-  id?: InputMaybe<OrderByDirection>;
-  imageURL?: InputMaybe<OrderByDirection>;
-  name?: InputMaybe<OrderByDirection>;
-  updated_at?: InputMaybe<OrderByDirection>;
-};
-
-export type ProductsUpdateInput = {
-  description?: InputMaybe<Scalars["String"]["input"]>;
-  id?: InputMaybe<Scalars["UUID"]["input"]>;
-  imageURL?: InputMaybe<Scalars["String"]["input"]>;
-  name?: InputMaybe<Scalars["String"]["input"]>;
-  updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
-};
-
-export type ProductsUpdateResponse = {
-  /** Count of the records impacted by the mutation */
-  affectedCount: Scalars["Int"]["output"];
-  /** Array of records impacted by the mutation */
-  records: Array<Products>;
-};
-
 export type Profiles = Node & {
   email?: Maybe<Scalars["String"]["output"]>;
   full_name?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["UUID"]["output"];
   /** Globally Unique Record Identifier */
   nodeId: Scalars["ID"]["output"];
-  ordersCollection?: Maybe<OrdersConnection>;
   role?: Maybe<Scalars["String"]["output"]>;
   updated_at?: Maybe<Scalars["Datetime"]["output"]>;
   username?: Maybe<Scalars["String"]["output"]>;
   userrole?: Maybe<User_Roles>;
-};
-
-export type ProfilesOrdersCollectionArgs = {
-  after?: InputMaybe<Scalars["Cursor"]["input"]>;
-  before?: InputMaybe<Scalars["Cursor"]["input"]>;
-  filter?: InputMaybe<OrdersFilter>;
-  first?: InputMaybe<Scalars["Int"]["input"]>;
-  last?: InputMaybe<Scalars["Int"]["input"]>;
-  orderBy?: InputMaybe<Array<OrdersOrderBy>>;
 };
 
 export type ProfilesConnection = {
