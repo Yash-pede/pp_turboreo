@@ -8,6 +8,13 @@ import { useGo } from "@refinedev/core";
 
 export const CreateOrders = () => {
   const go = useGo();
+  const GoToOrdersPage = () => {
+    go({
+      to: { resource: "orders", action: "list" },
+      type: "push",
+      options: { keepQuery: true },
+    });
+  };
   const { modalProps, formProps } = useModalForm({
     action: "create",
     resource: "ORDERS",
@@ -17,11 +24,7 @@ export const CreateOrders = () => {
       gqlMutation: CREATE_ORDER_MUTATION,
     },
     onMutationSuccess() {
-      go({
-        to: { resource: "orders", action: "list" },
-        type: "push",
-        options: { keepQuery: true },
-      });
+      GoToOrdersPage();
     },
   });
   const [userId, setUser] = useState<string>();
@@ -60,13 +63,7 @@ export const CreateOrders = () => {
         formProps.form?.setFieldsValue({ quantity: totalQuantity });
         formProps.form?.submit();
       }}
-      onCancel={() => {
-        go({
-          to: { resource: "orders", action: "list" },
-          type: "push",
-          options: { keepQuery: true },
-        });
-      }}
+      onCancel={GoToOrdersPage}
     >
       <Form {...formProps} size={"large"} layout="vertical">
         <Form.Item name="user_id" label="User Id" rules={[{ required: true }]}>
