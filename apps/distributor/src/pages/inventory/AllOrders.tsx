@@ -1,12 +1,17 @@
-import { EditButton, useTable } from "@refinedev/antd";
-import { GET_ALL_ORDERS_QUERY, GET_ALL_pRODUCTS_QUERY } from "@repo/graphql";
-import { Skeleton, Space, Table } from "antd";
-import { authProvider } from "../auth/authProvider";
 import React, { useEffect } from "react";
+import { DeleteButton, EditButton, useTable } from "@refinedev/antd";
+import {
+  GET_ALL_ORDERS_QUERY,
+  GET_ALL_pRODUCTS_QUERY,
+  Orders,
+} from "@repo/graphql";
+import { Skeleton, Space, Table } from "antd";
+import { useGo, useList } from "@refinedev/core";
+import { authProvider } from "@repo/utility";
 import dayjs from "dayjs";
-import { useList } from "@refinedev/core";
 
 export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
+  const go = useGo();
   const [userId, setUser] = React.useState<any>();
 
   useEffect(() => {
@@ -23,6 +28,9 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
   }, [userId]);
   const { tableProps, tableQueryResult } = useTable({
     resource: "ORDERS",
+    pagination: {
+      pageSize: 12,
+    },
     meta: {
       gqlQuery: GET_ALL_ORDERS_QUERY,
     },
@@ -58,13 +66,13 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
     ],
   });
   return (
-    <>
-      <Table loading={tableQueryResult.isLoading} {...tableProps}>
-        <Table.Column
-          dataIndex="id"
-          title="ID"
-          render={(value) => <strong>{value}</strong>}
-        />
+    <div>
+      {/* <pre>{JSON.stringify(tableQueryResult, null, 2)}</pre> */}
+      <Table
+        {...tableProps}
+        loading={tableQueryResult.isLoading}
+        pagination={{ ...tableProps.pagination }}
+      >
         <Table.Column
           dataIndex={"product_id"}
           title="product"
@@ -83,30 +91,18 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
             );
           }}
         />
-        <Table.Column
-          dataIndex="batch_no"
-          title="Batch No"
-          render={(value: Array<any>) => (
-            <div
-              style={{
-                display: "flex",
-                gap: "10px",
-                flexWrap: "wrap",
-                alignItems: "center",
-              }}
-            >
-              {value.map((item) => (
-                <p>{item}</p>
-              ))}
-            </div>
-          )}
+        
+        <Table.Column<Orders>
+          dataIndex={"quantity"}
+          title="quantity"
+          render={(_value, record) => <Space>{record.quantity || "-"}</Space>}
         />
-        <Table.Column dataIndex="quantity" title="Quantity" />
-        <Table.Column dataIndex="status" title="Status" />
-        <Table.Column
-          dataIndex="salesperson_id"
-          title="Sales Person"
-          render={(value) => value || "-"}
+        <Table.Column<Orders>
+          dataIndex={"status"}
+          title="status"
+          render={(_value, record) => {
+            return <Space>{record.status}</Space>;
+          }}
         />
         <Table.Column
           dataIndex="created_at"
@@ -116,18 +112,40 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
           )}
         />
         <Table.Column
+          dataIndex="salesperson_id"
+          title="Sales Person"
+          render={(value) => value || "-"}
+        />
+        <Table.Column<Orders>
           dataIndex={"id"}
           title="Action"
           fixed="right"
           render={(value) => (
             <Space>
-              <EditButton size="small"  recordItemId={value} />
-              {/* <DeleteButton size="small"  recordItemId={value} /> */}
+              <EditButton
+                size="small"
+                recordItemId={value}
+                onClick={() =>
+                  go({
+                    to: {
+                      resource: "orders",
+                      action: "edit",
+                      id: value,
+                    },
+                    options: { keepQuery: true },
+                    type: "replace",
+                    query: {
+                      productId: tableQueryResult?.data?.data?.[0]?.productId,
+                    },
+                  })
+                }
+              />
+              <DeleteButton size="small" recordItemId={value} />
             </Space>
           )}
         />
       </Table>
       {children}
-    </>
+    </div>
   );
 };
