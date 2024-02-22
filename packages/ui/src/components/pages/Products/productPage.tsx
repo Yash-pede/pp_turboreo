@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useGo, useList } from "@refinedev/core";
 import { GET_ALL_pRODUCTS_QUERY } from "@repo/graphql";
-import { Button, Typography } from "antd";
+import { Button, Image, Typography } from "antd";
 import { DateField, DeleteButton } from "@refinedev/antd";
 
 export const ProductPage = () => {
@@ -65,7 +65,7 @@ export const ProductPage = () => {
           </div>
         </div>
         <div>
-          <img
+          <Image
             src={`https://krtkfjphiovnpjawcxwo.supabase.co/storage/v1/object/public/Products/${Product?.data[0]?.imageURL}`}
             alt=""
             style={{ width: "100%", height: "300px", objectFit: "cover",borderRadius:"3%",overflow:"hidden" }}

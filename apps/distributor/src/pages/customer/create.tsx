@@ -1,3 +1,9 @@
 export const CustomerCreate = () => {
-  return <div>CustomerCreate</div>;
+  return (
+    <>
+      <div>
+        Create Customer
+      </div>
+    </>
+  );
 };

@@ -1,3 +1,12 @@
+import { PlusOutlined } from "@ant-design/icons";
+import { CreateButton } from "@refinedev/antd";
+
 export const CustomerHome = () => {
-  return <div>CustomerHome</div>;
+  return (
+    <>
+      <div>
+        <CreateButton icon={<PlusOutlined />} />
+      </div>
+    </>
+  );
 };

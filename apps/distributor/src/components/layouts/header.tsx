@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Layout as AntdLayout,
-  Typography,
   Space,
   theme,
   Button,
@@ -13,7 +12,8 @@ import {
   useGetIdentity,
 } from "@refinedev/core";
 import { useThemedLayoutContext } from "@refinedev/antd";
-import { BarsOutlined } from "@ant-design/icons";
+import { BarsOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { useShoppingCart } from "../../contexts/cart/ShoppingCartContext";
 
 const { useToken } = theme;
 
@@ -25,8 +25,8 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   isSticky,
   sticky,
-  appName,
 }) => {
+  const { openCart } = useShoppingCart();
   const breakpoint = Grid.useBreakpoint();
   const { token } = useToken();
   const { setMobileSiderOpen } = useThemedLayoutContext();
@@ -35,7 +35,6 @@ export const Header: React.FC<HeaderProps> = ({
   const { data: user } = useGetIdentity({
     v3LegacyAuthProviderCompatible: Boolean(authProvider?.isLegacy),
   });
-  const { Title } = Typography;
   const shouldRenderHeader = user && (user.name || user.avatar);
 
   if (!shouldRenderHeader) {
@@ -61,7 +60,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <AntdLayout.Header style={headerStyles}>
-      <Space>{isMobile && <Title level={3}>{appName}</Title>}</Space>
+      {/* <Space>{isMobile && <Title level={3}>{appName}</Title>}</Space> */}
       <Space align="center">
         {isMobile && (
           <Button
@@ -71,6 +70,18 @@ export const Header: React.FC<HeaderProps> = ({
           />
         )}
       </Space>
+      {shouldRenderHeader && (
+        <Button
+          size="large"
+          type="dashed" shape="round"
+          onClick={() => {
+            openCart();
+          }}
+        >
+          <ShoppingCartOutlined />
+          {!isMobile && "Cart"}
+        </Button>
+      )}
     </AntdLayout.Header>
   );
 };

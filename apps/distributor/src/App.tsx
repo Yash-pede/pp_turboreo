@@ -19,6 +19,7 @@ import {
   AllInventory,
   AllOrders,
   CreateOrders,
+  CustomerCreate,
   CustomerEdit,
   CustomerHome,
   CustomerShow,
@@ -27,8 +28,10 @@ import {
   Home,
   Register,
 } from "./pages";
-import { Layout, Profile, ProductPage, LoginNew } from "@repo/ui";
+import { Profile, ProductPage, LoginNew } from "@repo/ui";
 import { resources } from "./config/resources";
+import { ShoppingCartProvider } from "./contexts/cart/ShoppingCartContext";
+import { Layout } from "./components/layouts";
 
 function App() {
   return (
@@ -52,47 +55,53 @@ function App() {
                   liveMode: "auto",
                 }}
               >
-                <Routes>
-                  <Route path="/register" element={<Register />} />
-                  <Route
-                    path="/login"
-                    element={<LoginNew userType={UserRoleTypes.DISTRIBUTORS} />}
-                  />
-                  <Route path="/forgot-password" element={<ForgotPassord />} />
-
-                  <Route
-                    element={
-                      <Authenticated
-                        key={"authenticated-layout"}
-                        fallback={<CatchAllNavigate to="/login" />}
-                      >
-                        <Layout appName="Distributor">
-                          <Outlet />
-                        </Layout>
-                      </Authenticated>
-                    }
-                  >
-                    login
-                    <Route index element={<Home />} />
-                    <Route path="/products">
-                      <Route index element={<AllAvalableProducts />} />
-                      <Route path=":id" element={<ProductPage />} />
+                <ShoppingCartProvider>
+                  <Routes>
+                    <Route path="/register" element={<Register />} />
+                    <Route
+                      path="/login"
+                      element={
+                        <LoginNew userType={UserRoleTypes.DISTRIBUTORS} />
+                      }
+                    />
+                    <Route
+                      path="/forgot-password"
+                      element={<ForgotPassord />}
+                    />
+                    <Route
+                      element={
+                        <Authenticated
+                          key={"authenticated-layout"}
+                          fallback={<CatchAllNavigate to="/login" />}
+                        >
+                          <Layout appName="Distributor">
+                            <Outlet />
+                          </Layout>
+                        </Authenticated>
+                      }
+                    >
+                      login
+                      <Route index element={<Home />} />
+                      <Route path="/products">
+                        <Route index element={<AllAvalableProducts />} />
+                        <Route path=":id" element={<ProductPage />} />
+                      </Route>
+                      <Route path="/orders">
+                        <Route index element={<AllOrders />} />
+                        <Route path="create" element={<CreateOrders />} />
+                        <Route path="edit/:id" element={<EditOrders />} />
+                      </Route>
+                      <Route path="/customer">
+                        <Route index element={<CustomerHome />} />
+                        <Route path="edit/:id" element={<CustomerEdit />} />
+                        <Route path="create" element={<CustomerCreate />} />
+                        <Route path=":id" element={<CustomerShow />} />
+                      </Route>
+                      <Route path="/inventory" element={<AllInventory />} />
+                      <Route path="/me" element={<Profile />} />
                     </Route>
-                    <Route path="/orders">
-                      <Route index element={<AllOrders />} />
-                      <Route path="create" element={<CreateOrders />} />
-                      <Route path="edit/:id" element={<EditOrders />} />
-                    </Route>
-                    <Route path="/customer">
-                      <Route index element={<CustomerHome />} />
-                      <Route path="edit/:id" element={<CustomerEdit />} />
-                      <Route path="create" element={<CustomerEdit />} />
-                      <Route path=":id" element={<CustomerShow />} />
-                    </Route>
-                    <Route path="/inventory" element={<AllInventory />} />
-                    <Route path="/me" element={<Profile />} />
-                  </Route>
-                </Routes>
+                  </Routes>
+                </ShoppingCartProvider>
                 <RefineKbar />
                 <UnsavedChangesNotifier />
                 <DocumentTitleHandler />

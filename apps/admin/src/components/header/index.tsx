@@ -15,7 +15,7 @@ const { Text } = Typography;
 const { useToken } = theme;
 
 type IUser = {
-  id: number;
+  id: string;
   name: string;
   avatar: string;
 };

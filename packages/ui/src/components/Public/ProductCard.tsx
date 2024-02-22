@@ -1,6 +1,6 @@
 import { useGo } from "@refinedev/core";
 import { Products } from "@repo/graphql";
-import { Card, Typography } from "antd";
+import { Card, Image, Typography } from "antd";
 
 export const ProductCardPublic = ({
   product,
@@ -28,14 +28,16 @@ export const ProductCardPublic = ({
           })
         }
       >
-        <img
+        <Image
           src={`https://krtkfjphiovnpjawcxwo.supabase.co/storage/v1/object/public/Products/${product.imageURL}`}
           alt={product.name}
+          preview={false}
           style={{
             width: "100%",
             height: "200px",
             objectFit: "cover",
             borderRadius: "5px",
+            margin: "auto",
           }}
         />
         <Paragraph
@@ -58,9 +60,15 @@ export const ProductCardPublic = ({
         >
           {product.mrp}
         </Paragraph>
-          <div style={{ display: "flex", justifyContent: "space-between",width:"100%" }}>
-        {RenderButton && <RenderButton />}
-          </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          {RenderButton && <RenderButton />}
+        </div>
       </Card>
     </>
   );

@@ -1,11 +1,9 @@
 import { useGo, useList } from "@refinedev/core";
-import {
-  GET_ALL_STOCKS_QUERY,
-  GET_ALL_pRODUCTS_QUERY,
-} from "@repo/graphql";
-import { Button, Card, Flex } from "antd";
+import { GET_ALL_STOCKS_QUERY, GET_ALL_pRODUCTS_QUERY } from "@repo/graphql";
+import { Button, Card, Flex, InputNumber } from "antd";
 import { IconShoppingCart } from "@tabler/icons-react";
 import { ProductCardPublic } from "@repo/ui";
+import { useShoppingCart } from "../../contexts/cart/ShoppingCartContext";
 export const AllAvalableProducts = () => {
   const { data: StockInventory, isLoading } = useList({
     resource: "STOCKS",
@@ -67,6 +65,12 @@ export const AllAvalableProducts = () => {
       </div>
     );
   }
+  const {
+    getItemsQuantity,
+    decreaseCartQuantity,
+    increaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
 
   return (
     <div style={{ gap: "15px", width: "100%" }}>
@@ -116,36 +120,89 @@ export const AllAvalableProducts = () => {
             isLoading={isLoading}
             key={product.id}
             RenderButton={() => (
-              <Button
-                type="primary"
-                size="large"
-                style={{
-                  gap: "15px",
-                  marginTop: "15px",
-                  marginBottom: "15px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                  e.stopPropagation();
-                  go({
-                    to: {
-                      resource: "orders",
-                      action: "create",
-                    },
-                    query: {
-                      product_id: product.id,
-                    },
-                    type: "push",
-                    options: {
-                      keepQuery: true,
-                    },
-                  });
-                }}
+              <div
+                onClick={(e) => e.stopPropagation()}
+                style={{ width: "100%" }}
               >
-                <IconShoppingCart /> Add to Orders
-              </Button>
+                {getItemsQuantity(product.id) === 0 ? (
+                  <Button
+                    type="primary"
+                    size="large"
+                    style={{
+                      gap: "15px",
+                      marginTop: "15px",
+                      marginBottom: "15px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                      e.preventDefault();
+                      increaseCartQuantity(product.id);
+                    }}
+                  >
+                    <IconShoppingCart /> Add to Cart
+                  </Button>
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "0.8rem",
+                      width: "100%",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "0.8rem",
+                        width: "100%",
+                      }}
+                    >
+                      <Button
+                        type="primary"
+                        disabled={getItemsQuantity(product.id) <= 5}
+                        onClick={() => decreaseCartQuantity(product.id)}
+                      >
+                        -
+                      </Button>
+                      <InputNumber
+                        value={getItemsQuantity(product.id)}
+                        defaultValue={getItemsQuantity(product.id)}
+                        readOnly
+                      />
+                      <Button
+                        type="primary"
+                        onClick={() => increaseCartQuantity(product.id)}
+                      >
+                        +
+                      </Button>
+                    </div>
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        type="primary"
+                        danger
+                        style={{ width: "100%" }}
+                        onClick={() => removeFromCart(product.id)}
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
             )}
           />
         ))}

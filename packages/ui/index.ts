@@ -1,4 +1,5 @@
 export * from "./src/components/layouts/index";
+export * from "./src/components/layouts/Sidebar"
 export * from "./src/components/layouts/header";
 export * from "./src/components/pages/Profile";
 export * from "./src/components/pages/Products/AllProducts"
@@ -9,3 +10,4 @@ export * from "./src/components/pages/admin/inventory/EditOrders"
 export * from "./src/components/auth/Login"
 export * from "./src/components/pages/inventory/CreateStock"
 export * from "./src/components/Public/ProductCard"
+export * from "./src/hooks/UseLocalStorage"

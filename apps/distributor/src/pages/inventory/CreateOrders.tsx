@@ -101,11 +101,11 @@ export const CreateOrders = () => {
             <Button type="primary" onClick={() => handleQuantityChange(5)}>
               +
             </Button>
-            <Alert
+            {/* <Alert
               style={{ marginLeft: "10px", marginTop: "5px" }}
               type="warning"
               message={`Total Quantity: ${quantity + Math.floor(quantity / 5)}`}
-            />
+            /> */}
           </div>
         </Form.Item>
         <Alert
