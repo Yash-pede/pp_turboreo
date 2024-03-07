@@ -1,15 +1,18 @@
 import { PROFILES_QUERY, Profiles } from "@repo/graphql";
 import {
+  CreateButton,
   DeleteButton,
   EditButton,
   FilterDropdown,
+  Show,
   useTable,
 } from "@refinedev/antd";
 import { Input, Space, Table } from "antd";
 import { getDefaultFilter } from "@refinedev/core";
 import { SearchOutlined } from "@ant-design/icons";
+import React from "react";
 
-export const Users = () => {
+export const Users = ({ children }: { children?: React.ReactNode }) => {
   const { tableProps, tableQueryResult } = useTable({
     resource: "profiles",
     onSearch(values: any) {
@@ -46,7 +49,8 @@ export const Users = () => {
     },
   });
   return (
-    <div>
+    <Show canEdit={false}>
+      <CreateButton style={{ float: "right", marginBottom: "10px" }} />
       <Table
         {...tableProps}
         loading={tableQueryResult.isLoading}
@@ -95,13 +99,14 @@ export const Users = () => {
           fixed="right"
           render={(value) => (
             <Space>
-              <EditButton size="small"  recordItemId={value} />
-              <DeleteButton size="small"  recordItemId={value} />
+              <EditButton size="small" recordItemId={value} />
+              <DeleteButton size="small" recordItemId={value} />
             </Space>
           )}
         />
       </Table>
+      {children}
       {/* <pre>{JSON.stringify(tableQueryResult?.data, null, 2)}</pre> */}
-    </div>
+    </Show>
   );
 };

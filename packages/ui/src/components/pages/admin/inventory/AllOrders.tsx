@@ -1,106 +1,74 @@
 import React from "react";
-import { DeleteButton, EditButton, useTable } from "@refinedev/antd";
-import { GET_ALL_ORDERS_QUERY, GET_ALL_pRODUCTS_QUERY, Orders } from "@repo/graphql";
-import { Skeleton, Space, Table } from "antd";
-import { useGo, useList } from "@refinedev/core";
+import { Show, useTable } from "@refinedev/antd";
+import { GET_ALL_PROFILES_QUERY, Profiles } from "@repo/graphql";
+import { Space, Table } from "antd";
+import { useGo } from "@refinedev/core";
+import { UserRoleTypes } from "@repo/utility";
 
 export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
   const go = useGo();
-  const { tableProps, tableQueryResult } = useTable({
-    resource: "ORDERS",
-    pagination: {
-      pageSize: 12,
-    },
+
+  const { tableProps: profileTableProps } = useTable({
+    resource: "profiles",
     meta: {
-      gqlQuery: GET_ALL_ORDERS_QUERY,
+      gqlQuery: GET_ALL_PROFILES_QUERY,
     },
-  });
-  const { data: products, isLoading: isLoadingProducts } = useList({
-    resource: "PRODUCTS",
-    meta: {
-      gqlQuery: GET_ALL_pRODUCTS_QUERY,
+    sorters: {
+      initial: [
+        {
+          field: "username",
+          order: "asc",
+        },
+      ],
     },
-    filters: [
-      {
-        field: "id",
-        operator: "in",
-        value: tableQueryResult?.data?.data?.map((item) => item.product_id),
-      },
-    ],
+    filters: {
+      initial: [
+        {
+          field: "userrole",
+          operator: "eq",
+          value: UserRoleTypes.DISTRIBUTORS,
+        },
+      ],
+    },
   });
   return (
-    <div>
-      {/* <pre>{JSON.stringify(tableQueryResult, null, 2)}</pre> */}
+    <Show canEdit={false}>
+      {/* <pre>{JSON.stringify(profiles, null, 2)}</pre> */}
       <Table
-        {...tableProps}
-        loading={tableQueryResult.isLoading}
-        pagination={{ ...tableProps.pagination }}
+        {...profileTableProps}
+        size="large"
+        style={{ cursor: "pointer" }}
+        onRow={(record) => ({
+          onClick: () => {
+            go({
+              to: { action: "show", resource: "orders", id: record.id || "" },
+              options: { keepQuery: false },
+              type: "replace",
+            });
+          },
+        })}
       >
         <Table.Column
-        dataIndex={"product_id"}
-        title="product"
-        render={(_value, record: any) => {
-          if (isLoadingProducts) {
-            return <Skeleton.Input />;
-          }
-          return (
-            <Space>
-              {
-                products?.data.find((item: any) => item.id === record.product_id)
-                  ?.name
-              }
-            </Space>
-          );
-        }}
-      />
-        <Table.Column<Orders>
-          dataIndex={"userId"}
-          title="userId"
-          render={(_value, record) => <Space>{record.user_id}</Space>}
+          dataIndex={"username"}
+          title="username"
+          render={(_value, record: Profiles) => (
+            <Space>{record.username}</Space>
+          )}
         />
-        <Table.Column<Orders>
-          dataIndex={"quantity"}
-          title="quantity"
-          render={(_value, record) => <Space>{record.quantity || "-"}</Space>}
+        <Table.Column
+          dataIndex={"email"}
+          title="email"
+          render={(_value, record: Profiles) => <Space>{record.email}</Space>}
         />
-        <Table.Column<Orders>
-          dataIndex={"status"}
-          title="status"
-          render={(_value, record) => {
-            return <Space>{record.status}</Space>;
-          }}
-        />
-
-        <Table.Column<Orders>
-          dataIndex={"id"}
-          title="Action"
-          fixed="right"
-          render={(value) => (
-            <Space>
-              <EditButton
-                size="small"
-                recordItemId={value}
-                onClick={() =>
-                  go({
-                    to: {
-                      resource: "orders",
-                      action: "edit",
-                      id: value,
-                    },
-                    options: { keepQuery: true },
-                    type: "replace",
-                    query: {
-                      productId: tableQueryResult?.data?.data?.[0]?.productId,
-                    },
-                  })
-                }
-              />
-              <DeleteButton size="small" recordItemId={value} />
-            </Space>
+        <Table.Column
+          dataIndex={"userrole"}
+          title="User Role"
+          render={(_value, record: Profiles) => (
+            <Space>{record.userrole}</Space>
           )}
         />
       </Table>
       {children}
-    </div>
+    </Show>
   );
 };

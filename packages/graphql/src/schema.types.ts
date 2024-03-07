@@ -66,6 +66,80 @@ export type BooleanFilter = {
   is?: InputMaybe<FilterIs>;
 };
 
+export type Customers = Node & {
+  created_at: Scalars["Datetime"]["output"];
+  distributor_id: Scalars["UUID"]["output"];
+  id: Scalars["BigInt"]["output"];
+  name: Scalars["String"]["output"];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars["ID"]["output"];
+  profiles: Profiles;
+};
+
+export type CustomersConnection = {
+  edges: Array<CustomersEdge>;
+  pageInfo: PageInfo;
+};
+
+export type CustomersDeleteResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Customers>;
+};
+
+export type CustomersEdge = {
+  cursor: Scalars["String"]["output"];
+  node: Customers;
+};
+
+export type CustomersFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<CustomersFilter>>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  distributor_id?: InputMaybe<UuidFilter>;
+  id?: InputMaybe<BigIntFilter>;
+  name?: InputMaybe<StringFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<CustomersFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<CustomersFilter>>;
+};
+
+export type CustomersInsertInput = {
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  distributor_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type CustomersInsertResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Customers>;
+};
+
+export type CustomersOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  distributor_id?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  name?: InputMaybe<OrderByDirection>;
+};
+
+export type CustomersUpdateInput = {
+  created_at?: InputMaybe<Scalars["Datetime"]["input"]>;
+  distributor_id?: InputMaybe<Scalars["UUID"]["input"]>;
+  name?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type CustomersUpdateResponse = {
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars["Int"]["output"];
+  /** Array of records impacted by the mutation */
+  records: Array<Customers>;
+};
+
 export type D_Inventory = Node & {
   batch_no: Scalars["String"]["output"];
   created_at: Scalars["Datetime"]["output"];
@@ -213,6 +287,8 @@ export type IntFilter = {
 
 /** The root type for creating and mutating data */
 export type Mutation = {
+  /** Deletes zero or more records from the `CUSTOMERS` collection */
+  deleteFromCUSTOMERSCollection: CustomersDeleteResponse;
   /** Deletes zero or more records from the `D_INVENTORY` collection */
   deleteFromD_INVENTORYCollection: D_InventoryDeleteResponse;
   /** Deletes zero or more records from the `ORDERS` collection */
@@ -223,6 +299,8 @@ export type Mutation = {
   deleteFromSTOCKSCollection: StocksDeleteResponse;
   /** Deletes zero or more records from the `profiles` collection */
   deleteFromprofilesCollection: ProfilesDeleteResponse;
+  /** Adds one or more `CUSTOMERS` records to the collection */
+  insertIntoCUSTOMERSCollection?: Maybe<CustomersInsertResponse>;
   /** Adds one or more `D_INVENTORY` records to the collection */
   insertIntoD_INVENTORYCollection?: Maybe<D_InventoryInsertResponse>;
   /** Adds one or more `ORDERS` records to the collection */
@@ -233,6 +311,8 @@ export type Mutation = {
   insertIntoSTOCKSCollection?: Maybe<StocksInsertResponse>;
   /** Adds one or more `profiles` records to the collection */
   insertIntoprofilesCollection?: Maybe<ProfilesInsertResponse>;
+  /** Updates zero or more records in the `CUSTOMERS` collection */
+  updateCUSTOMERSCollection: CustomersUpdateResponse;
   /** Updates zero or more records in the `D_INVENTORY` collection */
   updateD_INVENTORYCollection: D_InventoryUpdateResponse;
   /** Updates zero or more records in the `ORDERS` collection */
@@ -243,6 +323,12 @@ export type Mutation = {
   updateSTOCKSCollection: StocksUpdateResponse;
   /** Updates zero or more records in the `profiles` collection */
   updateprofilesCollection: ProfilesUpdateResponse;
+};
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromCustomersCollectionArgs = {
+  atMost?: Scalars["Int"]["input"];
+  filter?: InputMaybe<CustomersFilter>;
 };
 
 /** The root type for creating and mutating data */
@@ -276,6 +362,11 @@ export type MutationDeleteFromprofilesCollectionArgs = {
 };
 
 /** The root type for creating and mutating data */
+export type MutationInsertIntoCustomersCollectionArgs = {
+  objects: Array<CustomersInsertInput>;
+};
+
+/** The root type for creating and mutating data */
 export type MutationInsertIntoD_InventoryCollectionArgs = {
   objects: Array<D_InventoryInsertInput>;
 };
@@ -298,6 +389,13 @@ export type MutationInsertIntoStocksCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntoprofilesCollectionArgs = {
   objects: Array<ProfilesInsertInput>;
+};
+
+/** The root type for creating and mutating data */
+export type MutationUpdateCustomersCollectionArgs = {
+  atMost?: Scalars["Int"]["input"];
+  filter?: InputMaybe<CustomersFilter>;
+  set: CustomersUpdateInput;
 };
 
 /** The root type for creating and mutating data */
@@ -570,6 +668,8 @@ export type PageInfo = {
 
 /** The root type for querying data */
 export type Query = {
+  /** A pagable collection of type `CUSTOMERS` */
+  cUSTOMERSCollection?: Maybe<CustomersConnection>;
   /** A pagable collection of type `D_INVENTORY` */
   d_INVENTORYCollection?: Maybe<D_InventoryConnection>;
   /** Retrieve a record by its `ID` */
@@ -582,6 +682,16 @@ export type Query = {
   profilesCollection?: Maybe<ProfilesConnection>;
   /** A pagable collection of type `STOCKS` */
   sTOCKSCollection?: Maybe<StocksConnection>;
+};
+
+/** The root type for querying data */
+export type QueryCUstomersCollectionArgs = {
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
+  filter?: InputMaybe<CustomersFilter>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  orderBy?: InputMaybe<Array<CustomersOrderBy>>;
 };
 
 /** The root type for querying data */
@@ -793,6 +903,7 @@ export type Orders_StatusFilter = {
 };
 
 export type Profiles = Node & {
+  cUSTOMERSCollection?: Maybe<CustomersConnection>;
   email?: Maybe<Scalars["String"]["output"]>;
   full_name?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["UUID"]["output"];
@@ -802,6 +913,15 @@ export type Profiles = Node & {
   updated_at?: Maybe<Scalars["Datetime"]["output"]>;
   username?: Maybe<Scalars["String"]["output"]>;
   userrole?: Maybe<User_Roles>;
+};
+
+export type ProfilesCUstomersCollectionArgs = {
+  after?: InputMaybe<Scalars["Cursor"]["input"]>;
+  before?: InputMaybe<Scalars["Cursor"]["input"]>;
+  filter?: InputMaybe<CustomersFilter>;
+  first?: InputMaybe<Scalars["Int"]["input"]>;
+  last?: InputMaybe<Scalars["Int"]["input"]>;
+  orderBy?: InputMaybe<Array<CustomersOrderBy>>;
 };
 
 export type ProfilesConnection = {

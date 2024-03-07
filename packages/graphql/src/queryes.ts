@@ -1,6 +1,5 @@
 import gql from "graphql-tag";
 
-
 export const PROFILES_QUERY = gql`
   query Profiles(
     $filter: profilesFilter!
@@ -70,6 +69,8 @@ export const GET_ALL_ORDERS_QUERY = gql`
           status
           batch_no
           user_id
+          product_id
+          created_at
         }
       }
     }
@@ -87,6 +88,22 @@ export const GET_ALL_INVENTORY_DISTRIBUTOR_QUERY = gql`
           quantity
           salesperson_id
           batch_no
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ALL_PROFILES_QUERY = gql`
+  query profilesConnection {
+    profilesCollection {
+      edges {
+        node {
+          id
+          username
+          full_name
+          email
+          userrole
         }
       }
     }

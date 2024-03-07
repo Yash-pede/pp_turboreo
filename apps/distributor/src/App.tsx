@@ -27,6 +27,10 @@ import {
   ForgotPassord,
   Home,
   Register,
+  SalesCreate,
+  SalesEdit,
+  SalesHome,
+  SalesShow,
 } from "./pages";
 import { Profile, ProductPage, LoginNew } from "@repo/ui";
 import { resources } from "./config/resources";
@@ -84,7 +88,10 @@ function App() {
                       <Route index element={<Home />} />
                       <Route path="/products">
                         <Route index element={<AllAvalableProducts />} />
-                        <Route path=":id" element={<ProductPage />} />
+                        <Route
+                          path=":id"
+                          element={<ProductPage admin={false} />}
+                        />
                       </Route>
                       <Route path="/orders">
                         <Route index element={<AllOrders />} />
@@ -96,6 +103,12 @@ function App() {
                         <Route path="edit/:id" element={<CustomerEdit />} />
                         <Route path="create" element={<CustomerCreate />} />
                         <Route path=":id" element={<CustomerShow />} />
+                      </Route>
+                      <Route path="/sales">
+                        <Route index element={<SalesHome />} />
+                        <Route path="edit/:id" element={<SalesEdit />} />
+                        <Route path="create" element={<SalesCreate />} />
+                        <Route path=":id" element={<SalesShow />} />
                       </Route>
                       <Route path="/inventory" element={<AllInventory />} />
                       <Route path="/me" element={<Profile />} />

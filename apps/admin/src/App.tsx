@@ -14,7 +14,7 @@ import { dataProvider, liveProvider } from "@refinedev/supabase";
 import { App as AntdApp, ConfigProvider } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { UserRoleTypes, authProvider, supabaseClient } from "@repo/utility";
-import { ForgotPassord, Home, Register, Users } from "./pages";
+import { CreateUsers, ForgotPassord, Home, Register, Users } from "./pages";
 import {
   AllProducts,
   Layout,
@@ -25,6 +25,7 @@ import {
   AllInventory,
   LoginNew,
   CreateStock,
+  ShowOrders,
 } from "@repo/ui";
 import { resources } from "./config/resources";
 
@@ -74,18 +75,25 @@ function App() {
                     <Route index element={<Home />} />
                     <Route path="/products">
                       <Route index element={<AllProducts />} />
-                      <Route path=":id" element={<ProductPage />} />
+                      <Route
+                        path=":id"
+                        element={<ProductPage admin={true} />}
+                      />
                       <Route path="create" element={<>U r not su admin</>} />
                     </Route>
                     <Route path="/orders">
                       <Route index element={<AllOrders />} />
+                      <Route path=":id" element={<ShowOrders />} />
                       <Route path="edit/:id" element={<EditOrders />} />
                     </Route>
                     <Route path="/inventory">
                       <Route index element={<AllInventory />} />
                       <Route path="create" element={<CreateStock />} />
                     </Route>
-                    <Route path="/profiles" element={<Users />} />
+                    <Route path="/profiles">
+                      <Route index element={<Users />} />
+                      <Route path="create" element={<CreateUsers />} />
+                    </Route>
                     <Route path="/me" element={<Profile />} />
                   </Route>
                 </Routes>

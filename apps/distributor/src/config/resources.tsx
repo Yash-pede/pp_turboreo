@@ -5,6 +5,7 @@ import {
   IconPackage,
   IconPackageImport,
   IconUser,
+  IconUserBolt,
 } from "@tabler/icons-react";
 
 export const resources: IResourceItem[] = [
@@ -46,6 +47,17 @@ export const resources: IResourceItem[] = [
     show: "/customer/:id",
     edit: "/customer/edit/:id",
     create: "/customer/create",
+  },
+  {
+    name: "sales",
+    list: "/sales",
+    meta: {
+      label: "sales",
+      icon: <IconUserBolt />,
+    },
+    show: "/sales/:id",
+    edit: "/sales/edit/:id",
+    create: "/sales/create",
   },
   {
     name: "inventory",

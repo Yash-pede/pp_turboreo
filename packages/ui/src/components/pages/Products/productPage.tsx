@@ -1,16 +1,15 @@
 import { useLocation } from "react-router-dom";
 import { useGo, useList } from "@refinedev/core";
 import { GET_ALL_pRODUCTS_QUERY } from "@repo/graphql";
-import { Button, Image, Typography } from "antd";
-import { DateField, DeleteButton } from "@refinedev/antd";
+import { Button, Descriptions, Image, Row } from "antd";
+import { DateField, DeleteButton, Show } from "@refinedev/antd";
 
-export const ProductPage = () => {
+export const ProductPage = ({ admin }: { admin: boolean }) => {
   const { pathname } = useLocation();
   const id = pathname.split("/").pop();
   const go = useGo();
-  const { Title, Paragraph, Text } = Typography;
   const { data: Product } = useList({
-    resource: "products",
+    resource: "PRODUCTS",
     meta: {
       gqlQuery: GET_ALL_pRODUCTS_QUERY,
     },
@@ -25,55 +24,74 @@ export const ProductPage = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          margin: "auto",
-          width: "70%",
-          height: "100vh",
-          alignItems: "center",
-        }}
-      >
-        <div style={{ flex: 1, minWidth: "300px" }}>
-          <div style={{ marginBottom: "16px" }}>
-            <Title level={1}>{Product?.data[0]?.name}</Title>
-            <Paragraph>{Product?.data[0]?.description}</Paragraph>
-            <Text>
-              Updated at:{" "}
-              <DateField value={Product?.data[0]?.updatedAt}></DateField>
-            </Text>
-          </div>
-          <div style={{
+      <Show>
+        <div
+          style={{
             display: "flex",
-            gap: "16px",
+            justifyContent: "space-around",
+            margin: "auto",
+            width: "70%",
+            height: "100%",
             alignItems: "center",
-            justifyContent:"center",
-            width:"50%",
-          }}>
-            <Button type="primary" style={{width:"50%"}} size="large">
-              Edit
-            </Button>
-            <DeleteButton style={{width:"50%"}}
-              onSuccess={() => {
-                go({
-                  to: "/products",
-                  type: "push",
-                });
+          }}
+        >
+          <Row justify="center" align="middle" style={{ gap: "16px" }}>
+            <Descriptions bordered size="default" column={2}>
+              <Descriptions.Item label="Name">
+                {Product?.data[0]?.name}
+              </Descriptions.Item>
+              <Descriptions.Item label="Description">
+                {Product?.data[0]?.description}
+              </Descriptions.Item>
+              <Descriptions.Item label="Price">
+                {Product?.data[0]?.mrp}
+              </Descriptions.Item>
+              <Descriptions.Item label="Updated at">
+                <DateField value={Product?.data[0]?.updatedAt}></DateField>
+              </Descriptions.Item>
+            </Descriptions>
+            {admin && (
+              <div
+                style={{
+                  display: "flex",
+                  gap: "16px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "50%",
+                }}
+              >
+                <Button type="primary" style={{ width: "50%" }} size="large">
+                  Edit
+                </Button>
+
+                <DeleteButton
+                  style={{ width: "50%" }}
+                  onSuccess={() => {
+                    go({
+                      to: "/products",
+                      type: "push",
+                    });
+                  }}
+                />
+              </div>
+            )}
+          </Row>
+          <div>
+            <Image
+              src={`https://krtkfjphiovnpjawcxwo.supabase.co/storage/v1/object/public/Products/${Product?.data[0].imageURL}`}
+              alt=""
+              style={{
+                width: "100%",
+                height: "300px",
+                objectFit: "cover",
+                borderRadius: "3%",
+                overflow: "hidden",
               }}
             />
           </div>
         </div>
-        <div>
-          <Image
-            src={`https://krtkfjphiovnpjawcxwo.supabase.co/storage/v1/object/public/Products/${Product?.data[0]?.imageURL}`}
-            alt=""
-            style={{ width: "100%", height: "300px", objectFit: "cover",borderRadius:"3%",overflow:"hidden" }}
-          />
-        </div>
-      </div>
-      <div style={{ marginTop: "16px" }}></div>
-      {/* <pre>{JSON.stringify(Product?.data[0], null, 2)}</pre> */}
+      </Show>
+      {/* <pre>{JSON.stringify(Product, null, 2)}</pre> */}
     </>
   );
 };

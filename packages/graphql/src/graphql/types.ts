@@ -129,7 +129,15 @@ export type ORdersCollectionQueryVariables = Types.Exact<{
 export type ORdersCollectionQuery = {
   oRDERSCollection?: Types.Maybe<{
     edges: Array<{
-      node: Pick<Types.Orders, "quantity" | "status" | "batch_no" | "user_id">;
+      node: Pick<
+        Types.Orders,
+        | "quantity"
+        | "status"
+        | "batch_no"
+        | "user_id"
+        | "product_id"
+        | "created_at"
+      >;
     }>;
   }>;
 };
@@ -149,6 +157,21 @@ export type D_InventoryCollectionQuery = {
         | "quantity"
         | "salesperson_id"
         | "batch_no"
+      >;
+    }>;
+  }>;
+};
+
+export type ProfilesConnectionQueryVariables = Types.Exact<{
+  [key: string]: never;
+}>;
+
+export type ProfilesConnectionQuery = {
+  profilesCollection?: Types.Maybe<{
+    edges: Array<{
+      node: Pick<
+        Types.Profiles,
+        "id" | "username" | "full_name" | "email" | "userrole"
       >;
     }>;
   }>;

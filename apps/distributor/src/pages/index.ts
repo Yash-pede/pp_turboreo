@@ -12,3 +12,7 @@ export * from "./customer/index";
 export * from "./customer/Edit";
 export * from "./customer/show";
 export * from "./customer/create";
+export * from "./sales/index";
+export * from "./sales/Edit";
+export * from "./sales/show";
+export * from "./sales/create";

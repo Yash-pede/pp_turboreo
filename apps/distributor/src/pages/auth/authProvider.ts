@@ -65,11 +65,11 @@ export const authProvider: AuthBindings = {
       const { data, error } = await supabaseClient.auth.signUp({
         email,
         password,
-          data: {
-            role: "DISTRIBUTOR",
-            username: "demodistributor",
-            profileIcon: "",
-          },
+        data: {
+          role: "DISTRIBUTOR",
+          username: "demodistributor",
+          profileIcon: "",
+        },
       });
 
       if (error) {
@@ -234,6 +234,7 @@ export const authProvider: AuthBindings = {
 
     if (data?.user) {
       return {
+        id: data.user.id,
         ...data.user,
         name: data.user.email,
       };

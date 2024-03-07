@@ -1,7 +1,7 @@
-import { DateField, useModalForm } from "@refinedev/antd";
+import { DateField, Edit, useDrawerForm } from "@refinedev/antd";
 import { AllOrders } from "./AllOrders";
 import { GET_ALL_ORDERS_QUERY, UPDATE_ORDERS_MUTATION } from "@repo/graphql";
-import { Form, Input, InputNumber, Modal, Select } from "antd";
+import { Drawer, Form, Input, InputNumber, Select } from "antd";
 import { useGo, useList } from "@refinedev/core";
 import { useLocation } from "react-router-dom";
 import { OrderStatus } from "@repo/utility";
@@ -17,7 +17,7 @@ export const EditOrders = () => {
       options: { keepQuery: true },
     });
   };
-  const { modalProps, formProps, formLoading } = useModalForm({
+  const { drawerProps, formProps, saveButtonProps } = useDrawerForm({
     action: "edit",
     resource: "ORDERS",
     redirect: "show",
@@ -53,49 +53,50 @@ export const EditOrders = () => {
   }, [isLoading, formProps?.form, data?.data]);
   return (
     <AllOrders>
-      <Modal
-        {...modalProps}
-        afterClose={RouteToOrders}
-        confirmLoading={isLoading || formLoading}
-      >
-        <Form
-          {...formProps}
-          layout="vertical"
-          style={{ width: "100%", gap: "10px" }}
-        >
-          <Form.Item style={{ width: "100%" }} name="id" label="Order Id">
-            <Input min={1} style={{ width: "100%" }} />
-          </Form.Item>
-
-          <Form.Item style={{ width: "100%" }} name="user_id" label="User Id">
-            <Input min={1} style={{ width: "100%" }} />
-          </Form.Item>
-
-          <Form.Item
-            style={{ width: "100%" }}
-            name="product_id"
-            label="Product"
+      <Drawer {...drawerProps} onClose={RouteToOrders}>
+        <Edit saveButtonProps={saveButtonProps}>
+          <Form
+            {...formProps}
+            layout="vertical"
+            style={{ width: "100%", gap: "10px" }}
           >
-            <Input min={1} style={{ width: "100%" }} />
-          </Form.Item>
+            <Form.Item style={{ width: "100%" }} name="id" label="Order Id">
+              <Input min={1} style={{ width: "100%" }} />
+            </Form.Item>
 
-          <Form.Item style={{ width: "100%" }} name="quantity" label="Quantity">
-            <InputNumber min={1} style={{ width: "100%" }} />
-          </Form.Item>
+            <Form.Item style={{ width: "100%" }} name="user_id" label="User Id">
+              <Input min={1} style={{ width: "100%" }} />
+            </Form.Item>
 
-          <Form.Item style={{ width: "100%" }} name="status" label="Status">
-            <Select
-              placeholder="Select a status"
-              options={[
-                { label: "Pending", value: OrderStatus.PENDING },
-                { label: "Fulfilled", value: OrderStatus.FULFILLED },
-                { label: "Cancelled", value: OrderStatus.CANCELLED },
-                { label: "Inprocess", value: OrderStatus.INPROCESS },
-              ]}
-            />
-          </Form.Item>
+            <Form.Item
+              style={{ width: "100%" }}
+              name="product_id"
+              label="Product"
+            >
+              <Input min={1} style={{ width: "100%" }} />
+            </Form.Item>
 
-          {/* <Form.Item
+            <Form.Item
+              style={{ width: "100%" }}
+              name="quantity"
+              label="Quantity"
+            >
+              <InputNumber min={1} style={{ width: "100%" }} />
+            </Form.Item>
+
+            <Form.Item style={{ width: "100%" }} name="status" label="Status">
+              <Select
+                placeholder="Select a status"
+                options={[
+                  { label: "Pending", value: OrderStatus.PENDING },
+                  { label: "Fulfilled", value: OrderStatus.FULFILLED },
+                  { label: "Cancelled", value: OrderStatus.CANCELLED },
+                  { label: "Inprocess", value: OrderStatus.INPROCESS },
+                ]}
+              />
+            </Form.Item>
+
+            {/* <Form.Item
             label="Batch"
             name={"batch_no"}
             required
@@ -107,19 +108,20 @@ export const EditOrders = () => {
             />
           </Form.Item> */}
 
-          <Form.Item
-            style={{ width: "100%" }}
-            name="created_at"
-            label="Created at"
-          >
-            <DateField
-              value={data?.data[0].created_at}
-              format="LLL"
+            <Form.Item
               style={{ width: "100%" }}
-            />
-          </Form.Item>
-        </Form>
-      </Modal>
+              name="created_at"
+              label="Created at"
+            >
+              <DateField
+                value={data?.data[0].created_at}
+                format="LLL"
+                style={{ width: "100%" }}
+              />
+            </Form.Item>
+          </Form>
+        </Edit>
+      </Drawer>
     </AllOrders>
   );
 };

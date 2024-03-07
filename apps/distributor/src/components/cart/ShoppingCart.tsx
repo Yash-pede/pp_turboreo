@@ -42,7 +42,7 @@ export const ShoppingCart = ({ isOpen }: { isOpen: boolean }) => {
   };
 
   return (
-    <Drawer title="Basic Drawer" open={isOpen} onClose={closeCart} size="large">
+    <Drawer title="Your Cart" open={isOpen} onClose={closeCart} size="large">
       <Button
         type="primary"
         size="large"

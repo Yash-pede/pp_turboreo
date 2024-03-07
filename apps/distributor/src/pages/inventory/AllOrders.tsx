@@ -1,12 +1,17 @@
 import React, { useEffect } from "react";
-import { DeleteButton, EditButton, useTable } from "@refinedev/antd";
+import {
+  EditButton,
+  ExportButton,
+  List,
+  useTable,
+} from "@refinedev/antd";
 import {
   GET_ALL_ORDERS_QUERY,
   GET_ALL_pRODUCTS_QUERY,
   Orders,
 } from "@repo/graphql";
-import { Skeleton, Space, Table } from "antd";
-import { useGo, useList } from "@refinedev/core";
+import { Checkbox, Skeleton, Space, Table } from "antd";
+import { useExport, useGo, useList } from "@refinedev/core";
 import { authProvider } from "@repo/utility";
 import dayjs from "dayjs";
 
@@ -65,8 +70,54 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
       },
     ],
   });
+  const { triggerExport, isLoading: exportLoading } = useExport({
+    download: true,
+    resource: "ORDERS",
+    meta: {
+      fields: ["product_id", "quantity", "status", "created_at"],
+      gqlQuery: GET_ALL_ORDERS_QUERY,
+    },
+    filters: [
+      {
+        field: "user_id",
+        operator: "eq",
+        value: userId || "",
+      },
+      {
+        field: "product_id",
+        operator: "in",
+        value: tableQueryResult?.data?.data?.map((item) => item.product_id),
+      },
+    ],
+    sorters: [
+      {
+        field: "created_at",
+        order: "asc",
+      },
+    ],
+    mapData: (record) => {
+      return {
+        productName: products?.data.find(
+          (item: any) => item.id === record.product_id
+        )?.name,
+        quantity: record.quantity,
+        status: record.status,
+        created_at: dayjs(record.created_at).format("DD-MM-YYYY"),
+        id: record.id,
+      };
+    },
+    exportOptions: {
+      filename: "orders",
+    },
+  });
+
   return (
-    <div>
+    <List
+      canCreate={false}
+      headerButtons={
+        <ExportButton onClick={triggerExport} loading={exportLoading} />
+      }
+    >
       {/* <pre>{JSON.stringify(tableQueryResult, null, 2)}</pre> */}
       <Table
         {...tableProps}
@@ -91,7 +142,7 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
             );
           }}
         />
-        
+
         <Table.Column<Orders>
           dataIndex={"quantity"}
           title="quantity"
@@ -101,7 +152,13 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
           dataIndex={"status"}
           title="status"
           render={(_value, record) => {
-            return <Space>{record.status}</Space>;
+            return record.status === "Fulfilled" ? (
+              <Checkbox defaultChecked checked>
+                {record.status}
+              </Checkbox>
+            ) : (
+              <Checkbox>{record.status}</Checkbox>
+            );
           }}
         />
         <Table.Column
@@ -140,12 +197,12 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
                   })
                 }
               />
-              <DeleteButton size="small" recordItemId={value} />
+              {/* <DeleteButton size="small" recordItemId={value} /> */}
             </Space>
           )}
         />
       </Table>
       {children}
-    </div>
+    </List>
   );
 };
