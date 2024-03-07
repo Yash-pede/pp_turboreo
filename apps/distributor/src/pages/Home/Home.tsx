@@ -6,6 +6,7 @@ import { UseLocalStorage } from "@repo/ui";
 export const Home = () => {
   const [user, setUser] = UseLocalStorage<string>("USER", "");
   useEffect(() => {
+    if (!(user === "" || user === null)) return;
     const userid = async () => {
       if (!authProvider.getIdentity) {
         return;
