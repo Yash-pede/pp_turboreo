@@ -1,19 +1,21 @@
 import { Create } from "@refinedev/antd";
 import { Drawer, Form, Input, Space } from "antd";
-import { supabaseServiceRoleClient } from "@repo/utility";
-import { useGo, useNotification } from "@refinedev/core";
+import { UserRoleTypes, supabaseServiceRoleClient } from "@repo/utility";
+import { useGo, useNotification, useUpdate } from "@refinedev/core";
 import { SalesHome } from ".";
 
 export const SalesCreate = () => {
   const { open, close } = useNotification();
   const [form] = Form.useForm();
   const go = useGo();
+  const { status, mutate, isSuccess } = useUpdate();
 
   const CreateSalesUser = async (
     email: string,
     name: string,
     phNo: string,
     password: string,
+    full_name: string,
     boss_id: string,
   ) => {
     open &&
@@ -32,12 +34,15 @@ export const SalesCreate = () => {
         user_metadata: {
           username: name,
           phone: phNo,
+          full_name: full_name,
           boss_id: boss_id,
         },
       });
     console.log(data, error);
+
     if (data.user) {
       close && close("create-sales-user");
+      await setSalesUserRole(data.user.id);
       open &&
         open({
           key: "create-sales-user",
@@ -61,6 +66,21 @@ export const SalesCreate = () => {
       console.log(error);
     }
   };
+  const setSalesUserRole = async (userId: string) => {
+    mutate({
+      resource: "profiles",
+      id: userId,
+      values: {
+        userrole: UserRoleTypes.SALES,
+      },
+    });
+
+    if (status === "success" && isSuccess) {
+      console.log("User role set to SALES successfully");
+    } else {
+      console.error("Failed to set user role to SALES");
+    }
+  };
   form.submit = async () => {
     const values = form.getFieldsValue();
     const userId = JSON.parse(localStorage.getItem("USER") || "{}")
@@ -71,6 +91,7 @@ export const SalesCreate = () => {
       values.name,
       values.phone,
       values.password,
+      values.full_name,
       userId,
     );
   };
@@ -91,6 +112,15 @@ export const SalesCreate = () => {
         >
           <Form form={form} layout="vertical">
             <Form.Item
+              label="User Name"
+              name={"name"}
+              rules={[
+                { required: true, message: "Name is required", type: "string" },
+              ]}
+            >
+              <Input placeholder="Name" type="text" />
+            </Form.Item>
+            <Form.Item
               label="Email"
               name={"email"}
               rules={[
@@ -99,14 +129,8 @@ export const SalesCreate = () => {
             >
               <Input placeholder="Email" type="email" />
             </Form.Item>
-            <Form.Item
-              label="Name"
-              name={"name"}
-              rules={[
-                { required: true, message: "Name is required", type: "string" },
-              ]}
-            >
-              <Input placeholder="Name" type="text" />
+            <Form.Item label="Full Name" name={"full_name"}>
+              <Input placeholder="Enter Full Name" />
             </Form.Item>
             <Form.Item
               label="Phone"

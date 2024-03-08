@@ -903,12 +903,14 @@ export type Orders_StatusFilter = {
 };
 
 export type Profiles = Node & {
+  boss_id?: Maybe<Scalars["String"]["output"]>;
   cUSTOMERSCollection?: Maybe<CustomersConnection>;
   email?: Maybe<Scalars["String"]["output"]>;
   full_name?: Maybe<Scalars["String"]["output"]>;
   id: Scalars["UUID"]["output"];
   /** Globally Unique Record Identifier */
   nodeId: Scalars["ID"]["output"];
+  phone?: Maybe<Scalars["String"]["output"]>;
   role?: Maybe<Scalars["String"]["output"]>;
   updated_at?: Maybe<Scalars["Datetime"]["output"]>;
   username?: Maybe<Scalars["String"]["output"]>;
@@ -944,6 +946,7 @@ export type ProfilesEdge = {
 export type ProfilesFilter = {
   /** Returns true only if all its inner filters are true, otherwise returns false */
   and?: InputMaybe<Array<ProfilesFilter>>;
+  boss_id?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
   full_name?: InputMaybe<StringFilter>;
   id?: InputMaybe<UuidFilter>;
@@ -952,6 +955,7 @@ export type ProfilesFilter = {
   not?: InputMaybe<ProfilesFilter>;
   /** Returns true if at least one of its inner filters is true, otherwise returns false */
   or?: InputMaybe<Array<ProfilesFilter>>;
+  phone?: InputMaybe<StringFilter>;
   role?: InputMaybe<StringFilter>;
   updated_at?: InputMaybe<DatetimeFilter>;
   username?: InputMaybe<StringFilter>;
@@ -959,9 +963,11 @@ export type ProfilesFilter = {
 };
 
 export type ProfilesInsertInput = {
+  boss_id?: InputMaybe<Scalars["String"]["input"]>;
   email?: InputMaybe<Scalars["String"]["input"]>;
   full_name?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["UUID"]["input"]>;
+  phone?: InputMaybe<Scalars["String"]["input"]>;
   role?: InputMaybe<Scalars["String"]["input"]>;
   updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
   username?: InputMaybe<Scalars["String"]["input"]>;
@@ -976,9 +982,11 @@ export type ProfilesInsertResponse = {
 };
 
 export type ProfilesOrderBy = {
+  boss_id?: InputMaybe<OrderByDirection>;
   email?: InputMaybe<OrderByDirection>;
   full_name?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
+  phone?: InputMaybe<OrderByDirection>;
   role?: InputMaybe<OrderByDirection>;
   updated_at?: InputMaybe<OrderByDirection>;
   username?: InputMaybe<OrderByDirection>;
@@ -986,9 +994,11 @@ export type ProfilesOrderBy = {
 };
 
 export type ProfilesUpdateInput = {
+  boss_id?: InputMaybe<Scalars["String"]["input"]>;
   email?: InputMaybe<Scalars["String"]["input"]>;
   full_name?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["UUID"]["input"]>;
+  phone?: InputMaybe<Scalars["String"]["input"]>;
   role?: InputMaybe<Scalars["String"]["input"]>;
   updated_at?: InputMaybe<Scalars["Datetime"]["input"]>;
   username?: InputMaybe<Scalars["String"]["input"]>;
@@ -1004,8 +1014,8 @@ export type ProfilesUpdateResponse = {
 
 export type User_Roles =
   | "ADMIN"
-  | "CUSTOMER"
   | "DISTRIBUTORS"
+  | "SALES"
   | "SUPERADMIN"
   | "UNDEFINED";
 

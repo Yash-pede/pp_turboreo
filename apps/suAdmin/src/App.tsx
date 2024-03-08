@@ -66,19 +66,16 @@ function App() {
                         key={"authenticated-layout"}
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                          {/* <Layout appName="Distributor"> */}
-                          <ThemedLayoutV2
-                            Header={() => <Header appName="SuperAdmin" />}
-                            Title={(titleProps) => (
-                              <ThemedTitleV2
-                                {...titleProps}
-                                text={"PurePride"}
-                              />
-                            )}
-                          >
-                            <Outlet />
-                          </ThemedLayoutV2>
-                          {/* </Layout> */}
+                        {/* <Layout appName="Distributor"> */}
+                        <ThemedLayoutV2
+                          Header={() => <Header appName="SuperAdmin" />}
+                          Title={(titleProps) => (
+                            <ThemedTitleV2 {...titleProps} text={"PurePride"} />
+                          )}
+                        >
+                          <Outlet />
+                        </ThemedLayoutV2>
+                        {/* </Layout> */}
                       </Authenticated>
                     }
                   >

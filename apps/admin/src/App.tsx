@@ -2,7 +2,11 @@ import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
-import { RefineThemes, ThemedLayoutV2, useNotificationProvider } from "@refinedev/antd";
+import {
+  RefineThemes,
+  ThemedLayoutV2,
+  useNotificationProvider,
+} from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
 
 import routerBindings, {
@@ -67,19 +71,16 @@ function App() {
                         key={"authenticated-layout"}
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                            {/* <Layout appName="Distributor"> */}
-                            <ThemedLayoutV2
-                            Header={() => <Header appName="Admin" />}
-                            Title={(titleProps) => (
-                              <ThemedTitleV2
-                                {...titleProps}
-                                text={"PurePride"}
-                              />
-                            )}
-                          >
-                            <Outlet />
-                          </ThemedLayoutV2>
-                          {/* </Layout> */}
+                        {/* <Layout appName="Distributor"> */}
+                        <ThemedLayoutV2
+                          Header={() => <Header appName="Admin" />}
+                          Title={(titleProps) => (
+                            <ThemedTitleV2 {...titleProps} text={"PurePride"} />
+                          )}
+                        >
+                          <Outlet />
+                        </ThemedLayoutV2>
+                        {/* </Layout> */}
                       </Authenticated>
                     }
                   >
