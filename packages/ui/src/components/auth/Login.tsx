@@ -20,7 +20,7 @@ export const LoginNew = ({ userType }: { userType: UserRoleTypes }) => {
   const openNotificationWithIcon = (
     type: NotificationType,
     message: string,
-    description: string
+    description: string,
   ) => {
     api[type]({
       message: message,
@@ -57,7 +57,7 @@ export const LoginNew = ({ userType }: { userType: UserRoleTypes }) => {
             apiKey:
               "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtydGtmanBoaW92bnBqYXdjeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDE2MDQzNzMsImV4cCI6MjAxNzE4MDM3M30.rNWu78HUY5Yk6zTegL0Z0-dCiTqkU6wIifiTJQ3S_wQ",
           },
-        }
+        },
       );
 
       const result = response.data;
@@ -72,7 +72,7 @@ export const LoginNew = ({ userType }: { userType: UserRoleTypes }) => {
         openNotificationWithIcon(
           "error",
           "Login Failed",
-          "You are not authorized to login"
+          "You are not authorized to login",
         );
         setIsLoading(false);
         form.resetFields();
@@ -109,7 +109,7 @@ export const LoginNew = ({ userType }: { userType: UserRoleTypes }) => {
           openNotificationWithIcon(
             "success",
             "Login Successful",
-            "Login Successful"
+            "Login Successful",
           );
           setIsLoading(false);
           form.resetFields();
@@ -126,7 +126,7 @@ export const LoginNew = ({ userType }: { userType: UserRoleTypes }) => {
       openNotificationWithIcon(
         "error",
         "Login Failed",
-        "Please verify your Identity first"
+        "Please verify your Identity first",
       );
       form.resetFields();
       setIsLoading(false);

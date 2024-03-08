@@ -8,9 +8,9 @@ export const CreateUsers = () => {
   });
   return (
     <Users>
-    <Drawer {...drawerProps}>
-      <Create saveButtonProps={saveButtonProps}>CreateUsers</Create>
-    </Drawer>
+      <Drawer {...drawerProps}>
+        <Create saveButtonProps={saveButtonProps}>CreateUsers</Create>
+      </Drawer>
     </Users>
   );
 };

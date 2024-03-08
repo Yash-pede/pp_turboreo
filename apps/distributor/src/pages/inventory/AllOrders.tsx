@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  EditButton,
-  ExportButton,
-  List,
-  useTable,
-} from "@refinedev/antd";
+import { EditButton, ExportButton, List, useTable } from "@refinedev/antd";
 import {
   GET_ALL_ORDERS_QUERY,
   GET_ALL_pRODUCTS_QUERY,
@@ -98,7 +93,7 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
     mapData: (record) => {
       return {
         productName: products?.data.find(
-          (item: any) => item.id === record.product_id
+          (item: any) => item.id === record.product_id,
         )?.name,
         quantity: record.quantity,
         status: record.status,
@@ -135,7 +130,7 @@ export const AllOrders = ({ children }: { children?: React.ReactNode }) => {
               <Space>
                 {
                   products?.data.find(
-                    (item: any) => item.id === record.product_id
+                    (item: any) => item.id === record.product_id,
                   )?.name
                 }
               </Space>

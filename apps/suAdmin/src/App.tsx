@@ -14,24 +14,21 @@ import { dataProvider, liveProvider } from "@refinedev/supabase";
 import { App as AntdApp, ConfigProvider } from "antd";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { UserRoleTypes, authProvider, supabaseClient } from "@repo/utility";
-import {
-  CreateProduct,
-  ForgotPassord,
-  Home,
-  Register,
-  Users,
-} from "./pages";
+import { CreateProduct, ForgotPassord, Home, Register, Users } from "./pages";
 import {
   AllProducts,
-  Layout,
+  // Layout,
   Profile,
   ProductPage,
   AllOrders,
   EditOrders,
   AllInventory,
   LoginNew,
+  Header,
 } from "@repo/ui";
 import { resources } from "./config/resources";
+import { ThemedLayoutV2 } from "@refinedev/antd";
+import { ThemedTitleV2 } from "@refinedev/antd";
 
 function App() {
   return (
@@ -69,9 +66,19 @@ function App() {
                         key={"authenticated-layout"}
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                        <Layout appName="Super Admin">
-                          <Outlet />
-                        </Layout>
+                          {/* <Layout appName="Distributor"> */}
+                          <ThemedLayoutV2
+                            Header={() => <Header appName="SuperAdmin" />}
+                            Title={(titleProps) => (
+                              <ThemedTitleV2
+                                {...titleProps}
+                                text={"PurePride"}
+                              />
+                            )}
+                          >
+                            <Outlet />
+                          </ThemedLayoutV2>
+                          {/* </Layout> */}
                       </Authenticated>
                     }
                   >

@@ -58,7 +58,7 @@ export const ProductCardPublic = ({
             textOverflow: "ellipsis",
           }}
         >
-        MRP -  {product.mrp}
+          MRP - {product.mrp}
         </Paragraph>
         <div
           style={{

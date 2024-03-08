@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Layout as AntdLayout,
-  Space,
-  theme,
-  Button,
-  Grid,
-} from "antd";
+import { Layout as AntdLayout, Space, theme, Button, Grid } from "antd";
 import {
   pickNotDeprecated,
   useActiveAuthProvider,
@@ -22,10 +16,7 @@ interface HeaderProps {
   sticky?: boolean | undefined;
   appName?: string;
 }
-export const Header: React.FC<HeaderProps> = ({
-  isSticky,
-  sticky,
-}) => {
+export const Header: React.FC<HeaderProps> = ({ isSticky, sticky }) => {
   const { openCart } = useShoppingCart();
   const breakpoint = Grid.useBreakpoint();
   const { token } = useToken();
@@ -73,7 +64,8 @@ export const Header: React.FC<HeaderProps> = ({
       {shouldRenderHeader && (
         <Button
           size="large"
-          type="dashed" shape="round"
+          type="dashed"
+          shape="round"
           onClick={() => {
             openCart();
           }}

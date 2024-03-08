@@ -62,7 +62,7 @@ export const ShowOrders = () => {
           title="Product Name"
           render={(_value, record: Orders) => {
             const product = products?.data?.find(
-              (item) => item.id === record.product_id
+              (item) => item.id === record.product_id,
             );
             return <Space>{product?.name}</Space>;
           }}

@@ -1,9 +1,7 @@
 export const CustomerCreate = () => {
   return (
     <>
-      <div>
-        Create Customer
-      </div>
+      <div>Create Customer</div>
     </>
   );
 };

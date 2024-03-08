@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export const CurrentUser = () => {
-  return (
-    <div>CurrentUser</div>
-  )
-}
+  return <div>CurrentUser</div>;
+};

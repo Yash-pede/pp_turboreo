@@ -1,10 +1,7 @@
-
 export const CustomerEdit = () => {
   return (
     <>
-      <div>
-        EDIT
-      </div>
+      <div>EDIT</div>
     </>
-  )
-}
+  );
+};

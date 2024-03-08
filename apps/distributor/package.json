@@ -40,7 +40,7 @@
   "scripts": {
     "dev": "refine dev -- --host  --port 3002",
     "build": "tsc && refine build",
-    "preview": "refine start",
+    "preview": "refine start -- --host  --port 4002",
     "refine": "refine"
   },
   "browserslist": {

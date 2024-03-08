@@ -15,7 +15,7 @@ type ShoppingCartContext = {
   removeFromCart: (id: string) => void;
   cartQuantity: number;
   cartItems: CartItem[];
-  clearCart : () => void
+  clearCart: () => void;
 };
 
 type CartItem = {
@@ -37,7 +37,7 @@ export function ShoppingCartProvider({
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => quantity + item.quantity,
-    0
+    0,
   );
 
   const openCart = () => setIsOpen(true);
@@ -85,8 +85,8 @@ export function ShoppingCartProvider({
     });
   }
 
-  function clearCart(){
-    setCartItems([])
+  function clearCart() {
+    setCartItems([]);
   }
 
   return (
@@ -100,7 +100,7 @@ export function ShoppingCartProvider({
         cartQuantity,
         openCart,
         closeCart,
-        clearCart
+        clearCart,
       }}
     >
       {children}

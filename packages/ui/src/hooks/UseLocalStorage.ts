@@ -12,7 +12,7 @@ export function UseLocalStorage<T>(key: string, initialValue: T | (() => T)) {
   });
 
   useEffect(() => {
-      localStorage.setItem(key, JSON.stringify(value));
-  })
+    localStorage.setItem(key, JSON.stringify(value));
+  });
   return [value, setValue] as [typeof value, typeof setValue];
 }

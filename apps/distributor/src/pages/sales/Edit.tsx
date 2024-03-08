@@ -1,10 +1,7 @@
-
 export const SalesEdit = () => {
   return (
     <>
-      <div>
-        EDIT
-      </div>
+      <div>EDIT</div>
     </>
-  )
-}
+  );
+};

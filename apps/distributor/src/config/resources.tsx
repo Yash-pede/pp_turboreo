@@ -64,7 +64,7 @@ export const resources: IResourceItem[] = [
     list: "/inventory",
     meta: {
       label: "Inventory",
-      icon:<IconDeviceHeartMonitor/>
+      icon: <IconDeviceHeartMonitor />,
     },
     show: "/inventory/:id",
   },

@@ -57,7 +57,7 @@ export const Users = () => {
           title="Username"
           defaultFilteredValue={getDefaultFilter(
             "username",
-            tableQueryResult?.data?.filters
+            tableQueryResult?.data?.filters,
           )}
           filterIcon={<SearchOutlined />}
           filterDropdown={(props) => (
@@ -75,7 +75,7 @@ export const Users = () => {
           title="email"
           defaultFilteredValue={getDefaultFilter(
             "email",
-            tableQueryResult?.data?.filters
+            tableQueryResult?.data?.filters,
           )}
           filterIcon={<SearchOutlined />}
           filterDropdown={(props) => (
@@ -95,8 +95,8 @@ export const Users = () => {
           fixed="right"
           render={(value) => (
             <Space>
-              <EditButton size="small"  recordItemId={value} />
-              <DeleteButton size="small"  recordItemId={value} />
+              <EditButton size="small" recordItemId={value} />
+              <DeleteButton size="small" recordItemId={value} />
             </Space>
           )}
         />

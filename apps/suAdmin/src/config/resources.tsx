@@ -1,6 +1,11 @@
 import { IResourceItem } from "@refinedev/core";
-import { IconDashboard, IconPackage, IconPackageExport, IconPackageImport, IconUser } from "@tabler/icons-react";
-
+import {
+  IconDashboard,
+  IconPackage,
+  IconPackageExport,
+  IconPackageImport,
+  IconUser,
+} from "@tabler/icons-react";
 
 export const resources: IResourceItem[] = [
   {
@@ -19,7 +24,7 @@ export const resources: IResourceItem[] = [
       icon: <IconPackage />,
     },
     show: "/products/:id",
-    create:"/products/create",
+    create: "/products/create",
   },
   {
     name: "orders",

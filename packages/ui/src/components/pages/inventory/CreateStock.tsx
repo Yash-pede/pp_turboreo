@@ -45,7 +45,7 @@ export const CreateStock = () => {
           >
             <InputNumber style={{ width: "100%" }} />
           </Form.Item>
-          
+
           <Form.Item
             style={{ width: "100%" }}
             name="selling_price"

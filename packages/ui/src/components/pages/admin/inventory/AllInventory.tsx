@@ -54,7 +54,7 @@ export const AllInventory = () => {
               <Space>
                 {
                   products?.data.find(
-                    (item: any) => item.id === record.product_id
+                    (item: any) => item.id === record.product_id,
                   )?.name
                 }
               </Space>

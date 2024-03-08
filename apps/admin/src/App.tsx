@@ -2,7 +2,7 @@ import { Authenticated, Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
-import { RefineThemes, useNotificationProvider } from "@refinedev/antd";
+import { RefineThemes, ThemedLayoutV2, useNotificationProvider } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
 
 import routerBindings, {
@@ -17,7 +17,7 @@ import { UserRoleTypes, authProvider, supabaseClient } from "@repo/utility";
 import { CreateUsers, ForgotPassord, Home, Register, Users } from "./pages";
 import {
   AllProducts,
-  Layout,
+  // Layout,
   Profile,
   ProductPage,
   AllOrders,
@@ -26,8 +26,10 @@ import {
   LoginNew,
   CreateStock,
   ShowOrders,
+  Header,
 } from "@repo/ui";
 import { resources } from "./config/resources";
+import { ThemedTitleV2 } from "@refinedev/antd";
 
 function App() {
   return (
@@ -65,9 +67,19 @@ function App() {
                         key={"authenticated-layout"}
                         fallback={<CatchAllNavigate to="/login" />}
                       >
-                        <Layout appName="Admin">
-                          <Outlet />
-                        </Layout>
+                            {/* <Layout appName="Distributor"> */}
+                            <ThemedLayoutV2
+                            Header={() => <Header appName="Admin" />}
+                            Title={(titleProps) => (
+                              <ThemedTitleV2
+                                {...titleProps}
+                                text={"PurePride"}
+                              />
+                            )}
+                          >
+                            <Outlet />
+                          </ThemedLayoutV2>
+                          {/* </Layout> */}
                       </Authenticated>
                     }
                   >

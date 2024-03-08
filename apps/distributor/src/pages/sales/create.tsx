@@ -14,7 +14,7 @@ export const SalesCreate = () => {
     name: string,
     phNo: string,
     password: string,
-    boss_id: string
+    boss_id: string,
   ) => {
     open &&
       open({
@@ -71,7 +71,7 @@ export const SalesCreate = () => {
       values.name,
       values.phone,
       values.password,
-      userId
+      userId,
     );
   };
   return (

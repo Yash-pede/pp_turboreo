@@ -41,25 +41,31 @@ export const CREATE_ORDER_MUTATION = gql`
 `;
 
 export const UPDATE_ORDERS_MUTATION = gql`
-mutation updateORDERSCollection($set: ORDERSUpdateInput!, $filter: ORDERSFilter) {
-  updateORDERSCollection(set: $set, filter: $filter) {
-    records {
-      product_id
-      user_id
-      batch_no
-      quantity
-      status
+  mutation updateORDERSCollection(
+    $set: ORDERSUpdateInput!
+    $filter: ORDERSFilter
+  ) {
+    updateORDERSCollection(set: $set, filter: $filter) {
+      records {
+        product_id
+        user_id
+        batch_no
+        quantity
+        status
+      }
     }
   }
-}
 `;
 
 export const UPDATE_ORDERS_MUTATION_DISTRIBUTOR = gql`
-mutation updateORDERSCollection_DISTRIBUTOR($set: ORDERSUpdateInput!, $filter: ORDERSFilter) {
-  updateORDERSCollection(set: $set, filter: $filter) {
-    records {
-      status
+  mutation updateORDERSCollection_DISTRIBUTOR(
+    $set: ORDERSUpdateInput!
+    $filter: ORDERSFilter
+  ) {
+    updateORDERSCollection(set: $set, filter: $filter) {
+      records {
+        status
+      }
     }
   }
-}
 `;

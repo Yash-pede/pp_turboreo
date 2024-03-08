@@ -1,5 +1,8 @@
 import { useTable } from "@refinedev/antd";
-import { GET_ALL_INVENTORY_DISTRIBUTOR_QUERY, GET_ALL_pRODUCTS_QUERY } from "@repo/graphql";
+import {
+  GET_ALL_INVENTORY_DISTRIBUTOR_QUERY,
+  GET_ALL_pRODUCTS_QUERY,
+} from "@repo/graphql";
 import { Skeleton, Space, Table } from "antd";
 import { authProvider } from "../auth/authProvider";
 import React, { useEffect } from "react";
@@ -65,7 +68,7 @@ export const AllInventory = () => {
           title="ID"
           render={(value) => <strong>{value}</strong>}
         />
-       <Table.Column
+        <Table.Column
           dataIndex={"product_id"}
           title="product"
           render={(_value, record: any) => {
@@ -76,7 +79,7 @@ export const AllInventory = () => {
               <Space>
                 {
                   products?.data.find(
-                    (item: any) => item.id === record.product_id
+                    (item: any) => item.id === record.product_id,
                   )?.name
                 }
               </Space>

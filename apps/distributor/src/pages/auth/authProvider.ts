@@ -106,7 +106,7 @@ export const authProvider: AuthBindings = {
         email,
         {
           redirectTo: `${window.location.origin}/update-password`,
-        }
+        },
       );
 
       if (error) {
